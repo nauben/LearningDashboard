@@ -1,0 +1,166 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "Learning Dashboard",
+            "modelConfiguration": {
+                "fallbackIntentSensitivity": {
+                    "level": "LOW"
+                }
+            },
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "TaskToDoReadIntent",
+                    "slots": [],
+                    "samples": [
+                        "Lese meine To dos",
+                        "Lies meine To dos",
+                        "Lese meine To dos vor",
+                        "Lies meine To dos vor",
+
+                        "Lese meine To do Liste",
+                        "Lies meine To do Liste",
+                        "Lese meine To do Liste vor",
+                        "Lies meine To do Liste vor",
+
+                        "Lese meine Tu dus",
+                        "Lies meine Tu dus",
+                        "Lese meine Tu dus vor",
+                        "Lies meine Tu dus vor",
+
+                        "Lese meine Tu du Liste",
+                        "Lies meine Tu du Liste",
+                        "Lese meine Tu du Liste vor",
+                        "Lies meine Tu du Liste vor",
+
+                        "Was muss ich noch machen?",
+                        "Welche Aufgaben muss ich noch machen?",
+                        "Welche Aufgaben stehen noch an?",
+                        "Habe ich neue Aufgaben?",
+                        "Welche neuen Aufgaben habe ich?",
+                        "Welche neuen Aufgaben gibt es?"
+                    ]
+                },
+                {
+                    "name": "TaskWIPReadIntent",
+                    "slots": [],
+                    "samples": [
+                        "Lese alle Aufgaben in Arbeit vor",
+                        "Lese alle Aufgaben vor die in Arbeit sind",
+                        "Lese alle Aufgaben in Progress vor",
+                        "Lese alle Aufgaben vor die in Progress sind",
+
+                        "Lies alle Aufgaben in Arbeit vor",
+                        "Lies alle Aufgaben vor die in Arbeit sind",
+                        "Lies alle Aufgaben in Progress vor",
+                        "Lies alle Aufgaben vor die in Progress sind",
+
+                        "An Welchen Aufgaben arbeite ich gerade?",
+                        "Welche Aufgaben muss ich noch fertig machen?",
+                        "Welche Aufgaben sind noch in Arbeit?",
+                        "Welche Aufgaben sind noch nicht fertig?",
+                        "Sind noch Aufgaben in Arbeit?",
+                        "Gibt es noch unfertige Aufgaben?"
+                    ]
+                },
+                {
+                    "name": "TaskFinishedReadIntent",
+                    "slots": [],
+                    "samples": [
+                        "Welche Aufgaben sind Fertig?",
+                        "Lese meinen Fertigen Aufgaben vor?",
+                        "Lese meine Abgeschlossenen Aufgaben vor?",
+                        "Lese alle meinen fertigen Aufgaben vor",
+                        
+                        "Lies meinen Fertigen Aufgaben vor?",
+                        "Lies meine Abgeschlossenen Aufgaben vor?",
+                        "Lies alle meinen fertigen Aufgaben vor"
+                    ]
+                },
+                {
+                    "name": "ScheduleReadIntent",
+                    "slots": [],
+                    "samples": [
+                        "was habe ich morgen für vorlesungen",
+                        "was sind morgen für vorlesungen",
+                        "welche vorlesungen sind morgen",
+                        "habe ich morgen vorlesungen",
+                        "habe ich morgen unterricht",
+                        "was steht morgen an der Hochschule an"
+                    ]
+                },
+                {
+                    "name": "ReadSummaryIntent",
+                    "slots": [],
+                    "samples": [
+                        "Lese meine Zusammenfassung vor",
+                        "Lese meine Zusammenfassung",
+                        "Lies meine Zusammenfassung vor",
+                        "Lies meine Zusammenfassung",
+
+
+                        "Was steht an?",
+                        "Was steht heute an?",
+                        "Was ist zu tun?",
+                        "Was ist heute zu tun?",
+                        "Was muss ich machen?",
+                        "Was muss ich heute machen?",
+                        "Zusammenfassung"
+                    ]
+                },
+                {
+                    "name": "CreateToDoTaskIntent",
+                    "slots": [],
+                    "samples": [
+                        "Lege eine neue Aufgabe an",
+                        "Lege eine Aufgabe an",
+                        "Mach eine neue Aufgabe",
+                        "Erstelle eine neue Aufgabe",
+                        "Erstelle eine Aufgabe",
+                        "Ich habe eine neue Aufgabe",
+                        "Ich habe eine Aufgabe",
+                        "Mach eine Aufgabe",
+                        "Füge eine Aufgabe hinzu",
+                        "Füge eine Aufgabe zum Kanban-Board hinzu",
+                        "Füge eine neue Aufgabe zum Kanban-Board hinzu",
+                        "Mach eine neue Aufgabe im Kanban-Board",
+                        "Lege eine Aufgabe im Kanban-Board an",
+                        "Lege eine neue Aufgabe im Kanban-Board an",
+                        "Aufgabe erstellen",
+                        "Neue Aufgabe erstellen",
+                        "Aufgabe zum Kanban-Board hinzufügen",
+                        "Aufgabe anlegen",
+                        "Neue Aufgabe anlegen",
+                        "Aufgabe machen",
+                        "Neue Aufgabe machen",
+                        "Aufgabe hinzufügen",
+                        "Neue Aufgabe hinzufügen",
+                        "Füge eine neue Aufgabe hinzu",
+                        "Neue Aufgabe",
+                        "Füge neue Aufgabe hinzu"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
