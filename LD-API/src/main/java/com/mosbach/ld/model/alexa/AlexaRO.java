@@ -1,4 +1,4 @@
-package com.mosbach.demo.model.alexa;
+package com.mosbach.ld.model.alexa;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Map;
 //import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.*;
+import com.mosbach.demo.model.alexa.RequestRO;
 
 @JsonRootName(value = "TaskListRO")
 public class AlexaRO

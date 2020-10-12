@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "Learning Dashboard",
+            "invocationName": "learning dashboard",
             "modelConfiguration": {
                 "fallbackIntentSensitivity": {
                     "level": "LOW"
@@ -36,28 +36,24 @@
                         "Lies meine To dos",
                         "Lese meine To dos vor",
                         "Lies meine To dos vor",
-
                         "Lese meine To do Liste",
                         "Lies meine To do Liste",
                         "Lese meine To do Liste vor",
                         "Lies meine To do Liste vor",
-
                         "Lese meine Tu dus",
                         "Lies meine Tu dus",
                         "Lese meine Tu dus vor",
                         "Lies meine Tu dus vor",
-
                         "Lese meine Tu du Liste",
                         "Lies meine Tu du Liste",
                         "Lese meine Tu du Liste vor",
                         "Lies meine Tu du Liste vor",
-
-                        "Was muss ich noch machen?",
-                        "Welche Aufgaben muss ich noch machen?",
-                        "Welche Aufgaben stehen noch an?",
-                        "Habe ich neue Aufgaben?",
-                        "Welche neuen Aufgaben habe ich?",
-                        "Welche neuen Aufgaben gibt es?"
+                        "Was muss ich noch machen",
+                        "Welche Aufgaben muss ich noch machen",
+                        "Welche Aufgaben stehen noch an",
+                        "Habe ich neue Aufgaben",
+                        "Welche neuen Aufgaben habe ich",
+                        "Welche neuen Aufgaben gibt es"
                     ]
                 },
                 {
@@ -68,44 +64,29 @@
                         "Lese alle Aufgaben vor die in Arbeit sind",
                         "Lese alle Aufgaben in Progress vor",
                         "Lese alle Aufgaben vor die in Progress sind",
-
                         "Lies alle Aufgaben in Arbeit vor",
                         "Lies alle Aufgaben vor die in Arbeit sind",
                         "Lies alle Aufgaben in Progress vor",
                         "Lies alle Aufgaben vor die in Progress sind",
-
-                        "An Welchen Aufgaben arbeite ich gerade?",
-                        "Welche Aufgaben muss ich noch fertig machen?",
-                        "Welche Aufgaben sind noch in Arbeit?",
-                        "Welche Aufgaben sind noch nicht fertig?",
-                        "Sind noch Aufgaben in Arbeit?",
-                        "Gibt es noch unfertige Aufgaben?"
+                        "An Welchen Aufgaben arbeite ich gerade",
+                        "Welche Aufgaben muss ich noch fertig machen",
+                        "Welche Aufgaben sind noch in Arbeit",
+                        "Welche Aufgaben sind noch nicht fertig",
+                        "Sind noch Aufgaben in Arbeit",
+                        "Gibt es noch unfertige Aufgaben"
                     ]
                 },
                 {
                     "name": "TaskFinishedReadIntent",
                     "slots": [],
                     "samples": [
-                        "Welche Aufgaben sind Fertig?",
-                        "Lese meinen Fertigen Aufgaben vor?",
-                        "Lese meine Abgeschlossenen Aufgaben vor?",
+                        "Welche Aufgaben sind Fertig",
+                        "Lese meinen Fertigen Aufgaben vor",
+                        "Lese meine Abgeschlossenen Aufgaben vor",
                         "Lese alle meinen fertigen Aufgaben vor",
-                        
-                        "Lies meinen Fertigen Aufgaben vor?",
-                        "Lies meine Abgeschlossenen Aufgaben vor?",
+                        "Lies meinen Fertigen Aufgaben vor",
+                        "Lies meine Abgeschlossenen Aufgaben vor",
                         "Lies alle meinen fertigen Aufgaben vor"
-                    ]
-                },
-                {
-                    "name": "ScheduleReadIntent",
-                    "slots": [],
-                    "samples": [
-                        "was habe ich morgen für vorlesungen",
-                        "was sind morgen für vorlesungen",
-                        "welche vorlesungen sind morgen",
-                        "habe ich morgen vorlesungen",
-                        "habe ich morgen unterricht",
-                        "was steht morgen an der Hochschule an"
                     ]
                 },
                 {
@@ -116,14 +97,12 @@
                         "Lese meine Zusammenfassung",
                         "Lies meine Zusammenfassung vor",
                         "Lies meine Zusammenfassung",
-
-
-                        "Was steht an?",
-                        "Was steht heute an?",
-                        "Was ist zu tun?",
-                        "Was ist heute zu tun?",
-                        "Was muss ich machen?",
-                        "Was muss ich heute machen?",
+                        "Was steht an",
+                        "Was steht heute an",
+                        "Was ist zu tun",
+                        "Was ist heute zu tun",
+                        "Was muss ich machen",
+                        "Was muss ich heute machen",
                         "Zusammenfassung"
                     ]
                 },
@@ -158,9 +137,73 @@
                         "Neue Aufgabe",
                         "Füge neue Aufgabe hinzu"
                     ]
+                },
+                {
+                    "name": "ScheduleReadIntent",
+                    "slots": [
+                        {
+                            "name": "scheduleDate",
+                            "type": "AMAZON.DATE",
+                            "samples": [
+                                "am {scheduleDate}",
+                                "{scheduleDate}",
+                                "ich möchte die vorlesungen vom {scheduleDate} sehen"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "Vorlesungen",
+                        "Welche Vorlesungen",
+                        "Wann habe ich Vorlesungen",
+                        "was habe ich am {scheduleDate} für vorlesungen",
+                        "was habe ich {scheduleDate} für vorlesungen",
+                        "was sind am {scheduleDate} für vorlesungen",
+                        "was sind {scheduleDate} für vorlesungen",
+                        "welche vorlesungen sind am {scheduleDate}",
+                        "welche vorlesungen sind {scheduleDate}",
+                        "habe ich am {scheduleDate} vorlesungen",
+                        "habe ich {scheduleDate} vorlesungen",
+                        "habe ich am {scheduleDate} unterricht",
+                        "habe ich {scheduleDate} unterricht",
+                        "was steht am {scheduleDate} an der Hochschule an",
+                        "was steht {scheduleDate} an der Hochschule an"
+                    ]
                 }
             ],
             "types": []
-        }
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "ScheduleReadIntent",
+                    "delegationStrategy": "SKILL_RESPONSE",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "scheduleDate",
+                            "type": "AMAZON.DATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.153503252364.817553974409"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.153503252364.817553974409",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Für welchem Tag oder Datum möchtest du die Vorlesungen sehen"
+                    }
+                ]
+            }
+        ]
     }
 }

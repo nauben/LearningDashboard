@@ -4,7 +4,6 @@ import com.mosbach.demo.dataManagerImpl.PostgresTaskManagerImpl;
 import com.mosbach.demo.model.alexa.AlexaRO;
 import com.mosbach.demo.model.alexa.OutputSpeechRO;
 import com.mosbach.demo.model.alexa.ResponseRO;
-import com.mosbach.demo.model.student.Student;
 import com.mosbach.demo.model.task.Task;
 import com.mosbach.demo.model.task.TaskList;
 import org.springframework.http.HttpStatus;
@@ -30,9 +29,7 @@ public class MappingController {
     @GetMapping("/task/all")
     public TaskList getTasks(@RequestParam(value = "name", defaultValue = "Student") String name) {
 
-        TaskList taskList = new TaskList(
-                                    new Student("me", name)
-                            );
+        TaskList taskList = new TaskList();
         taskList.setTasks();
 
         return taskList;
@@ -47,9 +44,7 @@ public class MappingController {
     @ResponseStatus(HttpStatus.OK)
     public String createTask(@RequestBody Task task) {
 
-        TaskList taskList = new TaskList(
-                                    new Student("me", "ignore")
-                            );
+        TaskList taskList = new TaskList();
         taskList.addTask(task);
 
         return task.getName();
