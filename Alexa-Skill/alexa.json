@@ -29,64 +29,62 @@
                     "samples": []
                 },
                 {
-                    "name": "TaskToDoReadIntent",
-                    "slots": [],
+                    "name": "TaskReadIntent",
+                    "slots": [
+                        {
+                            "name": "swimlane",
+                            "type": "swimlane",
+                            "samples": [
+                                "Gibt es {swimlane} Aufgaben",
+                                "Sind noch Aufgaben {swimlane}",
+                                "Welche Aufgaben sind noch {swimlane}",
+                                "An Welchen Aufgaben {swimlane}",
+                                "Lies alle meine {swimlane} vor",
+                                "Lese alle meine {swimlane} vor",
+                                "Lies alle Aufgaben vor die {swimlane} sind",
+                                "Lies alle Aufgaben {swimlane} vor",
+                                "Lese alle Aufgaben vor die {swimlane} sind",
+                                "Lese alle Aufgaben {swimlane} vor",
+                                "Welche Aufgaben {swimlane} ",
+                                "Was {swimlane}",
+                                "Lies meine {swimlane} vor",
+                                "Lies meine {swimlane} Liste vor",
+                                "Lese meine {swimlane} Liste vor",
+                                "Lies meine {swimlane} Liste",
+                                "Lese meine {swimlane} Liste",
+                                "Lese meine {swimlane} vor",
+                                "Lies meine {swimlane}",
+                                "Lese meine {swimlane}",
+                                "{swimlane}"
+                            ]
+                        }
+                    ],
                     "samples": [
-                        "Lese meine To dos",
-                        "Lies meine To dos",
-                        "Lese meine To dos vor",
-                        "Lies meine To dos vor",
-                        "Lese meine To do Liste",
-                        "Lies meine To do Liste",
-                        "Lese meine To do Liste vor",
-                        "Lies meine To do Liste vor",
-                        "Lese meine Tu dus",
-                        "Lies meine Tu dus",
-                        "Lese meine Tu dus vor",
-                        "Lies meine Tu dus vor",
-                        "Lese meine Tu du Liste",
-                        "Lies meine Tu du Liste",
-                        "Lese meine Tu du Liste vor",
-                        "Lies meine Tu du Liste vor",
-                        "Was muss ich noch machen",
-                        "Welche Aufgaben muss ich noch machen",
-                        "Welche Aufgaben stehen noch an",
-                        "Habe ich neue Aufgaben",
-                        "Welche neuen Aufgaben habe ich",
-                        "Welche neuen Aufgaben gibt es"
-                    ]
-                },
-                {
-                    "name": "TaskWIPReadIntent",
-                    "slots": [],
-                    "samples": [
-                        "Lese alle Aufgaben in Arbeit vor",
-                        "Lese alle Aufgaben vor die in Arbeit sind",
-                        "Lese alle Aufgaben in Progress vor",
-                        "Lese alle Aufgaben vor die in Progress sind",
-                        "Lies alle Aufgaben in Arbeit vor",
-                        "Lies alle Aufgaben vor die in Arbeit sind",
-                        "Lies alle Aufgaben in Progress vor",
-                        "Lies alle Aufgaben vor die in Progress sind",
-                        "An Welchen Aufgaben arbeite ich gerade",
-                        "Welche Aufgaben muss ich noch fertig machen",
-                        "Welche Aufgaben sind noch in Arbeit",
-                        "Welche Aufgaben sind noch nicht fertig",
-                        "Sind noch Aufgaben in Arbeit",
-                        "Gibt es noch unfertige Aufgaben"
-                    ]
-                },
-                {
-                    "name": "TaskFinishedReadIntent",
-                    "slots": [],
-                    "samples": [
-                        "Welche Aufgaben sind Fertig",
-                        "Lese meinen Fertigen Aufgaben vor",
-                        "Lese meine Abgeschlossenen Aufgaben vor",
-                        "Lese alle meinen fertigen Aufgaben vor",
-                        "Lies meinen Fertigen Aufgaben vor",
-                        "Lies meine Abgeschlossenen Aufgaben vor",
-                        "Lies alle meinen fertigen Aufgaben vor"
+                        "Lese meine {swimlane}",
+                        "Lies meine {swimlane}",
+                        "Lese meine {swimlane} vor",
+                        "Lies meine {swimlane} vor",
+                        "Lese meine {swimlane} Liste",
+                        "Lies meine {swimlane} Liste",
+                        "Lese meine {swimlane} Liste vor",
+                        "Lies meine {swimlane} Liste vor",
+                        "Was {swimlane}",
+                        "Welche Aufgaben {swimlane}",
+                        "Lese alle Aufgaben {swimlane} vor",
+                        "Lese alle Aufgaben vor die {swimlane} sind",
+                        "Lies alle Aufgaben {swimlane} vor",
+                        "Lies alle Aufgaben vor die {swimlane} sind",
+                        "Lese alle meine {swimlane} vor",
+                        "Lies alle meine {swimlane} vor",
+                        "An Welchen Aufgaben {swimlane}",
+                        "Welche Aufgaben sind noch {swimlane}",
+                        "Sind noch Aufgaben {swimlane}",
+                        "Gibt es {swimlane} Aufgaben",
+                        "Lese meine Aufgaben",
+                        "Lese meine Aufgaben vor",
+                        "Kanban",
+                        "Kanban-Board",
+                        "Aufgaben"
                     ]
                 },
                 {
@@ -108,7 +106,28 @@
                 },
                 {
                     "name": "CreateToDoTaskIntent",
-                    "slots": [],
+                    "slots": [
+                        {
+                            "name": "title",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "Schreibe {title}",
+                                "Nenne sie {title}",
+                                "{title}"
+                            ]
+                        },
+                        {
+                            "name": "dueDate",
+                            "type": "AMAZON.DATE",
+                            "samples": [
+                                "Bis {dueDate}",
+                                "Sie soll bis {dueDate} fertig sein",
+                                "Sie soll bis zum {dueDate} fertig sein",
+                                "Bis zum {dueDate}",
+                                "{dueDate}"
+                            ]
+                        }
+                    ],
                     "samples": [
                         "Lege eine neue Aufgabe an",
                         "Lege eine Aufgabe an",
@@ -135,7 +154,11 @@
                         "Neue Aufgabe hinzufügen",
                         "Füge eine neue Aufgabe hinzu",
                         "Neue Aufgabe",
-                        "Füge neue Aufgabe hinzu"
+                        "Füge neue Aufgabe hinzu",
+                        "Neue Aufgabe mit dem Titel {title}",
+                        "Erstelle die Aufgabe {title}",
+                        "Erstelle eine Aufgabe mit dem Titel {title}",
+                        "Neue Aufgabe {title}"
                     ]
                 },
                 {
@@ -154,6 +177,7 @@
                     "samples": [
                         "Vorlesungen",
                         "Welche Vorlesungen",
+                        "Welche Vorlesungen habe ich",
                         "Wann habe ich Vorlesungen",
                         "was habe ich am {scheduleDate} für vorlesungen",
                         "was habe ich {scheduleDate} für vorlesungen",
@@ -170,7 +194,53 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "swimlane",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Fertig",
+                                "synonyms": [
+                                    "abgeschlossenen",
+                                    "abgeschlossen",
+                                    "fertigen",
+                                    "abgeschlossenen Aufgaben",
+                                    "fertigen Aufgaben",
+                                    "sind fertig"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "In Arbeit",
+                                "synonyms": [
+                                    "nicht fertig",
+                                    "unfertig",
+                                    "unfertige",
+                                    "in Progress",
+                                    "arbeite ich gerade",
+                                    "muss ich noch fertig machen"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "To Do",
+                                "synonyms": [
+                                    "Tu Dus",
+                                    "Tu Du",
+                                    "To Dus",
+                                    "To Du",
+                                    "To Dos",
+                                    "muss ich noch machen",
+                                    "stehen noch an"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         "dialog": {
             "intents": [
@@ -190,6 +260,49 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "TaskReadIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "swimlane",
+                            "type": "swimlane",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.225941655717.1210739811331"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateToDoTaskIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "title",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": true,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "confirmation": "Confirm.Slot.402969439355.566107649242",
+                                "elicitation": "Elicit.Slot.7985834382.126608789489"
+                            }
+                        },
+                        {
+                            "name": "dueDate",
+                            "type": "AMAZON.DATE",
+                            "confirmationRequired": true,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "confirmation": "Confirm.Slot.385138520301.321834640536",
+                                "elicitation": "Elicit.Slot.385138520301.321834640536"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -200,7 +313,84 @@
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Für welchem Tag oder Datum möchtest du die Vorlesungen sehen"
+                        "value": "Für welchem Tag oder Datum möchtest du die Vorlesungen sehen?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.225941655717.1210739811331",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Welche Swimlane soll ich vorlesen?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Welcher Aufgabenstatus interessiert dich?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.7985834382.126608789489",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Wie möchtest du die Aufgabe nennen?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Was ist zu tun?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Wie soll die Aufgabe heißen?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Welchen Titel soll die Aufgabe haben?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.402969439355.566107649242",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Soll die Aufgabe {title} heißen?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Ich habe {title} verstanden. Stimmt das?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.385138520301.321834640536",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Bis wann soll die Aufgabe fertig sein?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Bis wann soll die Aufgabe erledigt sein?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Welches Fälligkeitsdatum möchtest du der Aufgabe geben?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.385138520301.321834640536",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Die Aufgabe ist am {dueDate} fällig. Korrekt?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Ich habe {dueDate} verstanden. Stimmt das?"
                     }
                 ]
             }
