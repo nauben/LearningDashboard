@@ -1,8 +1,7 @@
-package com.mosbach.demo.dataManagerImpl;
+package com.mosbach.ld.dataManagerImpl;
 
-import com.mosbach.demo.dataManager.TaskManager;
-import com.mosbach.demo.model.student.Student;
-import com.mosbach.demo.model.task.Task;
+import com.mosbach.ld.dataManager.TaskManager;
+import com.mosbach.ld.model.task.Task;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

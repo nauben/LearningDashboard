@@ -1,9 +1,8 @@
-package com.mosbach.demo.model.task;
+package com.mosbach.ld.model.task;
 
-import com.mosbach.demo.dataManager.TaskManager;
-import com.mosbach.demo.dataManagerImpl.PostgresTaskManagerImpl;
-import com.mosbach.demo.dataManagerImpl.PropertyFileTaskManagerImpl;
-import com.mosbach.demo.model.student.Student;
+import com.mosbach.ld.dataManager.TaskManager;
+import com.mosbach.ld.dataManagerImpl.PostgresTaskManagerImpl;
+import com.mosbach.ld.dataManagerImpl.PropertyFileTaskManagerImpl;
 
 import java.util.Collection;
 

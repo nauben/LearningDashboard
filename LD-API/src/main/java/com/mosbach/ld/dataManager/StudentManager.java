@@ -1,4 +1,4 @@
-package com.mosbach.demo.dataManager;
+package com.mosbach.ld.dataManager;
 
 public interface StudentManager {
 

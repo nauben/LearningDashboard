@@ -1,14 +1,12 @@
-package com.mosbach.demo.dataManager;
+package com.mosbach.ld.dataManager;
 
-import com.mosbach.demo.model.student.Student;
-import com.mosbach.demo.model.task.Task;
+import com.mosbach.ld.model.task.Task;
 
 import java.util.Collection;
 
 public interface TaskManager {
 
-    Collection<Task> getAllTasks(Student student);
-    void addTask(Task task, Student student);
+    
 
     // TODO
     // removeTask, getTasksInOrder, getTaskByTaskID, ...

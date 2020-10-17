@@ -11,7 +11,6 @@ public class Profile {
 	private Date created;
 	//private String institution; ?
 	private String location;
-	private ProfileSettings settings;
 	private Collection<Contact> contacts;
 	
 	

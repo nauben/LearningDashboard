@@ -1,11 +1,12 @@
-package com.mosbach.demo;
+package com.mosbach.ld;
 
-import com.mosbach.demo.dataManagerImpl.PostgresTaskManagerImpl;
-import com.mosbach.demo.model.alexa.AlexaRO;
-import com.mosbach.demo.model.alexa.OutputSpeechRO;
-import com.mosbach.demo.model.alexa.ResponseRO;
-import com.mosbach.demo.model.task.Task;
-import com.mosbach.demo.model.task.TaskList;
+import com.mosbach.ld.dataManagerImpl.PostgresTaskManagerImpl;
+import com.mosbach.ld.model.alexa.AlexaRO;
+import com.mosbach.ld.model.alexa.OutputSpeechRO;
+import com.mosbach.ld.model.alexa.ResponseRO;
+import com.mosbach.ld.model.dhbwSchedule.DHBWSchedule;
+import com.mosbach.ld.model.task.Task;
+import com.mosbach.ld.model.task.TaskList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class MappingController {
     // Set the used DataProvider (ProperyFileManager, PostgresMaganer) here and not in TaskList
     //
 
+	/*
     @GetMapping("/task/all")
     public TaskList getTasks(@RequestParam(value = "name", defaultValue = "Student") String name) {
 
@@ -118,5 +120,39 @@ public class MappingController {
         alexaRO.setResponse(response);
         return alexaRO;
     }
+    */
+	
+	@GetMapping("/dhbw-schedule/courses/all")
+    public DHBWSchedule getAllCourses(@RequestParam(value = "name", defaultValue = "Student") String name) {
+
+		DHBWSchedule s = new DHBWSchedule();
+		
+		
+
+        return s;
+    }
+	
+	@GetMapping("/dhbw-schedule/{course}/all")
+    public DHBWSchedule getAllLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
+
+		DHBWSchedule s = new DHBWSchedule();
+		
+		
+
+        return s;
+    }
+	
+	@GetMapping("/dhbw-schedule/{course}/upcomingdays")
+    public DHBWSchedule getUpcomingDaysLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
+
+		DHBWSchedule s = new DHBWSchedule();
+		
+		
+
+        return s;
+    }
+	
+	
+	
 
 }

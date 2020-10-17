@@ -1,4 +1,4 @@
-package com.mosbach.demo.model.alexa;
+package com.mosbach.ld.model.alexa;
 
 import com.fasterxml.jackson.annotation.*;
 

@@ -1,8 +1,7 @@
-package com.mosbach.demo.dataManagerImpl;
+package com.mosbach.ld.dataManagerImpl;
 
-import com.mosbach.demo.dataManager.TaskManager;
-import com.mosbach.demo.model.student.Student;
-import com.mosbach.demo.model.task.Task;
+import com.mosbach.ld.dataManager.TaskManager;
+import com.mosbach.ld.model.task.Task;
 import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,9 +13,9 @@ import java.util.Properties;
 
 public class PostgresTaskManagerImpl implements TaskManager  {
 
-    String databaseURL = "jdbc:postgresql://ec2-3-95-87-221.compute-1.amazonaws.com:5432/d2rasups8ubgk7";
-    String username = "zsctybckkjffbv";
-    String password = "e6bd8f8504e647c26e51e31635aa74a03beed0666f7a7a9ca948531c21b28819";
+    String databaseURL = "jdbc:postgres://eujrltajivvwzr:d2b486de8e4091ae14d53fa56fc6cbc906e7a2180cc02935f8f91005655b6e0a@ec2-34-254-24-116.eu-west-1.compute.amazonaws.com:5432/d51u5rqpl59pv";
+    String username = "eujrltajivvwzr";
+    String password = "d2b486de8e4091ae14d53fa56fc6cbc906e7a2180cc02935f8f91005655b6e0a";
     BasicDataSource basicDataSource;
 
     static PostgresTaskManagerImpl postgresTaskManager = null;
@@ -36,7 +35,7 @@ public class PostgresTaskManagerImpl implements TaskManager  {
 
 
     @Override
-    public Collection<Task> getAllTasks(Student student) {
+    public Collection<Task> getAllTasks() {
 
         List<Task> tasks = new ArrayList<>();
         Properties properties = new Properties();
@@ -46,13 +45,7 @@ public class PostgresTaskManagerImpl implements TaskManager  {
             stmt = basicDataSource.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM tasks");
             while (rs.next()) {
-                tasks.add(
-                        new Task(
-                                rs.getString("name"),
-                                rs.getString("description"),
-                                rs.getInt("priority")
-                        )
-                );
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,7 +55,7 @@ public class PostgresTaskManagerImpl implements TaskManager  {
     }
 
     @Override
-    public void addTask(Task task, Student student) {
+    public void addTask(Task task) {
 
         List<Task> tasks = new ArrayList<>();
         Properties properties = new Properties();
