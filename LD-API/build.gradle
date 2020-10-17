@@ -19,8 +19,12 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	implementation 'commons-dbcp:commons-dbcp:1.4'
-	compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+	//implementation 'commons-dbcp:commons-dbcp:1.4'
+	//compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+	// https://mvnrepository.com/artifact/org.mnode.ical4j/ical4j
+	//implementation 'org.mnode.ical4j:ical4j:3.0.18'
+	implementation 'net.sf.biweekly:biweekly:0.6.4'
+	
 }
 
 test {
