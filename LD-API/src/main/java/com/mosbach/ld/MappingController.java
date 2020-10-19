@@ -4,17 +4,57 @@ import com.mosbach.ld.dataManagerImpl.PostgresTaskManagerImpl;
 import com.mosbach.ld.model.alexa.AlexaRO;
 import com.mosbach.ld.model.alexa.OutputSpeechRO;
 import com.mosbach.ld.model.alexa.ResponseRO;
+import com.mosbach.ld.model.auth.AuthenticationRequest;
+import com.mosbach.ld.model.auth.AuthenticationResponse;
 import com.mosbach.ld.model.dhbwSchedule.DHBWSchedule;
 import com.mosbach.ld.model.task.Task;
 import com.mosbach.ld.model.task.TaskList;
+import com.mosbach.ld.services.UserCredentialService;
+import com.mosbach.ld.util.JwtUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1.0")
+@RequestMapping("/api/v0.1a")
 public class MappingController {
 
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	@Autowired
+	private UserCredentialService userCredentialService;
+	@Autowired
+	private JwtUtil jwtTokenUtil;
+	
+	@PostMapping(
+            path = "/authenticate",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+		try {
+			authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())	
+			);
+		} catch(BadCredentialsException e) {
+			throw new Exception("Incorrect username or password", e);
+		}
+		
+		final UserDetails userDetails = userCredentialService
+				.loadUserByUsername(authenticationRequest.getEmail());
+		
+		final String jwt = jwtTokenUtil.generateToken(userDetails);
+		
+		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+	}
+	
+	
     // TODO
     // The student is completely ignored.
     //
