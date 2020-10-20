@@ -1,0 +1,42 @@
+.textOnCarousel{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%);
+	text-shadow: 25px 25px 50px black
+}
+
+#message {
+  display:none;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid-psw {
+  color: #99ff99;
+}
+
+.valid-psw:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid-psw {
+  color: #FF3333;
+}
+
+.invalid-psw:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
