@@ -1,4 +1,4 @@
-package com.mosbach.ld;
+package com.mosbach.ld.controller;
 
 import com.mosbach.ld.dataManagerImpl.PostgresTaskManagerImpl;
 import com.mosbach.ld.model.alexa.AlexaRO;
@@ -6,11 +6,21 @@ import com.mosbach.ld.model.alexa.OutputSpeechRO;
 import com.mosbach.ld.model.alexa.ResponseRO;
 import com.mosbach.ld.model.auth.AuthenticationRequest;
 import com.mosbach.ld.model.auth.AuthenticationResponse;
+import com.mosbach.ld.model.dhbwSchedule.DHBWCourses;
+import com.mosbach.ld.model.dhbwSchedule.DHBWLecture;
 import com.mosbach.ld.model.dhbwSchedule.DHBWSchedule;
 import com.mosbach.ld.model.task.Task;
 import com.mosbach.ld.model.task.TaskList;
+import com.mosbach.ld.services.DHBWScheduleService;
 import com.mosbach.ld.services.UserCredentialService;
 import com.mosbach.ld.util.JwtUtil;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+import java.util.Date;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +32,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+//necesary?
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v0.1a")
 public class MappingController {
@@ -30,6 +42,8 @@ public class MappingController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private UserCredentialService userCredentialService;
+	@Autowired
+	private DHBWScheduleService dhbwScheduleService;
 	@Autowired
 	private JwtUtil jwtTokenUtil;
 	
@@ -66,6 +80,11 @@ public class MappingController {
     // TODO
     // Set the used DataProvider (ProperyFileManager, PostgresMaganer) here and not in TaskList
     //
+	
+	@GetMapping("/test")
+	public String test() {
+		return "Hello World!";
+	}
 
 	/*
     @GetMapping("/task/all")
@@ -163,33 +182,29 @@ public class MappingController {
     */
 	
 	@GetMapping("/dhbw-schedule/courses/all")
-    public DHBWSchedule getAllCourses(@RequestParam(value = "name", defaultValue = "Student") String name) {
-
-		DHBWSchedule s = new DHBWSchedule();
-		
-		
-
-        return s;
+    public DHBWCourses getAllCourses() {
+		return new DHBWCourses(dhbwScheduleService.loadAllCourses());
     }
 	
 	@GetMapping("/dhbw-schedule/{course}/all")
     public DHBWSchedule getAllLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
-
-		DHBWSchedule s = new DHBWSchedule();
-		
-		
-
-        return s;
+		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
+        return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);
     }
 	
 	@GetMapping("/dhbw-schedule/{course}/upcomingdays")
-    public DHBWSchedule getUpcomingDaysLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
-
-		DHBWSchedule s = new DHBWSchedule();
+    public DHBWSchedule getUpcomingDaysLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "days", defaultValue = "3") int days) {
 		
+		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
+		Predicate<DHBWLecture> streamsPredicate = 
+				lecture -> lecture.getEnd().isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)) 
+					&& lecture.getStart().isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusDays(days));
+		 
+	    lectures = lectures.stream()
+	      .filter(streamsPredicate)
+	      .collect(Collectors.toList());
 		
-
-        return s;
+	    return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);
     }
 	
 	

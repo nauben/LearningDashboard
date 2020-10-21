@@ -1,56 +1,65 @@
 package com.mosbach.ld.model.dhbwSchedule;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class DHBWLecture {
 
-	String summary; // welche
-	String description; // wer
-	String location; // raum
-	Date start; // start
-	Date end; // ende
+	String title; 
+	String lecturer; 
+	String location; 
+	LocalDateTime start; 
+	LocalDateTime end; 
 	
 	public DHBWLecture() {
 		super();
 	}
 
-	public DHBWLecture(String summary, String description, String location, Date start, Date end) {
+	public DHBWLecture(String title, String lecturer, String location, LocalDateTime start, LocalDateTime end) {
 		super();
-		this.summary = summary;
-		this.description = description;
+		this.title = title;
+		this.lecturer = lecturer;
 		this.location = location;
 		this.start = start;
 		this.end = end;
 	}
-	
-	public String getSummary() {
-		return summary;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setSummary(String summary) {
-		this.summary = summary;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getDescription() {
-		return description;
+
+	public String getLecturer() {
+		return lecturer;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setLecturer(String lecturer) {
+		this.lecturer = lecturer;
 	}
+
 	public String getLocation() {
 		return location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Date getStart() {
+
+	public LocalDateTime getStart() {
 		return start;
 	}
-	public void setStart(Date start) {
+
+	public void setStart(LocalDateTime start) {
 		this.start = start;
 	}
-	public Date getEnd() {
+
+	public LocalDateTime getEnd() {
 		return end;
 	}
-	public void setEnd(Date end) {
+
+	public void setEnd(LocalDateTime end) {
 		this.end = end;
 	}
 	

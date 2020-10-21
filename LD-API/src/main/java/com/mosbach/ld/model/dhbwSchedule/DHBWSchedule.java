@@ -1,19 +1,19 @@
 package com.mosbach.ld.model.dhbwSchedule;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 public class DHBWSchedule {
 
 	String course;
-	Date datestamp;
+	LocalDateTime datestamp;
 	Collection<DHBWLecture> lectures;
 	
 	public DHBWSchedule() {
 		super();
 	}
 	
-	public DHBWSchedule(String course, Date datestamp, Collection<DHBWLecture> lectures) {
+	public DHBWSchedule(String course, LocalDateTime datestamp, Collection<DHBWLecture> lectures) {
 		super();
 		this.course = course;
 		this.datestamp = datestamp;
@@ -26,10 +26,10 @@ public class DHBWSchedule {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	public Date getDatestamp() {
+	public LocalDateTime getDatestamp() {
 		return datestamp;
 	}
-	public void setDatestamp(Date datestamp) {
+	public void setDatestamp(LocalDateTime datestamp) {
 		this.datestamp = datestamp;
 	}
 	public Collection<DHBWLecture> getLectures() {
