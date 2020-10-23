@@ -59,7 +59,7 @@ myInput.onkeyup = function() {
     capital.classList.add("valid-psw");
   } else {
     capital.classList.remove("valid-psw");
-    capital.classList.add("invalid");
+    capital.classList.add("invalid-psw");
   }
 
   // Validate numbers
