@@ -9,8 +9,8 @@
 	<title>Learning Dashboard</title>
   </head>
  <body>
-	 <!-- Header-->
-	 <nav class="navbar navbar-expand navbar-dark bg-dark">
+<!-- Header-->
+	<nav class="navbar navbar-expand navbar-dark bg-dark">
       		<span class="my-auto" id="sidebarCollapse">
 				<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-list" fill="white" xmlns="http://www.w3.org/2000/svg">
 				  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -88,8 +88,8 @@
         </ul>
      </nav>
 
-	 <!-- Sidebar  -->
     <div class="wrapper">
+	<!-- Sidebar  -->
       <nav id="sidebar">
         <div class="sidebar-header">
             <h3>Learning Dashboard</h3>
@@ -119,15 +119,171 @@
           </ul>
 		  <a href="#" class="btn btn-light logout-btn">Abmelden</a>
         </nav>
-		
-		
-		<!-- Content -->
-		
-    </div>
-	 
+    
 
+	 <!-- Content of the page -->
+	 <div id="content">
+		 <div class="container-fluid">
+		  <div class="row">
+			<div class="col-9">
+				<div class="card">
+					<div class="card-header">
+						Kanban-Board
+					</div>
+					<div class="row mt-2 mb-2">
+						<div class="col-4">
+							<div class="card">
+								<div class="card-header">
+									To Do
+								</div>
+								<div class="card m-2">
+									<div class="card-header">
+										#003
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Titel einer Aufgabe</h5>
+									</div>					
+								</div>
+								<div class="card m-2">
+									<div class="card-header">
+										#006
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Titel einer Aufgabe</h5>
+										<p class="card-text">Mi, 08:15 Uhr</p>
+									</div>					
+								</div>	
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="card">
+								<div class="card-header">
+									In Arbeit
+								</div>
+								<div class="card m-2">
+									<div class="card-header">
+										#002
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Titel einer Aufgabe</h5>
+										<p class="card-text">Fr, 09:30 Uhr</p>
+									</div>					
+								</div>
+								<div class="card m-2">
+									<div class="card-header">
+										#004
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Titel einer Aufgabe</h5>
+									</div>					
+								</div>
+								<div class="card m-2">
+									<div class="card-header">
+										#005
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Titel einer Aufgabe</h5>
+										<p class="card-text">Mo, 13:00 Uhr</p>
+									</div>					
+								</div>	
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="card">
+								<div class="card-header">
+									Fertig
+								</div>
+								<div class="card m-2">
+									<div class="card-header">
+										#001
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Titel einer Aufgabe</h5>
+									</div>					
+								</div>			
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="col-3">
+				<div class="card">
+					<div class="card-header">
+						Vorlesungen
+					</div>
+					<div class="card m-2">
+						<div class="card-header">
+							Heute
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">ABWL-Steuern u. Bilanzen<br>
+								08:15 bis 12:15 Uhr
+							</li>
+							<li class="list-group-item">Einführung Web-Appl.<br>
+								13:00 bis 17:15 Uhr</li>
+						</ul>
+					</div>
+					<div class="card m-2">
+						<div class="card-header">
+							Morgen
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Einführung Web-Appl.<br>
+								08:15 bis 12:15 Uhr
+							</li>
+							<li class="list-group-item">Statistik<br>
+								13:00 bis 17:00 Uhr
+							</li>
+						</ul>
+					</div>
+					<div class="card m-2">
+						<div class="card-header">
+						  Freitag
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Digitale Transformation<br>
+								09:00 bis 12:15 Uhr
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="card mt-3">
+					<div class="card-header">
+						Musik
+					</div>				  	
+					<div class="row">
+						<div class="col-4 card-img">
+							<img src="images/100X100.gif" alt="Album cover" width="80px" height="auto">
+						</div>
+						<div class="col-5 text-center">
+							Music to Study <br>
+							John Doe <br>
+							<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-skip-backward-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V4a.5.5 0 0 0-.5-.5z"/>
+								<path d="M.904 8.697l6.363 3.692c.54.313 1.233-.066 1.233-.697V4.308c0-.63-.692-1.01-1.233-.696L.904 7.304a.802.802 0 0 0 0 1.393z"/>
+								<path d="M8.404 8.697l6.363 3.692c.54.313 1.233-.066 1.233-.697V4.308c0-.63-.693-1.01-1.233-.696L8.404 7.304a.802.802 0 0 0 0 1.393z"/>
+							</svg>
+							<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-skip-forward-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+								<path d="M7.596 8.697l-6.363 3.692C.693 12.702 0 12.322 0 11.692V4.308c0-.63.693-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+								<path d="M15.096 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.693-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+							</svg>
+						</div>
+						<div class="col-3 my-auto">
+							<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+							</svg>
+						</div>
+					</div>
+				</div>
+		  	</div>
+		 </div>
+		</div>
+	</div>
 	  
-	  
+	</div>  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-3.5.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

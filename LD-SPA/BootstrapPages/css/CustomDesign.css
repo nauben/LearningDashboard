@@ -66,7 +66,9 @@
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    transition: all 0.3s;
+	background: #00448E;
+	color: white;
+	transition: all 0.3s;
 }
 
 #sidebar.active {
@@ -75,7 +77,8 @@
     text-align: center;
 }
 
-#sidebar.active .sidebar-header h3{
+#sidebar.active .sidebar-header h3,
+#sidebar.active .logout-btn{
     display: none;
 }
 
@@ -85,6 +88,7 @@
 
 #sidebar ul li a {
     text-align: left;
+	color: white;
 }
 
 #sidebar.active ul li a {
@@ -115,8 +119,7 @@
 
 #sidebar .sidebar-header {
     padding: 20px;
-    /*Farbe ändern */
-	background: #6d7fcc;
+	background: #00448E;
 }
 
 #sidebar .sidebar-header strong {
@@ -128,12 +131,11 @@
     padding: 10px;
     font-size: 1.1em;
     display: block;
+	background: #00448E;
 }
 
 #sidebar ul li a:hover {
-    /*Farbe ändern */
-	color: #7386D5;
-    background: #fff;
+	color: #6c757d;
 }
 
 #sidebar ul li a i {
@@ -142,9 +144,8 @@
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    /*Farbe ändern */
 	color: #fff;
-    background: #6d7fcc;
+    background: #00448E;
 }
 
 a[data-toggle="collapse"] {
@@ -162,8 +163,18 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-	/*Farbe ändern */
-    background: #6d7fcc;
+}
+
+.logout-btn{
+	margin-left: 20px;
+	margin-bottom: 30px;
+}
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
 }
 
 @media (max-width: 768px) {
@@ -184,7 +195,8 @@ ul ul a {
     #sidebar.active {
         margin-left: 0 !important;
     }
-    #sidebar .sidebar-header h3 {
+    #sidebar .sidebar-header h3,
+			 .logout-btn{
         display: none;
     }
     #sidebar .sidebar-header strong {
