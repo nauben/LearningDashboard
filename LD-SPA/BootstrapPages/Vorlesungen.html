@@ -9,8 +9,8 @@
 	<title>Learning Dashboard</title>
   </head>
  <body>
-	 <!-- Header-->
-	 <nav class="navbar navbar-expand navbar-dark bg-dark">
+<!-- Header-->
+	<nav class="navbar navbar-expand navbar-dark bg-dark">
       		<span class="my-auto" id="sidebarCollapse">
 				<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-list" fill="white" xmlns="http://www.w3.org/2000/svg">
 				  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -22,8 +22,8 @@
 					<div class="container">
 						<div class="row">
 							<!-- hidden on screens smaller than large -->
-							<div class="col-auto border border-white d-none d-lg-block my-auto">
-							10min
+							<div class="col-auto border border-white d-none d-lg-block">
+								10min
 							</div>
 						<!-- clock-->
 						<!-- version for screens smaller than large -->
@@ -83,14 +83,14 @@
         </ul>
      </nav>
 
-	 <!-- Sidebar  -->
     <div class="wrapper">
+	<!-- Sidebar  -->
       <nav id="sidebar">
-      	<div class="sidebar-header">
+        <div class="sidebar-header">
             <h3>Learning Dashboard</h3>
             <strong>LD</strong>
         </div>
-	   	<ul class="list-unstyled">
+      	<ul class="list-unstyled">
 			<li class="active">
 				<a href="#">
 					<i></i>
@@ -136,19 +136,95 @@
 					</span>
 				</a>
 			 </li>
-		  </ul>
+          </ul>
 		  <a href="#" class="btn btn-light logout-btn">Abmelden</a>
         </nav>
-		
-		
-		<!-- Content -->
-		
-    </div>
-	 
+    
+
+	 <!-- Content of the page -->
+	 <div id="content">
+		 <div class="container-fluid">			
+			<div class="card">
+				<div class="card-header">
+					Vorlesungen
+				</div>
+				<ul class="list-group list-group-flush">
+					<!-- Optionen -->
+					<li class="list-group-item">
+						<div class="card m-2">
+							<div class="card-header">
+								Optionen
+							</div>
+							<div class="card-text m-4">
+								<div class="row">
+									<div class="col-lg-4">
+										Vorlesungen vom:
+										<a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+									</div>
+									<div class="col-lg-4">
+										bis zum:
+										<a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+									</div>
+									<div class="col-lg-4">
+										Kurs:
+										<a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Autocomplete</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- einzelne Vorlesungen -->
+					<li class="list-group-item">
+						<div class="card m-2">
+							<div class="card-header">
+								Mittwoch, 21. Oktober 2020
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">ABWL-Steuern u. Bilanzen<br>
+									08:15 bis 12:15 Uhr
+								</li>
+								<li class="list-group-item">Einführung Web-Appl.<br>
+									13:00 bis 17:15 Uhr</li>
+							</ul>
+						</div>
+						<div class="card m-2">
+							<div class="card-header">
+								Donnerstag, 22. Oktober 2020
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Einführung Web-Appl.<br>
+									08:15 bis 12:15 Uhr
+								</li>
+								<li class="list-group-item">Statistik<br>
+									13:00 bis 17:00 Uhr
+								</li>
+							</ul>
+						</div>
+						<div class="card m-2">
+							<div class="card-header">
+							  Freitag, 23. Oktober 2020
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Digitale Transformation<br>
+									09:00 bis 12:15 Uhr
+								</li>
+							</ul>
+						</div>
+					</li>
+				
+				</ul>
+				
+				
+			</div>
+		</div>
+	</div>
+	  
+	</div>  
+
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap-4.5.3.js"></script>
 	<script src="js/CustomJS.js"></script>
-	 
+
   </body>
 </html>

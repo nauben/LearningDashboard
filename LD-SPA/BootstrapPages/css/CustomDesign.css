@@ -86,6 +86,15 @@
     display: block;
 }
 
+#sidebar.active .sidebar-text{
+	display: none;
+}
+
+#sidebar.active .sidebar-svg{
+	transform: scale(2.0);
+	
+}
+
 #sidebar ul li a {
     text-align: left;
 	color: white;
@@ -135,7 +144,7 @@
 }
 
 #sidebar ul li a:hover {
-	color: #6c757d;
+	text-decoration: overline;
 }
 
 #sidebar ul li a i {
@@ -169,6 +178,13 @@ ul ul a {
 	margin-left: 20px;
 	margin-bottom: 30px;
 }
+
+.logout-btn:hover{
+	background-color: #dc3545;
+	border-color: #dc3545;
+	color: white;
+}
+
 
 #content {
     width: 100%;
@@ -224,4 +240,25 @@ ul ul a {
     #sidebarCollapse span {
         display: none;
     }
+}
+
+/* Kanban-Board */
+
+.card.draggable {
+    margin-bottom: 1rem;
+    cursor: grab;
+}
+
+.droppable {
+    background-color: #00448E;
+    min-height: 60px;
+    margin-bottom: 1rem;
+}
+
+.not-allowed {
+	cursor: not-allowed;
+}
+
+.shrink:hover {
+	transform: scale(0.8);
 }
