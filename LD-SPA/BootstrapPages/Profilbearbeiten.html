@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/css/bootstrap-4.5.3.css">
+	<link href="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/css/CustomDesign.css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/images/favicon.png">	
+	<title>Learning Dashboard</title>
+  </head>
+ <body>
+<!-- Header-->
+	<nav class="navbar navbar-expand navbar-dark bg-dark">
+      		<span class="my-auto" id="sidebarCollapse">
+				<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-list" fill="white" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+				</svg>
+				<span class="navbar-brand my-auto">Guten Morgen, Tom</span>
+			</span>
+			<ul class="navbar-nav ml-auto">
+				<li class="text-white">
+					<div class="container">
+						<div class="row">
+							<!-- hidden on screens smaller than large -->
+							<div class="col-auto border border-white d-none d-lg-block my-auto">
+							10min
+							</div> 
+						<!-- <div class="progress col-2 my-auto">    					
+  							<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+								-10min
+							</div> 
+						</div> -->
+						<!-- clock-->
+						<!-- version for screens smaller than large -->
+						<li class="nav-item dropdown my-auto d-block d-lg-none">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-clock" fill="#8CFF4D" xmlns="http://www.w3.org/2000/svg">
+							  		<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
+							  		<path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+								</svg>
+							</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" disabled>Pomodoro-Timer</a>
+								  <div class="dropdown-divider"></div>
+								  <a class="dropdown-item" href="#">VWL</a>
+								  <div class="dropdown-item" href="#">10min</div>
+								</div>
+						  </li>		
+						<!-- version for screens large+ -->
+						<div class="d-none d-lg-block">
+							<div class="ml-2 mr-2 d-flex justify-content-center align-items-center">
+								<svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-clock" fill="#8CFF4D" xmlns="http://www.w3.org/2000/svg">
+								  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
+								  <path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+								</svg>
+							</div>
+						</div>
+						<!-- hidden on screens smaller than large -->
+						<div class="col-auto text-right p-0 marginright-10 d-none d-lg-block text-white">
+							Pomodoro-Timer <br>
+							VWL
+						</div>
+					  </div>
+					</div>
+				</li>
+			<!--Bell icon -->
+			<li class="nav-item px-3 my-auto">
+				  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+					<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+				  </svg>
+			 </li>
+			<!-- User icon -->
+			
+			 <li class="nav-item dropdown my-auto">
+			  	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-square" fill="white" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+						<path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+					</svg>  
+				</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown2">
+					  <a class="dropdown-item" href="#">Profil bearbeiten</a>
+					  <a class="dropdown-item" href="#">Abmelden</a>
+					  <div class="dropdown-divider"></div>
+					  <div class="dropdown-item disabled">Learning Dashboard v1.0</div>
+					</div>
+			  </li>	
+        </ul>
+     </nav>
+
+    <div class="wrapper">
+	<!-- Sidebar  -->
+      <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Learning Dashboard</h3>
+            <strong>LD</strong>
+        </div>
+        <ul class="list-unstyled">
+            <li class="active">
+                <a href="#">
+                    <i></i>
+					<img src="images/house-fill.svg" alt="" width="25" height="25" title="Home">
+					Start
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                  	<i></i>
+					<img src="images/Learn.png" alt="" width="25" height="25" title="Learn">
+					Lernen
+              	</a>
+			</li>
+			<li>
+                <a href="#">
+                    <i></i>
+					<img src="images/kanban.svg" alt="" width="25" height="25" title="Kanban">
+					Kanban
+             	</a>
+             </li>
+             <li>
+                <a href="#">
+                    <i></i>
+					<img src="images/lecture.svg" alt="" width="25" height="25" title="lecture">
+					Vorlesungen
+					<img src="images/calendar3.svg" alt="" width="25" height="25" title="calendar">
+             	</a>
+             </li>
+          </ul>
+		  <a  href="#" class="btn btn-light logout-btn">
+			  <img src="images/account-logout.svg" alt="" width="20" height="20" title="Logout">
+			  Abmelden
+		  </a>
+        </nav>
+    
+
+	 <!-- Content of the page -->
+		 <div id="content">
+			 
+			<div class="container bootstrap snippets bootdeys">
+				<div class="row">
+	  				<div class="col-xs-12 col-sm-9">
+		<form class="form-horizontal">
+			<div class="card text-center">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Tobias Hummel</h4>
+                    <p class="mb-0">@THEhuMMel</p>
+                    <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                    <div class="mt-2">
+                      <button type="button" class="btn btn-primary">
+						  <img src="images/camera-fill.svg" alt="" width="20" height="20" title="Kamera">
+					  Profilbild bearbeiten
+						  
+					</button>
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <span class="badge badge-secondary">administrator</span>
+                    <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                  </div>
+                </div>
+              </div>
+			</div>
+		  <div class="card card-body">
+			<div class="card-header">
+			<h4 class="card-titel">Benutzerinfo</h4>
+			</div>
+			<div class="card-body">
+			  <div class="form-group">
+				<label class="col-sm-3 control-label">Vorname</label>
+				<div class="col-sm-10">
+				  <input type="text" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-3 control-label">Nachname</label>
+				<div class="col-sm-10">
+				  <input type="text" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">E-Mail</label>
+				<div class="col-sm-10">
+				  <input type="text" class="form-control">
+				</div>
+			  </div>  
+				<div class="form-group">
+				<label class="col-sm-2 control-label">Instition</label>
+				<div class="col-sm-10">
+				 <select class="form-control">
+					<option selected="">Hochschule wählen</option>
+					<option>DHBW Mosbach</option>
+					<option>DHBW Bad Mergentheim</option>
+					<option>DHBW Mannheim</option>
+					<option>DHBW Stuttgart</option>
+					<option>DHBW Karlsruhe</option>
+				  </select>
+				</div>  
+			  </div>
+				<div class="form-group">
+				<label class="col-sm-2 control-label">Kurs&nbsp;</label>
+				<div class="col-sm-10">
+				 <select class="form-control">
+					<option selected="">Kurs wählen</option>
+					<option>WI19A</option>
+					<option>WI19B</option>
+					<option>WI19C</option>
+					<option>WI20A</option>
+					<option>WI20B</option>
+					<option>WI20C</option> 
+				  </select>
+				</div>  
+			  </div>
+		  </div>
+		</div>
+
+<!-- 			
+			
+		  <div class="card card-body">
+			<div class="card-header">
+			<h4 class="card-titel">Contact info</h4>
+			</div>
+			<div class="card-body">
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">Work number</label>
+				<div class="col-sm-10">
+				  <input type="tel" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">Mobile number</label>
+				<div class="col-sm-10">
+				  <input type="tel" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">E-mail address</label>
+				<div class="col-sm-10">
+				  <input type="email" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">Work address</label>
+				<div class="col-sm-10">
+				  <textarea rows="3" class="form-control"></textarea>
+				</div>
+			  </div>
+			</div>
+		  </div>
+-->
+		  <div class="card card-body">
+			<div class="card-header">
+			<h4 class="card-titel">Sicherheit</h4>
+			</div>
+			<div class="card-body">
+			  <div class="form-group">
+				<label class="col-sm-3 control-label">Aktuelles Passwort&nbsp;</label>
+				<div class="col-sm-10">
+				  <input type="password" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-3 control-label">Neues Passwort</label>
+				<div class="col-sm-10">
+				  <input type="password" class="form-control">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+				  <div class="checkbox">
+					<input type="checkbox" id="checkbox_1">
+					<label for="checkbox_1">Make this account public ENTFERNEN-----------------------------</label>
+				  </div>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+				  <button type="submit" class="btn btn-primary">Bestätigen</button>
+				  <button type="reset" class="btn btn-default">Abbrechen</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</form>
+	  </div>
+				
+					      <div class="col-12 col-md-3 mb-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="px-xl-3">
+              <button class="btn btn-block btn-secondary">
+                 <img src="images/account-logout.svg" alt="" width="20" height="20" title="Logout">
+                Abmelden
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title font-weight-bold">Support</h6>
+            <p class="card-text">Get fast, free help from our friendly assistants.</p>
+            <button type="button" class="btn btn-primary">Contact Us</button>
+          </div>
+        </div>
+      </div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	  
+	 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/js/jquery-3.5.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/js/popper.min.js"></script>
+    <script src="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/js/bootstrap-4.5.3.js"></script>
+	<script src="../../../GitHub/LearningDashboard/LD-SPA/BootstrapPages/js/CustomJS.js"></script>
+	 
+	 <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+  </body>
+</html>
