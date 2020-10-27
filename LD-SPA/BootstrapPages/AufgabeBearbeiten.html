@@ -98,214 +98,120 @@
         <ul class="list-unstyled">
             <li class="active">
                 <a href="#">
-                    <i></i>
-					<img src="images/house-fill.svg" alt="" width="25" height="25" title="Home">
-					Start
+                    <i></i>Start
                 </a>
             </li>
             <li>
                 <a href="#">
-                  	<i></i>
-					<img src="images/Learn.png" alt="" width="25" height="25" title="Learn">
-					Lernen
+                  	<i></i>Lernen
               	</a>
 			</li>
 			<li>
                 <a href="#">
-                    <i></i>
-					<img src="images/kanban.svg" alt="" width="25" height="25" title="Kanban">
-					Kanban
+                    <i></i>Kanban
              	</a>
              </li>
              <li>
                 <a href="#">
-                    <i></i>
-					<img src="images/lecture.svg" alt="" width="25" height="25" title="lecture">
-					Vorlesungen
-					<img src="images/calendar3.svg" alt="" width="25" height="25" title="calendar">
+                    <i></i>Vorlesungen
              	</a>
              </li>
           </ul>
-		  <a  href="#" class="btn btn-light logout-btn">
-			  <img src="images/account-logout.svg" alt="" width="20" height="20" title="Logout">
-			  Abmelden
-		  </a>
+		  <a href="#" class="btn btn-light logout-btn">Abmelden</a>
         </nav>
     
 
 	 <!-- Content of the page -->
-		 <div id="content">
-			 
-			<div class="container">
-				<div class="row">
-	  				<div class="col-xs-12 col-sm-9">
-		<form class="form-horizontal">
-			<div class="card text-center">
-              <div class="row">
-                <div class="col-12 col-sm-auto mb-3">
-                  <div class="mx-auto" style="width: 140px;">
-                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                  <div class="text-center text-sm-left mb-2 mb-sm-0">
-                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Tobias Hummel</h4>
-                    <p class="mb-0">@THEhuMMel</p>
-                    <div class="text-muted"><small>Last seen 2 hours ago</small></div>
-                    <div class="mt-2">
-                      <button type="button" class="btn btn-primary">
-						  <img src="images/camera-fill.svg" alt="" width="20" height="20" title="Kamera">
-					  Profilbild bearbeiten
-						  
-					</button>
-                    </div>
-                  </div>
-                  <div class="text-center text-sm-right">
-                    <span class="badge badge-secondary">administrator</span>
-                    <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
-                  </div>
-                </div>
-              </div>
-			</div>
-		  <div class="card card-body">
-			<div class="card-header">
-			<h4 class="card-titel">Benutzerinfo</h4>
-			</div>
-			<div class="card-body">
-			  <div class="form-group">
-				<label class="col-sm-3 control-label">Vorname</label>
-				<div class="col-sm-10">
-				  <input type="text" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-3 control-label">Nachname</label>
-				<div class="col-sm-10">
-				  <input type="text" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label">E-Mail</label>
-				<div class="col-sm-10">
-				  <input type="text" class="form-control">
-				</div>
-			  </div>  
-				<div class="form-group">
-				<label class="col-sm-2 control-label">Instition</label>
-				<div class="col-sm-10">
-				 <select class="form-control">
-					<option selected="">Hochschule wählen</option>
-					<option>DHBW Mosbach</option>
-					<option>DHBW Bad Mergentheim</option>
-					<option>DHBW Mannheim</option>
-					<option>DHBW Stuttgart</option>
-					<option>DHBW Karlsruhe</option>
-				  </select>
-				</div>  
-			  </div>
-				<div class="form-group">
-				<label class="col-sm-2 control-label">Kurs&nbsp;</label>
-				<div class="col-sm-10">
-				 <select class="form-control">
-					<option selected="">Kurs wählen</option>
-					<option>WI19A</option>
-					<option>WI19B</option>
-					<option>WI19C</option>
-					<option>WI20A</option>
-					<option>WI20B</option>
-					<option>WI20C</option> 
-				  </select>
-				</div>  
-			  </div>
-		  </div>
-		</div>
+	 <div id="content">
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+			  Launch demo modal
+			</button>
 
-<!-- 			
-			
-		  <div class="card card-body">
-			<div class="card-header">
-			<h4 class="card-titel">Contact info</h4>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Aufgabe bearbeiten</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					<div class="row">
+	  				<div class="card col-md-12 col-lg-9">
+		<form class="form-horizontal">
+
+
+			<div class="form-group">
+
+							 <div class="card m-sm-1"> 
+								<div class="row">
+									<div class="col-auto">
+										<h4>(Symbol) Titel</h4>
+									</div>
+									<div class="col-auto">
+										<button type="button" class="btn btn-outline-primary">Bearbeiten</button>
+									</div>
+								</div>	
+									Ich bin der Titel der Aufgabe
+							</div>
+							  <div class="card m-sm-1"> 
+								<div class="row">
+									<div class="col-auto">
+										<h4>(Symbol) Beschreibung</h4>
+									</div>
+									<div class="col-auto">
+										<button type="button" class="btn btn-outline-primary">Bearbeiten</button>
+									</div>
+								</div>	
+									Ich bin die Beschreibung der Aufgabe
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+							</div>
+
 			</div>
-			<div class="card-body">
-			  <div class="form-group">
-				<label class="col-sm-2 control-label">Work number</label>
-				<div class="col-sm-10">
-				  <input type="tel" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label">Mobile number</label>
-				<div class="col-sm-10">
-				  <input type="tel" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label">E-mail address</label>
-				<div class="col-sm-10">
-				  <input type="email" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label">Work address</label>
-				<div class="col-sm-10">
-				  <textarea rows="3" class="form-control"></textarea>
-				</div>
-			  </div>
-			</div>
-		  </div>
--->
-		  <div class="card card-body">
-			<div class="card-header">
-			<h4 class="card-titel">Sicherheit</h4>
-			</div>
-			<div class="card-body">
-			  <div class="form-group">
-				<label class="col-sm-3 control-label">Aktuelles Passwort&nbsp;</label>
-				<div class="col-sm-10">
-				  <input type="password" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-3 control-label">Neues Passwort</label>
-				<div class="col-sm-10">
-				  <input type="password" class="form-control">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<div class="col-sm-10 col-sm-offset-2">
-				  <button type="submit" class="btn btn-primary">Bestätigen</button>
-				  <button type="reset" class="btn btn-default">Abbrechen</button>
-				</div>
-			  </div>
-			</div>
-		  </div>
+
+
+
+
 		</form>
 	  </div>
 				
-					      <div class="col-12 col-md-3 mb-3">
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="px-xl-3">
-              <button class="btn btn-block btn-secondary">
-                 <img src="images/account-logout.svg" alt="" width="20" height="20" title="Logout">
-                Abmelden
-              </button>
+					      <div class="card col-md-12 col-lg-3">
+
+          <div class="card m-sm-1">
+            <div class="px-xl-12">
+              <div class="form-group">
+				<label class="col-sm-12 control-label">Instition</label>
+				<div class="col-sm-12">
+				 <select class="form-control">
+					<option selected="">Aktuelle Swimlane</option>
+					<option>TO DO</option>
+					<option>IN ARBEIT</option>
+					<option>FERTIG</option>
+				  </select>
+				</div>  
             </div>
           </div>
         </div>
-        <div class="card">
+        <div class="card m-sm-1">
           <div class="card-body">
-            <h6 class="card-title font-weight-bold">Support</h6>
+            <h6 class="card-title font-weight-bold">Mitarbeiter?</h6>
             <p class="card-text">Get fast, free help from our friendly assistants.</p>
             <button type="button" class="btn btn-primary">Contact Us</button>
           </div>
         </div>
-      </div>
-					
 					
 				</div>
+			</div>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+					<button type="button" class="btn btn-primary">Änderungen Speichern</button>
+				  </div>
+				</div>
+			  </div>
 			</div>
 		</div>
 	</div>
