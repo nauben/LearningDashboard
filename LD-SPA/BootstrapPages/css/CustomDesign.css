@@ -262,3 +262,7 @@ ul ul a {
 .shrink:hover {
 	transform: scale(0.8);
 }
+
+.kan-bg{
+	background-color: rgba(0, 0, 0, 0.03);
+}
