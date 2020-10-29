@@ -8,7 +8,12 @@
                 <div class="row">
                     <div class="col-lg-4">
                         Zeitraum von: <br>
-                        <a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Datum auswählen</mat-label>
+                          <input matInput [matDatepicker]="picker">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
                     </div>
                     <div class="col-lg-4">
                         bis: <br>
@@ -65,9 +70,10 @@
                     </table>
                 </div>
                 <div class="col-lg-6">
-                    <svg width="15em" height="15em" viewBox="0 0 16 16" class="bi bi-pie-chart-fill sidebar-svg" fill="black" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
-                    </svg>
+                    <div id="divChart">
+                    <canvas id="PieChart" width="400" height="400"></canvas>
+                    </div>
+
                 </div>
             </div>
         </div>
