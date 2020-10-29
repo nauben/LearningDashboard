@@ -1,0 +1,291 @@
+<div (window:resize)="sizeKan()" class="container-fluid">
+    <div class="row">
+      <div class="col-lg-9">
+          <div class="card mb-3">
+              <div class="card-header">
+                  <span class="row">
+                      <span class="col-6">
+                          Kanban-Board
+                      </span>
+                      <span class="col-6">
+                          <!-- only visible on screens smaller than lg -->
+                           <div class="form-group d-block d-lg-none">
+                              <select onChange="chooseSwimlane()" class="form-control" id="swimlane">
+                                <option selected>Swimlane auswählen</option>
+                                <option value="To Do">To Do</option>
+                                <option value="In Arbeit">In Arbeit</option>
+                                <option value="Fertig">Fertig</option>
+                              </select>
+                            </div>
+                      </span>
+                  </span>
+              </div>
+              <div class="row">
+                  <div class="col-lg-4" id="todo">
+                      <div class="card kan-bg m-2">
+                          <div class="card-subtitle text-center text-uppercase mt-2">
+                              To Do
+                          </div>
+                          <div class="items">
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                              <div class="card shadow m-2 draggable" id="cd3" draggable="true" ondragstart="drag(event)">
+                                  <div class="card-body p-2">
+                                      <div class="card-title">
+                                          <span class="font-italic text-info">
+                                          #003&nbsp;&nbsp;&nbsp;
+                                          </span>
+                                          <div class="btn-group dropright">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                              </svg>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Aufgabe bearbeiten</a>
+                                                <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                            </div>
+                                          </div>
+                                          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                              <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                          </svg>
+                                      </div>
+                                      Titel einer Aufgabe
+                                  </div>					
+                              </div>
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                              <div class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                                  <div class="card-body p-2">
+                                      <div class="card-title">
+                                          <span class="font-italic text-info">
+                                          #006&nbsp;&nbsp;&nbsp;
+                                          </span>
+                                          <div class="btn-group dropright">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                              </svg>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Aufgabe bearbeiten</a>
+                                                <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                            </div>
+                                          </div>
+                                          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                              <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                          </svg>
+                                      </div>
+                                      Titel einer Aufgabe
+                                      <p class ="card-text">Mi, 08:15 Uhr</p>
+                                  </div>					
+                              </div>
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                              <div class="form-group ml-2 mr-2 shadow">
+                                  <input type="text" class="form-control" id="tasktitle" placeholder="+ Aufgabe hinzufügen...">
+                                </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 d-none d-lg-block" id="inarbeit">
+                      <div class="card kan-bg m-2">
+                          <div class="card-subtitle text-center text-uppercase mt-2">
+                              In Arbeit
+                          </div>
+                          <div class="items">
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                              <div class="card shadow m-2 draggable" id="cd2" draggable="true" ondragstart="drag(event)">
+                                  <div class="card-body p-2">
+                                      <div class="card-title">
+                                          <span class="font-italic text-info">
+                                          #002&nbsp;&nbsp;&nbsp;
+                                          </span>
+                                          <div class="btn-group dropright">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                              </svg>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Aufgabe bearbeiten</a>
+                                                <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                            </div>
+                                          </div>
+                                          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                              <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                          </svg>
+                                      </div>
+                                      Titel einer Aufgabe
+                                      <p class ="card-text">Fr, 09:30 Uhr</p>
+                                  </div>					
+                              </div>
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                              <div class="card shadow m-2 draggable" id="cd4" draggable="true" ondragstart="drag(event)">
+                                  <div class="card-body p-2">
+                                      <div class="card-title">
+                                          <span class="font-italic text-info">
+                                          #004&nbsp;&nbsp;&nbsp;
+                                          </span>
+                                          <div class="btn-group dropright">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                              </svg>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Aufgabe bearbeiten</a>
+                                                <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                            </div>
+                                          </div>
+                                          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                              <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                          </svg>
+                                      </div>
+                                      Titel einer Aufgabe
+                                  </div>					
+                              </div>
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                              <div class="card shadow m-2 draggable" id="cd5" draggable="true" ondragstart="drag(event)">
+                                  <div class="card-body p-2">
+                                      <div class="card-title">
+                                          <span class="font-italic text-info">
+                                          #005&nbsp;&nbsp;&nbsp;
+                                          </span>
+                                          <div class="btn-group dropright">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                              </svg>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Aufgabe bearbeiten</a>
+                                                <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                            </div>
+                                          </div>
+                                          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                              <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                          </svg>
+                                      </div>
+                                      Titel einer Aufgabe
+                                      <p class ="card-text">Fr, 09:30 Uhr</p>
+                                  </div>					
+                              </div>
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 d-none d-lg-block" id="fertig">
+                      <div class="card kan-bg m-2">
+                          <div class="card-subtitle text-center text-uppercase mt-2">
+                              Fertig
+                          </div>
+                          <div class="items">
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                          <div class="card shadow m-2 draggable" id="cd1" draggable="true" ondragstart="drag(event)">
+                              <div class="card-body p-2">
+                                  <div class="card-title">
+                                      <span class="font-italic text-info">
+                                      #001&nbsp;&nbsp;&nbsp;
+                                      </span>
+                                      <div class="btn-group dropright">
+                                        <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                          </svg>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="#">Aufgabe bearbeiten</a>
+                                            <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                        </div>
+                                      </div>
+                                      <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                          <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                          <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                      </svg>
+                                  </div>
+                                  Titel einer Aufgabe
+                                  </div>					
+                              </div>
+                              <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="card">
+              <div class="card-header">
+                  Vorlesungen
+              </div>
+              <div class="card m-2">
+                  <div class="card-header">
+                      Heute
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item schedule">ABWL-Steuern u. Bilanzen<br>
+                          08:15 bis 12:15 Uhr
+                      </li>
+                      <li class="list-group-item schedule">Einführung Web-Appl.<br>
+                          13:00 bis 17:15 Uhr</li>
+                  </ul>
+              </div>
+              <div class="card m-2">
+                  <div class="card-header">
+                      Morgen
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item schedule">Einführung Web-Appl.<br>
+                          08:15 bis 12:15 Uhr
+                      </li>
+                      <li class="list-group-item schedule">Statistik<br>
+                          13:00 bis 17:00 Uhr
+                      </li>
+                  </ul>
+              </div>
+              <div class="card m-2">
+                  <div class="card-header">
+                    Freitag
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item schedule">Digitale Transformation<br>
+                          09:00 bis 12:15 Uhr
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="card mt-3">
+              <div class="card-header">
+                  Musik
+              </div>				  	
+              <div class="row">
+                  <div class="col-3 card-img">
+                      <img src="../../../assets/images/500x500.jpg" alt="Album cover" width="80px" height="auto" class="shrink">
+                  </div>
+                  <div class="col-6 text-center">
+                      Music to Study<br>
+                      John Doe <br>
+                      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-skip-backward-fill shrink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V4a.5.5 0 0 0-.5-.5z"/>
+                          <path d="M.904 8.697l6.363 3.692c.54.313 1.233-.066 1.233-.697V4.308c0-.63-.692-1.01-1.233-.696L.904 7.304a.802.802 0 0 0 0 1.393z"/>
+                          <path d="M8.404 8.697l6.363 3.692c.54.313 1.233-.066 1.233-.697V4.308c0-.63-.693-1.01-1.233-.696L8.404 7.304a.802.802 0 0 0 0 1.393z"/>
+                      </svg>&nbsp;
+                      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-skip-forward-fill shrink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M7.596 8.697l-6.363 3.692C.693 12.702 0 12.322 0 11.692V4.308c0-.63.693-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                          <path d="M15.096 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.693-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                      </svg>
+                  </div>
+                  <div class="col-3 my-auto">
+                      <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-caret-right-fill shrink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                      </svg>
+                  </div>
+              </div>
+          </div>
+        </div>
+   </div>
+  </div>
