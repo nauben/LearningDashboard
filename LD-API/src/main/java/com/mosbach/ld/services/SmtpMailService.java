@@ -27,6 +27,7 @@ public class SmtpMailService {
 	private Session mailSession;
 	private Properties mailServerProperties;
 	
+	
 	public SmtpMailService(SmtpMailConfig config) {
 		
 		this.config = config;
