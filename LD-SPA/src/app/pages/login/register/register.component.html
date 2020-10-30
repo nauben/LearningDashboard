@@ -1,1 +1,34 @@
-<p>register works!</p>
+<div class="col-sm-8 mx-auto">
+    <h1 class="text-white display-4">Registrieren</h1>
+    <br>
+    <form>
+      <div class="form-group">
+        <input autofocus required type="email" class="form-control" id="Email-Login" placeholder="E-Mail-Adresse">
+      </div>
+      <div class="form-group">
+        <input required type="password" class="form-control" id="Password-Register" aria-describedby="passwordHelp" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+        <small id="passwordHelp" class="form-text text-white">Das Passwort muss mindestens acht Zeichen enthalten.</small>
+      </div>
+      <div class="form-group">
+        <input required type="password" class="form-control" id="Password-Confirmation" placeholder="Passwort wiederholen" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+          <div class="text-white">
+            <input type="checkbox" onclick="showPassword2L()">&nbsp;Passwort anzeigen
+            </div>
+      </div>
+      <div class="text-white">
+        <div class="text-right">
+              <button type="submit" class="btn btn-info btn-lg">Registrieren</button>
+            <br><br>
+              <a href="Login.html" class="text-white"><h5>Zurück zur Anmeldung</h5>
+              </a>
+          </div>
+        <div id="message" class="border border-light">
+          <h3>Das Passwort muss folgendes enthalten:</h3>
+          <p id="letter" class="invalid-psw">Ein <b>Kleinbuchstabe</b></p>
+          <p id="capital" class="invalid-psw">Ein <b>Großbuchstabe</b></p>
+          <p id="number" class="invalid-psw">Eine <b>Zahl</b></p>
+          <p id="length" class="invalid-psw">Mindestens <b>8 Zeichen</b></p>
+        </div>			
+      </div>
+    </form>
+</div>

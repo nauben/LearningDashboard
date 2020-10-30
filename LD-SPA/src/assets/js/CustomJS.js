@@ -39,7 +39,7 @@ var y = document.getElementById("Password-New");
 			}
 }
 
-//####################
+/*//####################
 //Password Register validation
 function validatePassword(){
 var myInput = document.getElementById("Password-Register");
@@ -99,7 +99,7 @@ myInput.onkeyup = function() {
     length.classList.add("invalid-psw");
   }
 }
-}
+} */
 //####################
 //Password Register validation
 function validatePassword2(){

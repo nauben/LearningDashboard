@@ -10,19 +10,44 @@
                     <div class="card-header">
                         Optionen
                     </div>
-                    <div class="card-text m-4">
+                    <div class="card-text mt-3 ml-3 mr-3">
                         <div class="row">
-                            <div class="col-lg-4">
-                                Vorlesungen vom:
-                                <a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+                            <div class="col-lg-3 my-auto">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Vorlesungen vom:</mat-label>
+                                    <input matInput [matDatepicker]="startdate">
+                                    <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                                    <mat-datepicker #startdate></mat-datepicker>
+                                  </mat-form-field>
                             </div>
-                            <div class="col-lg-4">
-                                bis zum:
-                                <a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+                            <div class="col-lg-3 my-auto">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>bis:</mat-label>
+                                    <input matInput [matDatepicker]="enddate">
+                                    <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                                    <mat-datepicker #enddate></mat-datepicker>
+                                  </mat-form-field>
                             </div>
-                            <div class="col-lg-4">
-                                Kurs:
-                                <a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Autocomplete</a>
+                            <div class="col-lg-3 my-auto">
+                                <form>
+                                    <mat-form-field>
+                                      <input type="text"
+                                             placeholder="Kurs"
+                                             aria-label="Kurs"
+                                             matInput
+                                             [formControl]="myControl"
+                                             [matAutocomplete]="auto">
+                                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                  </form>
+                            </div>
+                            <div class="col-lg-3 my-auto">
+                                <!-- (click) = func() -->
+                                <button class="btn btn-info">Aktualisieren</button>
                             </div>
                         </div>
                     </div>

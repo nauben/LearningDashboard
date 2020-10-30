@@ -4,28 +4,36 @@
             <div class="card-header">
                 Optionen
             </div>
-            <div class="card-text m-4">
+            <div class="card-text mt-3 ml-3 mr-3">
                 <div class="row">
-                    <div class="col-lg-4">
-                        Zeitraum von: <br>
-                       
+                    <div class="col-lg-4 my-auto">
+                       <mat-form-field appearance="fill">
+                        <mat-label>Zeitraum von</mat-label>
+                        <input matInput [matDatepicker]="startdate">
+                        <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                        <mat-datepicker #startdate></mat-datepicker>
+                      </mat-form-field>
                     </div>
-                    <div class="col-lg-4">
-                        bis: <br>
-                        <a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+                    <div class="col-lg-4 my-auto">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Zeitraum bis</mat-label>
+                          <input matInput [matDatepicker]="enddate">
+                          <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                          <mat-datepicker #enddate></mat-datepicker>
+                        </mat-form-field>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="Semester">Semester:</label>
-                            <select class="form-control" id="Semester">Semester
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
-                            </select>
-                         </div>
+                    <div class="col-lg-4 my-auto">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Semester</mat-label>
+                        <select matNativeControl>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                      </mat-form-field>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MaterialModule } from './material.module';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './pages/kanban/main/main.component';
@@ -12,6 +14,7 @@ import { LearnComponent } from './pages/learn/learn.component';
 import { RegisterComponent } from './pages/login/register/register.component';
 import { KanbanComponent } from './pages/kanban/kanban.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { LoginTextOnlyComponent } from './pages/login/login-text-only/login-text-only.component';
 
 
 @NgModule({
@@ -25,11 +28,13 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
     RegisterComponent,
     KanbanComponent,
     ScheduleComponent,
+    LoginTextOnlyComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

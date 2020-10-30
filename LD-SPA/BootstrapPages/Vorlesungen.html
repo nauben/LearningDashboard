@@ -158,12 +158,20 @@
 							<div class="card-text m-4">
 								<div class="row">
 									<div class="col-lg-4">
-										Vorlesungen vom:
-										<a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+										<mat-form-field appearance="fill">
+											<mat-label>Vorlesungen vom:</mat-label>
+											<input matInput [matDatepicker]="startdate">
+											<mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+											<mat-datepicker #startdate></mat-datepicker>
+										  </mat-form-field>
 									</div>
 									<div class="col-lg-4">
-										bis zum:
-										<a class="btn-danger" href="https://material.angular.io/components/datepicker/overview">Angular Datepicker</a>
+										<mat-form-field appearance="fill">
+											<mat-label>bis:</mat-label>
+											<input matInput [matDatepicker]="enddate">
+											<mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+											<mat-datepicker #enddate></mat-datepicker>
+										  </mat-form-field>
 									</div>
 									<div class="col-lg-4">
 										Kurs:
