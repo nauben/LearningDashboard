@@ -1,36 +1,54 @@
 package com.mosbach.ld.controller;
 
-import com.mosbach.ld.dataManagerImpl.PostgresTaskManagerImpl;
+import com.mosbach.ld.dataManager.LearnStatisticsDataManager;
+import com.mosbach.ld.dataManager.NotificationDataManager;
+import com.mosbach.ld.dataManager.TaskDataManager;
+import com.mosbach.ld.dataManager.UserDataManager;
+import com.mosbach.ld.model.alexa.AlexaConnectResponse;
 import com.mosbach.ld.model.alexa.AlexaRO;
 import com.mosbach.ld.model.alexa.OutputSpeechRO;
 import com.mosbach.ld.model.alexa.ResponseRO;
 import com.mosbach.ld.model.auth.AuthenticationRequest;
 import com.mosbach.ld.model.auth.AuthenticationResponse;
+import com.mosbach.ld.model.auth.RegistrationRequest;
+import com.mosbach.ld.model.auth.RegistrationResponse;
 import com.mosbach.ld.model.dhbwSchedule.DHBWCourses;
 import com.mosbach.ld.model.dhbwSchedule.DHBWLecture;
 import com.mosbach.ld.model.dhbwSchedule.DHBWSchedule;
+import com.mosbach.ld.model.learnStatistics.Subject;
 import com.mosbach.ld.model.task.Task;
 import com.mosbach.ld.model.task.TaskList;
+import com.mosbach.ld.model.user.User;
+import com.mosbach.ld.services.AlexaService;
 import com.mosbach.ld.services.DHBWScheduleService;
-import com.mosbach.ld.services.UserCredentialService;
-import com.mosbach.ld.util.JwtUtil;
+import com.mosbach.ld.services.UserService;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
+import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.exceptions.InvalidClientException;
+import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 //necesary?
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -38,155 +56,286 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v0.1a")
 public class MappingController {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
-	@Autowired
-	private UserCredentialService userCredentialService;
-	@Autowired
+	private UserDataManager userManager;
+	private TaskDataManager taskManager;
+	private NotificationDataManager notificationManager;
+	private LearnStatisticsDataManager learnStatisticsManager;
 	private DHBWScheduleService dhbwScheduleService;
-	@Autowired
-	private JwtUtil jwtTokenUtil;
+	private AlexaService alexaService;
+	private PasswordEncoder passwordEncoder;
 	
-	@PostMapping(
-            path = "/authenticate",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-    )
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-		try {
-			authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())	
-			);
-		} catch(BadCredentialsException e) {
-			throw new Exception("Incorrect username or password", e);
-		}
+	@Autowired
+	public MappingController(@Qualifier("u-postgres") UserDataManager userManager,
+			@Qualifier("t-postgres") TaskDataManager taskManager,
+			@Qualifier("n-postgres") NotificationDataManager notificationManager,
+			@Qualifier("ls-postgres") LearnStatisticsDataManager learnStatisticsManager,
+				DHBWScheduleService dhbwScheduleService,
+				AlexaService alexaService,
+				PasswordEncoder passwordEncoder
+			) {
 		
-		final UserDetails userDetails = userCredentialService
-				.loadUserByUsername(authenticationRequest.getEmail());
+		this.userManager = userManager;
+		this.taskManager = taskManager;
+		this.notificationManager = notificationManager;
+		this.learnStatisticsManager = learnStatisticsManager;
 		
-		final String jwt = jwtTokenUtil.generateToken(userDetails);
-		
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		this.dhbwScheduleService = dhbwScheduleService;
+		this.alexaService = alexaService;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	
-    // TODO
-    // The student is completely ignored.
-    //
-
-    // TODO
-    // delete, update, get by id, get sorted, ...
-    //
-
-    // TODO
-    // Set the used DataProvider (ProperyFileManager, PostgresMaganer) here and not in TaskList
-    //
+	
+	
+	
+	/*
+	*/
+	
 	
 	@GetMapping("/test")
 	public String test() {
-		return "Hello World!";
+		return "Hello World!" + SecurityContextHolder.getContext().getAuthentication();
 	}
 
 	/*
-    @GetMapping("/task/all")
-    public TaskList getTasks(@RequestParam(value = "name", defaultValue = "Student") String name) {
-
-        TaskList taskList = new TaskList();
-        taskList.setTasks();
-
-        return taskList;
-    }
-
-
-
-    @PostMapping(
-            path = "/task",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+	 *******************************************************************************************************
+	 */
+	
+	@GetMapping("/profile")
+	public ResponseEntity<?> getUserProfile(){
+		SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//User u = userManager.getUserById(id);
+		return null;
+	}
+	
+	@GetMapping("/profile/short")
+	public ResponseEntity<?> getUserProfileShort(){
+		
+		return null;
+	}
+	
+	@PutMapping(
+			path = "/profile",
+			consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<?> updateUserProfile(@RequestBody User user){
+		//check if user contains all required info
+		return null;
+	}
+	
+	@PostMapping( 
+			path = "/contacts",
+			consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<?> addUserContact(@RequestBody User user){
+		// check if user id is valid
+		return null;
+	}
+	
+	@GetMapping("/contacts")
+	public ResponseEntity<?> getUserContacts(){
+		return ResponseEntity.ok(userManager.getContacts());
+	}
+	
+	@DeleteMapping("/contacts/{id}")
+	public ResponseEntity<?> deleteUserContact(@PathVariable("id") String id){
+		//check if contact exists
+		//delete contact
+		return null;
+	}
+	
+	
+	
+	/*
+	 *******************************************************************************************************
+	 */
+	
+	@GetMapping("/tasks")
+	public ResponseEntity<?> getAllTasks() {
+		return ResponseEntity.ok(new TaskList(taskManager.getAllTasks(), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
+	}
+	
+	@GetMapping("/tasks/{id}")
+	public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
+		if(taskManager.taskExists(UUID.fromString(id)))
+			return ResponseEntity.ok(taskManager.getTaskById(UUID.fromString(id)));
+		return null;
+	}
+	
+	@PostMapping(
+            path = "/tasks",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    @ResponseStatus(HttpStatus.OK)
-    public String createTask(@RequestBody Task task) {
-
-        TaskList taskList = new TaskList();
-        taskList.addTask(task);
-
-        return task.getName();
-    }
-
-
-    @PostMapping(
-            path = "/task/createtable"
+	public ResponseEntity<?> createTask(@RequestBody Task task) {
+		if(task.getSwimlane() != null && task.getTitle() != null)
+			taskManager.createNewTask(task);
+		return null;
+	}
+	
+	@PutMapping(
+            path = "/tasks/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    @ResponseStatus(HttpStatus.OK)
-    public String createTask() {
-
-        final PostgresTaskManagerImpl postgresTaskManagerImpl =
-                PostgresTaskManagerImpl.getPostgresTaskManagerImpl();
-        postgresTaskManagerImpl.createTableTask();
-
-        return "Database Table created";
-    }
-
-
-
-    @PostMapping(
+	public ResponseEntity<?> updateTask(@PathVariable("id") String id, @RequestBody Task task) {
+		if(task.getId() != null && task.getSwimlane() != null && task.getTitle() != null)
+			taskManager.updateTask(task);
+		return null;
+	}
+	
+	@DeleteMapping(
+            path = "/tasks/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
+		
+		return null;
+	}
+	
+	@DeleteMapping(
+            path = "/tasks",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> deleteAllTasks() {
+		
+		return null;
+	}
+	
+	/*
+	 *******************************************************************************************************
+	 */
+	
+	@GetMapping("/notifications")
+	public ResponseEntity<?> getAllNotifications() {
+		return ResponseEntity.ok(notificationManager.getAllNotifications());
+	}
+	
+	/*
+	 *******************************************************************************************************
+	 */
+	
+	@PostMapping(
+            path = "/pomodoro/subjects",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> addSubject(@RequestBody Subject subject) {
+		//check if valid
+		return null;
+	}
+	
+	@PutMapping(
+            path = "/pomodoro/subjects/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> updateSubjectName(@PathVariable("id") String id, @RequestBody Subject subject) {
+		//check if valid
+		return null;
+	}
+	
+	@PutMapping(
+            path = "/pomodoro/subjects/{id}/time",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> updateSubjectTime(@PathVariable("id") String id, @RequestBody Subject subject) {
+		//check if valid
+		return null;
+	}
+	
+	@GetMapping("/pomodoro/subjects")
+	public ResponseEntity<?> getAllSubjects(){
+		return null;
+	}
+	
+	@GetMapping("/pomodoro/subjects/{id}")
+	public ResponseEntity<?> getSubject(@PathVariable("id") String id){
+		return null;
+	}
+	
+	@DeleteMapping(
+            path = "/pomodoro/subjects/{id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> deleteSubject(@PathVariable("id") String id) {
+		
+		return null;
+	}
+	
+	
+	/*
+	 *******************************************************************************************************
+	 */
+	
+	
+	@PostMapping(
             path = "/alexa",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    public AlexaRO getTasks(@RequestBody AlexaRO alexaRO) {
-
-        String outText = "";
-
-        if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest")) {
-            outText = outText + "Welcome to the Mosbach Task Organizer. ";
-        }
-        else {
-            if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                    (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("TaskReadIntent"))) {
-                try
-                {
-                    TaskList taskList = new TaskList(
-                            new Student("me", "ignore")
-                    );
-                    taskList.setTasks();
-
-                    outText = outText + "You have to do the following tasks. ";
-                    int i = 1;
-                    for (Task temp : taskList.getTasks()) {
-                        outText = outText + "Number " + i + " . ";
-                        outText = outText + temp.getName() + ", priority " + temp.getPriority() + " . ";
-                        i++;
-                    }
-                }
-                catch(Exception e) {
-                    outText = "Unfortunately, we cannot reach heroku. Our REST server is not responding. ";
-                }
-            }
-        }
-
-        return
-                prepareResponse(alexaRO, outText, true);
-    }
-
-    private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
-
-        alexaRO.setRequest(null);
-        alexaRO.setSession(null);
-        alexaRO.setContext(null);
-        OutputSpeechRO outputSpeechRO = new OutputSpeechRO();
-        outputSpeechRO.setType("PlainText");
-        outputSpeechRO.setText(outText);
-        ResponseRO response = new ResponseRO(outputSpeechRO, shouldEndSession);
-        alexaRO.setResponse(response);
-        return alexaRO;
-    }
-    */
+	public AlexaRO alexaEndPoint(@RequestBody AlexaRO alexaRO) {
+		
+		return alexaService.processRequest(alexaRO);
+	}
 	
-	@GetMapping("/dhbw-schedule/courses/all")
+	@PostMapping(
+            path = "/alexa/connect/token",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public AlexaConnectResponse accountLinkingAlexaToken(final @RequestParam Map<String, String> parameters) {
+		return null;
+	}
+	
+	@PostMapping(
+            path = "/alexa/connect/auth",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public AlexaConnectResponse accountLinkingAlexaAuth() {
+		return null;
+	}
+	
+	/*
+	 *******************************************************************************************************
+	 */
+	
+	@PostMapping(
+            path = "/registrate",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> registrateNewUser(@RequestBody User user) {
+		if(user.getEmail() != null && user.getPassword() != null)
+			userManager.registerNewUser(user);
+		return null;
+	}
+	
+	@PostMapping(
+            path = "/activate/{token}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+	public ResponseEntity<?> registrateNewUser() {
+		//userService.
+		return null;
+	}
+	
+	/*
+	 *******************************************************************************************************
+	 */
+	
+	@GetMapping("/dhbw-schedule/courses")
     public DHBWCourses getAllCourses() {
 		return new DHBWCourses(dhbwScheduleService.loadAllCourses());
     }
 	
-	@GetMapping("/dhbw-schedule/{course}/all")
+	@GetMapping("/dhbw-schedule/{course}")
     public DHBWSchedule getAllLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
 		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
         return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);

@@ -1,163 +1,162 @@
 package com.mosbach.ld.model.task;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
+import java.util.UUID;
+
+import com.mosbach.ld.model.user.User;
 
 public class Task {
 
-	private int id;
-	private short swimlane;
+	private UUID id;
+	private Integer swimlane;
 	private String title;
-	private String description;
-	private Date dueDate;
-	private Date created;
-	private Date updated;
+	private String descrption;
+	private LocalDateTime dueDate;
+	private Collection<User> assignees;
+	private LocalDateTime created;
+	private User createdBy;
+	private LocalDateTime updates;
+	private User updatedBy;
 	private Collection<Comment> comments;
 	private Collection<Activity> activities;
 	private Collection<CheckItem> checklist;
-	private Collection<Member> members;
-	private TaskLabel label;
+	private Integer label;
 	
 	public Task() {
-		
+		super();
 	}
-	
-	public Task(int id, short swimlane, String title, String description, Date dueDate, Date created, Date updated,
-			Collection<Comment> comments, Collection<Activity> activities, Collection<CheckItem> checklist,
-			Collection<Member> members, TaskLabel label) {
+
+	public Task(UUID id, int swimlane, String title, String descrption, LocalDateTime dueDate,
+			Collection<User> assignees, LocalDateTime created, User createdBy, LocalDateTime updates, User updatedBy,
+			Collection<Comment> comments, Collection<Activity> activities, Collection<CheckItem> checklist, int label) {
 		super();
 		this.id = id;
 		this.swimlane = swimlane;
 		this.title = title;
-		this.description = description;
+		this.descrption = descrption;
 		this.dueDate = dueDate;
+		this.assignees = assignees;
 		this.created = created;
-		this.updated = updated;
+		this.createdBy = createdBy;
+		this.updates = updates;
+		this.updatedBy = updatedBy;
 		this.comments = comments;
 		this.activities = activities;
 		this.checklist = checklist;
-		this.members = members;
 		this.label = label;
 	}
 
-
-	public int getId() {
+	public UUID getId() {
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
-
-	public short getSwimlane() {
+	public Integer getSwimlane() {
 		return swimlane;
 	}
 
-
-	public void setSwimlane(short swimlane) {
+	public void setSwimlane(int swimlane) {
 		this.swimlane = swimlane;
 	}
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
-	public String getDescription() {
-		return description;
+	public String getDescrption() {
+		return descrption;
 	}
 
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescrption(String descrption) {
+		this.descrption = descrption;
 	}
 
-
-	public Date getDueDate() {
+	public LocalDateTime getDueDate() {
 		return dueDate;
 	}
 
-
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
 
+	public Collection<User> getAssignees() {
+		return assignees;
+	}
 
-	public Date getCreated() {
+	public void setAssignees(Collection<User> assignees) {
+		this.assignees = assignees;
+	}
+
+	public LocalDateTime getCreated() {
 		return created;
 	}
 
-
-	public void setCreated(Date created) {
+	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
 
-
-	public Date getUpdated() {
-		return updated;
+	public User getCreatedBy() {
+		return createdBy;
 	}
 
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
 	}
 
+	public LocalDateTime getUpdates() {
+		return updates;
+	}
+
+	public void setUpdates(LocalDateTime updates) {
+		this.updates = updates;
+	}
+
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 
 	public Collection<Comment> getComments() {
 		return comments;
 	}
 
-
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
-
 
 	public Collection<Activity> getActivities() {
 		return activities;
 	}
 
-
 	public void setActivities(Collection<Activity> activities) {
 		this.activities = activities;
 	}
-
 
 	public Collection<CheckItem> getChecklist() {
 		return checklist;
 	}
 
-
 	public void setChecklist(Collection<CheckItem> checklist) {
 		this.checklist = checklist;
 	}
 
-
-	public Collection<Member> getMembers() {
-		return members;
-	}
-
-
-	public void setMembers(Collection<Member> members) {
-		this.members = members;
-	}
-
-
-	public TaskLabel getLabel() {
+	public int getLabel() {
 		return label;
 	}
 
-
-	public void setLabel(TaskLabel label) {
+	public void setLabel(int label) {
 		this.label = label;
-	}	
+	}
 	
 }

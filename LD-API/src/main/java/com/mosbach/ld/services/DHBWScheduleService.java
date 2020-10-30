@@ -2,14 +2,10 @@ package com.mosbach.ld.services;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,10 +14,7 @@ import java.util.TreeMap;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.mosbach.ld.model.dhbwSchedule.DHBWCourses;
 import com.mosbach.ld.model.dhbwSchedule.DHBWLecture;
-import com.mosbach.ld.model.dhbwSchedule.DHBWSchedule;
-import com.sun.el.parser.ParseException;
 
 import biweekly.Biweekly;
 import biweekly.ICalendar;
