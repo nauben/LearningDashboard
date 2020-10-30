@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDatepickerModule} from '@angular/material/datepicker'; 
-import {Chart} from 'node_modules/chart.js'
+import { Chart } from 'node_modules/chart.js'
 
 @Component({
   selector: 'app-learn',
