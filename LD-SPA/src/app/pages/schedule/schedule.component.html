@@ -6,13 +6,13 @@
         <ul class="list-group list-group-flush">
             <!-- Optionen -->
             <li class="list-group-item">
-                <div class="card m-2">
+                <div class="card">
                     <div class="card-header">
                         Optionen
                     </div>
                     <div class="card-text mt-3 ml-3 mr-3">
                         <div class="row">
-                            <div class="col-lg-3 my-auto">
+                            <div class="col-xl-4 my-auto">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Vorlesungen vom:</mat-label>
                                     <input matInput [matDatepicker]="startdate">
@@ -20,15 +20,15 @@
                                     <mat-datepicker #startdate></mat-datepicker>
                                   </mat-form-field>
                             </div>
-                            <div class="col-lg-3 my-auto">
-                                <mat-form-field appearance="fill">
+                            <div class="col-xl-3 my-auto">
+                                <mat-form-field appearance="fill" class="width120px">
                                     <mat-label>bis:</mat-label>
                                     <input matInput [matDatepicker]="enddate">
                                     <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
                                     <mat-datepicker #enddate></mat-datepicker>
                                   </mat-form-field>
                             </div>
-                            <div class="col-lg-3 my-auto">
+                            <div class="col-xl-3 my-auto">
                                 <form>
                                     <mat-form-field>
                                       <input type="text"
@@ -45,9 +45,9 @@
                                     </mat-form-field>
                                   </form>
                             </div>
-                            <div class="col-lg-3 my-auto">
+                            <div class="col-xl-2 my-auto">
                                 <!-- (click) = func() -->
-                                <button class="btn btn-info">Aktualisieren</button>
+                                <button class="btn btn-info mb-2">Aktualisieren</button>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
             </li>
             <!-- einzelne Vorlesungen -->
             <li class="list-group-item">
-                <div class="card m-2">
+                <div class="card mb-2">
                     <div class="card-header">
                         Mittwoch, 21. Oktober 2020
                     </div>
@@ -67,7 +67,7 @@
                             13:00 bis 17:15 Uhr</li>
                     </ul>
                 </div>
-                <div class="card m-2">
+                <div class="card mb-2">
                     <div class="card-header">
                         Donnerstag, 22. Oktober 2020
                     </div>
@@ -80,7 +80,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card m-2">
+                <div class="card mb-2">
                     <div class="card-header">
                       Freitag, 23. Oktober 2020
                     </div>

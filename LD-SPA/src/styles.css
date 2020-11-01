@@ -212,7 +212,7 @@ ul ul a {
         margin-left: 0 !important;
     }
     #sidebar .sidebar-header h3,
-			 .logout-btn{
+	#sidebar .logout-btn{
         display: none;
     }
     #sidebar .sidebar-header strong {
