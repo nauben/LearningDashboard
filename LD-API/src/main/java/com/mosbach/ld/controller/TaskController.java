@@ -47,7 +47,9 @@ public class TaskController {
 	@GetMapping("/tasks")
 	public ResponseEntity<?> getAllTasks() {
 		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
-		return ResponseEntity.ok(new TaskList(taskManager.getAllTasksOf(id), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
+		Collection<Task> tasks = taskManager.getAllTasksOf(id);
+		tasks.forEach((task) -> task.setAssignees(taskManager.getAssigneesOf(task.getId())));
+		return ResponseEntity.ok(new TaskList(tasks, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
 	}
 	
 	@GetMapping("/tasks/{id}")
@@ -110,17 +112,13 @@ public class TaskController {
 	
 	@GetMapping("/tasks/{id}/users")
 	public ResponseEntity<?> getTaskMembers(@PathVariable("id") String id) {
-		/*boolean success = false;
-		if(user.getId() != null)
-			success = taskManager..updateTask(task);
-		else return ResponseEntity.ok(new DefaultActionResponse(false, "Necessary values missing..."));
-		if(success)
-			return ResponseEntity.ok(new DefaultActionResponse(true, null));
-		return ResponseEntity.ok(new DefaultActionResponse(false, "Error while saving data..."));
-		/*boolean success = false;
-		if(task.getId() != null && task.getSwimlane() != null && task.getTitle() != null)
-			taskManager.updateTask(task);*/
-		return null;
+		UUID uuid = null;
+		try {
+			uuid = UUID.fromString(id);
+		}catch(Exception e) {e.printStackTrace(); return ResponseEntity.ok(new DefaultActionResponse(false, "Parameters not valid..."));}
+		if(uuid != null && taskManager.taskExists(uuid))
+			return ResponseEntity.ok(taskManager.getAssigneesOf(uuid));
+		return ResponseEntity.ok(new DefaultActionResponse(false, "No such task exists..."));
 	}
 	
 	@DeleteMapping(
@@ -129,17 +127,18 @@ public class TaskController {
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
 	public ResponseEntity<?> deleteFromTaskMembers(@PathVariable("id") String id, @PathVariable("userId") String userId) {
-		/*boolean success = false;
-		if(user.getId() != null)
-			success = taskManager..updateTask(task);
+		boolean success = false;
+		UUID uuid = null, useruuId = null;
+		try {
+			uuid = UUID.fromString(id);
+			useruuId = UUID.fromString(userId);
+		}catch(Exception e) {e.printStackTrace(); return ResponseEntity.ok(new DefaultActionResponse(false, "Parameters not valid..."));}
+		if(uuid != null && useruuId != null)
+			success = taskManager.deleteFromTaskMembers(uuid, useruuId);
 		else return ResponseEntity.ok(new DefaultActionResponse(false, "Necessary values missing..."));
 		if(success)
 			return ResponseEntity.ok(new DefaultActionResponse(true, null));
 		return ResponseEntity.ok(new DefaultActionResponse(false, "Error while saving data..."));
-		/*boolean success = false;
-		if(task.getId() != null && task.getSwimlane() != null && task.getTitle() != null)
-			taskManager.updateTask(task);*/
-		return null;
 	}
 	
 	@DeleteMapping(

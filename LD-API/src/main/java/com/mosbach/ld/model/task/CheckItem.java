@@ -6,13 +6,13 @@ public class CheckItem {
 	
 	private UUID id;
 	private String description;
-	private boolean checked;
+	private Boolean checked;
 	
 	public CheckItem() {
 		super();
 	}
 
-	public CheckItem(UUID id, String description, boolean checked) {
+	public CheckItem(UUID id, String description, Boolean checked) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -35,11 +35,11 @@ public class CheckItem {
 		this.description = description;
 	}
 
-	public boolean isChecked() {
+	public Boolean isChecked() {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
 	

@@ -2,7 +2,6 @@ package com.mosbach.ld.dataManagerImpl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -227,62 +226,235 @@ public class PostgresTaskDataManagerImpl implements TaskDataManager {
 
 	@Override
 	public Collection<Comment> getCommentsOf(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "SELECT c.id \"cid\", c.\"task-id\", c.\"user-id\", c.message, c.\"Timestamp\", u.id \"uid\", u.email, u.firstname, u.lastname "
+				+ "FROM public.\"Comments\" c, public.\"User\" u "
+				+ "where c.\"task-id\" = '"+id+"' and c.\"user-id\" = u.id "
+				+ "order by \"Timestamp\" desc;";
+		System.out.println(sql);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		return jdbcTemplate.query(sql, (resultSet, i) -> {
+			return new Comment(
+					UUID.fromString(resultSet.getString("cid")),
+					LocalDateTime.parse(resultSet.getString("Timestamp"), formatter),
+					resultSet.getString(""),
+					new User(
+							null,
+							UUID.fromString(resultSet.getString("uid")),
+							null,
+							null,
+							resultSet.getString("email"),
+							null,
+							resultSet.getString("firstname"),
+							resultSet.getString("lastname"),
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null
+						)
+				);
+		});
 	}
 
 	@Override
 	public Collection<Activity> getActivitiesOf(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "SELECT a.id \"aid\", a.\"user-id\", a.\"timestamp\", a.activity, a.\"task-id\", u.id \"uid\", u.email, u.firstname, u.lastname \r\n"
+				+ "FROM public.\"Activities\" a, public.\"User\" u \r\n"
+				+ "where \"task-id\"='"+id+"' and a.\"user-id\" = u.id \r\n"
+				+ "order by \"timestamp\" desc;";
+		System.out.println(sql);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		return jdbcTemplate.query(sql, (resultSet, i) -> {
+			return new Activity(
+					UUID.fromString(resultSet.getString("aid")), 
+					new User(
+							null,
+							UUID.fromString(resultSet.getString("uid")),
+							null,
+							null,
+							resultSet.getString("email"),
+							null,
+							resultSet.getString("firstname"),
+							resultSet.getString("lastname"),
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null
+						), 
+					LocalDateTime.parse(resultSet.getString("Timestamp"), formatter), 
+					resultSet.getString("description")
+				);
+		});
 	}
 
 	@Override
 	public Collection<CheckItem> getChecklistOf(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "SELECT id, \"task-id\", checked, description "
+				+ "FROM public.\"Checklist\" "
+				+ "where \"task-id\"='"+id+"' "
+				+ "order by checked;";
+		System.out.println(sql);
+		return jdbcTemplate.query(sql, (resultSet, i) -> {
+			return new CheckItem(
+					UUID.fromString(resultSet.getString("id")),
+					resultSet.getString("description"),
+					false
+				);
+		});
 	}
 
 	@Override
-	public boolean addCommentTo(UUID id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addCommentTo(UUID tid, Comment c) {
+		String desc = c.getMessage().replace("'", "''");
+		final String sql = 
+				"INSERT INTO public.\"Comments\" "
+				+ "(id, \"task-id\", \"user-id\", message, \"Timestamp\") "
+				+ "VALUES(uuid_generate_v4(), '"+tid+"', '"+c.getUser().getId()+"', '"+desc+"', date_trunc('second'::text, CURRENT_TIMESTAMP));";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean deleteComment(UUID id) {
-		// TODO Auto-generated method stub
-		return false;
+		final String sql = 
+				"DELETE FROM public.\"Comments\" "
+				+ "WHERE id='"+id+"';";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean addActivityTo(UUID id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addActivityTo(UUID id, Activity a) {
+		final String sql = 
+				"DELETE FROM public.\"Comments\" "
+				+ "WHERE id='"+id+"';";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean addCheckItemTo(UUID id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addCheckItemTo(UUID id, CheckItem c) {
+		final String sql = 
+				"INSERT INTO public.\"Checklist\"\r\n"
+				+ "(id, \"task-id\", checked, description)\r\n"
+				+ "VALUES(uuid_generate_v4(), '"+id+"', false, '"+c.getDescription().replace("'", "''")+"');";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean updateCheckItem(CheckItem checkItem) {
-		// TODO Auto-generated method stub
-		return false;
+		final String sql = buildQueryUpdateCheckItem(checkItem);
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	private String buildQueryUpdateCheckItem(CheckItem checkItem) {
+		StringBuilder sb = new StringBuilder();
+		int changes = 0;
+		sb.append("UPDATE public.\"Checklist\" SET ");
+		if(checkItem.getDescription() != null) {
+			sb.append("description='"+checkItem.getDescription().replace("'", "''")+"'");
+			changes++;
+		}
+		if(checkItem.isChecked() != null) {
+			if(changes > 0) sb.append(", ");
+			sb.append("checked="+checkItem.isChecked()+" ");
+			changes++;
+		}
+		
+		sb.append(" WHERE id='"+checkItem.getId()+"';");
+		if(changes > 0)
+			return sb.toString();
+		else return "NULL;";
 	}
 
 	@Override
 	public boolean deleteCheckItem(UUID id) {
-		// TODO Auto-generated method stub
-		return false;
+		final String sql = 
+				"DELETE FROM public.\"Checklist\" "
+				+ "WHERE id='"+id+"';";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean addToTaskMembers(UUID id, User user) {
-		// TODO Auto-generated method stub
-		return false;
+		final String sql = 
+				"INSERT INTO public.\"TaskUser\" "
+				+ "(id, \"task-id\", \"user-id\") "
+				+ "VALUES(uuid_generate_v4(), '"+id+"', '"+user.getId()+"');";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteFromTaskMembers(UUID id, UUID user) {
+		final String sql = 
+				"DELETE FROM public.\"TaskUser\" "
+				+ "WHERE \"user-id\" = '"+id+"' and \"task-id\" ='"+user+"';";
+		System.out.println(sql);
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 }

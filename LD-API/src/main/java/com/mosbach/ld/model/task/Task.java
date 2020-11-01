@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mosbach.ld.model.user.User;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Task {
 
 	private UUID id;

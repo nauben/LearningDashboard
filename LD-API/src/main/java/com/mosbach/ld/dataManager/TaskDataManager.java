@@ -31,18 +31,20 @@ public interface TaskDataManager {
 	
 	public Collection<CheckItem> getChecklistOf(UUID id);
 	
-	public boolean addCommentTo(UUID id);
+	public boolean addCommentTo(UUID tid, Comment c);
 	
 	public boolean deleteComment(UUID id);
 	
-	public boolean addActivityTo(UUID id);
+	public boolean addActivityTo(UUID id, Activity a);
 	
-	public boolean addCheckItemTo(UUID id);
+	public boolean addCheckItemTo(UUID id, CheckItem c);
 	
 	public boolean updateCheckItem(CheckItem checkItem);
 	
 	public boolean deleteCheckItem(UUID id);
 	
 	public boolean addToTaskMembers(UUID id, User user);
+	
+	public boolean deleteFromTaskMembers(UUID id, UUID user);
 
 }

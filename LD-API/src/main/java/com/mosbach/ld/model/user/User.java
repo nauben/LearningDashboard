@@ -9,9 +9,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 //evtl für später einmal
 //@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements UserDetails {
 
 	@JsonIgnore
@@ -34,6 +36,7 @@ public class User implements UserDetails {
 	private Boolean isAccountNonExpired;
 	private Boolean isAccountNonLocked;
 	private Boolean isCredentialsNonExpired;
+	@JsonIgnore
 	private Boolean isEnabled;
 	private Collection<User> contacts;
 	
@@ -85,22 +88,42 @@ public class User implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
+		return isAccountNonExpired;
+	}
+	
+	public Boolean isOAccountNonExpired() {
 		return isAccountNonExpired;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
+		return isAccountNonLocked;
+	}
+	
+	public Boolean isOAccountNonLocked() {
 		return isAccountNonLocked;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
+		return isCredentialsNonExpired;
+	}
+	
+	public Boolean isOCredentialsNonExpired() {
 		return isCredentialsNonExpired;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
+		return isEnabled;
+	}
+	
+	public Boolean isOEnabled() {
 		return isEnabled;
 	}
 
