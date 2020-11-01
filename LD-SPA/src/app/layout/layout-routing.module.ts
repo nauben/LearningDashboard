@@ -6,7 +6,7 @@ import { FooterCarouselLayoutComponent } from './footer-carousel-layout/footer-c
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/start',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
