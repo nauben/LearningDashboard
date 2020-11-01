@@ -1,5 +1,8 @@
 package com.mosbach.ld.dataManager;
 
+import com.mosbach.ld.model.task.Activity;
+import com.mosbach.ld.model.task.CheckItem;
+import com.mosbach.ld.model.task.Comment;
 import com.mosbach.ld.model.task.Task;
 import com.mosbach.ld.model.user.User;
 
@@ -21,5 +24,25 @@ public interface TaskDataManager {
 	public Collection<User> getAssigneesOf(UUID id);
 	
 	public Collection<Task> getAllTasksOf(UUID userId);
+	
+	public Collection<Comment> getCommentsOf(UUID id);
+	
+	public Collection<Activity> getActivitiesOf(UUID id);
+	
+	public Collection<CheckItem> getChecklistOf(UUID id);
+	
+	public boolean addCommentTo(UUID id);
+	
+	public boolean deleteComment(UUID id);
+	
+	public boolean addActivityTo(UUID id);
+	
+	public boolean addCheckItemTo(UUID id);
+	
+	public boolean updateCheckItem(CheckItem checkItem);
+	
+	public boolean deleteCheckItem(UUID id);
+	
+	public boolean addToTaskMembers(UUID id, User user);
 
 }

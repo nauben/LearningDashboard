@@ -8,9 +8,15 @@ import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//evtl für später einmal
+//@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class User implements UserDetails {
 
+	@JsonIgnore
 	private static final long serialVersionUID = -5014614165199594545L;
+	
 	private List<? extends GrantedAuthority> grantedAuthorities;
 	private UUID id;
 	private LocalDateTime created;
@@ -194,7 +200,7 @@ public class User implements UserDetails {
 		return visibility;
 	}
 
-	public void setVisibility(int visibility) {
+	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
 
@@ -202,23 +208,23 @@ public class User implements UserDetails {
 		return sendNotifications;
 	}
 
-	public void setSendNotifications(boolean sendNotifications) {
+	public void setSendNotifications(Boolean sendNotifications) {
 		this.sendNotifications = sendNotifications;
 	}
 
-	public void setAccountNonExpired(boolean isAccountNonExpired) {
+	public void setAccountNonExpired(Boolean isAccountNonExpired) {
 		this.setIsAccountNonExpired(isAccountNonExpired);
 	}
 
-	public void setAccountNonLocked(boolean isAccountNonLocked) {
+	public void setAccountNonLocked(Boolean isAccountNonLocked) {
 		this.setIsAccountNonLocked(isAccountNonLocked);
 	}
 
-	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
+	public void setCredentialsNonExpired(Boolean isCredentialsNonExpired) {
 		this.setIsCredentialsNonExpired(isCredentialsNonExpired);
 	}
 
-	public void setEnabled(boolean isEnabled) {
+	public void setEnabled(Boolean isEnabled) {
 		this.setIsEnabled(isEnabled);
 	}
 
@@ -261,5 +267,18 @@ public class User implements UserDetails {
 	public void setIsAccountNonExpired(Boolean isAccountNonExpired) {
 		this.isAccountNonExpired = isAccountNonExpired;
 	}
+
+	@Override
+	public String toString() {
+		return "User [grantedAuthorities=" + grantedAuthorities + ", id=" + id + ", created=" + created + ", lastLogin="
+				+ lastLogin + ", email=" + email + ", password=" + password + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", gender=" + gender + ", institution=" + institution + ", imageUrl=" + imageUrl
+				+ ", location=" + location + ", visibility=" + visibility + ", sendNotifications=" + sendNotifications
+				+ ", isAccountNonExpired=" + isAccountNonExpired + ", isAccountNonLocked=" + isAccountNonLocked
+				+ ", isCredentialsNonExpired=" + isCredentialsNonExpired + ", isEnabled=" + isEnabled + ", contacts="
+				+ contacts + "]";
+	}
+	
+	
 	
 }
