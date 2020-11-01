@@ -19,8 +19,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
 
 	//creates a spec-compliant secure-random key:
-	//TODO not quite working
-	private static final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512); //or HS384 or HS512
+	private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512); //or HS384 or HS512
 	
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
