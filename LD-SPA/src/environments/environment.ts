@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://api-learningdashboard.herokuapp.com/api/v0.1a'
+  apiUrl: 'https://api-learningdashboard.herokuapp.com/api/v0.1a'
 };
 
 /*
