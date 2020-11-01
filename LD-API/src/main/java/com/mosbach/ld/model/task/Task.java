@@ -13,12 +13,12 @@ public class Task {
 	private UUID id;
 	private Integer swimlane;
 	private String title;
-	private String descrption;
+	private String description;
 	private LocalDateTime dueDate;
 	private Collection<User> assignees;
 	private LocalDateTime created;
 	private User createdBy;
-	private LocalDateTime updates;
+	private LocalDateTime updated;
 	private User updatedBy;
 	private Collection<Comment> comments;
 	private Collection<Activity> activities;
@@ -29,19 +29,19 @@ public class Task {
 		super();
 	}
 
-	public Task(UUID id, int swimlane, String title, String descrption, LocalDateTime dueDate,
-			Collection<User> assignees, LocalDateTime created, User createdBy, LocalDateTime updates, User updatedBy,
+	public Task(UUID id, int swimlane, String title, String description, LocalDateTime dueDate,
+			Collection<User> assignees, LocalDateTime created, User createdBy, LocalDateTime updated, User updatedBy,
 			Collection<Comment> comments, Collection<Activity> activities, Collection<CheckItem> checklist, int label) {
 		super();
 		this.id = id;
 		this.swimlane = swimlane;
 		this.title = title;
-		this.descrption = descrption;
+		this.description = description;
 		this.dueDate = dueDate;
 		this.assignees = assignees;
 		this.created = created;
 		this.createdBy = createdBy;
-		this.updates = updates;
+		this.updated = updated;
 		this.updatedBy = updatedBy;
 		this.comments = comments;
 		this.activities = activities;
@@ -73,12 +73,12 @@ public class Task {
 		this.title = title;
 	}
 
-	public String getDescrption() {
-		return descrption;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public LocalDateTime getDueDate() {
@@ -113,12 +113,12 @@ public class Task {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDateTime getUpdates() {
-		return updates;
+	public LocalDateTime getUpdated() {
+		return updated;
 	}
 
-	public void setUpdates(LocalDateTime updates) {
-		this.updates = updates;
+	public void setUpdates(LocalDateTime updated) {
+		this.updated = updated;
 	}
 
 	public User getUpdatedBy() {
@@ -153,7 +153,7 @@ public class Task {
 		this.checklist = checklist;
 	}
 
-	public int getLabel() {
+	public Integer getLabel() {
 		return label;
 	}
 

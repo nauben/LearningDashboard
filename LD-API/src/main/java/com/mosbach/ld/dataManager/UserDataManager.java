@@ -29,9 +29,15 @@ public interface UserDataManager extends UserDetailsService {
 	
 	public boolean setNewContactOf(UUID id, UUID contact);
 	
+	public boolean deleteContactFrom(UUID id, UUID contact);
+	
 	public Collection<User> getContactsOf(UUID id);
 	
 	public Collection<User> getAllUsers();
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+	
+	public boolean markTokenAsInvalid(String token);
+	
+	public boolean isTokenInvalid(String token);
 }

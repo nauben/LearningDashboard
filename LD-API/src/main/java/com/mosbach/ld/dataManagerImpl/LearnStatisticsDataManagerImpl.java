@@ -27,7 +27,7 @@ public class LearnStatisticsDataManagerImpl implements LearnStatisticsDataManage
 		final String sql = 
 				"INSERT INTO public.\"Learning-Statistics\" "
 				+ "(id, \"user-id\", subject, \"time\", \"Since\") "
-				+ "VALUES(uuid_generate_v4(), '"+userId+"', '"+subject.getTitle()+"', 0, CURRENT_DATE);";
+				+ "VALUES(uuid_generate_v4(), '"+userId+"', '"+subject.getTitle()+"', 0, date_trunc('second', CURRENT_TIMESTAMP));";
 		try {
 			jdbcTemplate.update(sql);
 		}catch(Exception e) {
@@ -80,7 +80,7 @@ public class LearnStatisticsDataManagerImpl implements LearnStatisticsDataManage
 	public boolean resetSubjectTime(UUID id) {
 		final String sql = 
 				"UPDATE public.\"Learning-Statistics\"\r\n"
-				+ "SET \"time\"=0, \"Since\"=CURRENT_DATE\r\n"
+				+ "SET \"time\"=0, \"Since\"=date_trunc('second', CURRENT_TIMESTAMP)\r\n"
 				+ "WHERE id='"+id+"';";
 		try {
 			jdbcTemplate.update(sql);

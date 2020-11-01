@@ -56,307 +56,313 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/v0.1a")
 public class MappingController {
 
-	private UserDataManager userManager;
-	private TaskDataManager taskManager;
-	private NotificationDataManager notificationManager;
-	private LearnStatisticsDataManager learnStatisticsManager;
-	private DHBWScheduleService dhbwScheduleService;
-	private AlexaService alexaService;
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	public MappingController(@Qualifier("u-postgres") UserDataManager userManager,
-			@Qualifier("t-postgres") TaskDataManager taskManager,
-			@Qualifier("n-postgres") NotificationDataManager notificationManager,
-			@Qualifier("ls-postgres") LearnStatisticsDataManager learnStatisticsManager,
-				DHBWScheduleService dhbwScheduleService,
-				AlexaService alexaService,
-				PasswordEncoder passwordEncoder
-			) {
-		
-		this.userManager = userManager;
-		this.taskManager = taskManager;
-		this.notificationManager = notificationManager;
-		this.learnStatisticsManager = learnStatisticsManager;
-		
-		this.dhbwScheduleService = dhbwScheduleService;
-		this.alexaService = alexaService;
-		this.passwordEncoder = passwordEncoder;
-	}
-	
-	
-	
-	
-	
-	/*
-	*/
-	
-	
+//	private UserDataManager userManager;
+//	private TaskDataManager taskManager;
+//	private NotificationDataManager notificationManager;
+//	private LearnStatisticsDataManager learnStatisticsManager;
+//	private DHBWScheduleService dhbwScheduleService;
+//	private AlexaService alexaService;
+//	private PasswordEncoder passwordEncoder;
+//	
+//	@Autowired
+//	public MappingController(@Qualifier("u-postgres") UserDataManager userManager,
+//			@Qualifier("t-postgres") TaskDataManager taskManager,
+//			@Qualifier("n-postgres") NotificationDataManager notificationManager,
+//			@Qualifier("ls-postgres") LearnStatisticsDataManager learnStatisticsManager,
+//				DHBWScheduleService dhbwScheduleService,
+//				AlexaService alexaService,
+//				PasswordEncoder passwordEncoder
+//			) {
+//		
+//		this.userManager = userManager;
+//		this.taskManager = taskManager;
+//		this.notificationManager = notificationManager;
+//		this.learnStatisticsManager = learnStatisticsManager;
+//		
+//		this.dhbwScheduleService = dhbwScheduleService;
+//		this.alexaService = alexaService;
+//		this.passwordEncoder = passwordEncoder;
+//	}
+//	
+//	
+//	
+//	
+//	
+//	/*
+//	*/
+//	
+//	
 	@GetMapping("/test")
 	public String test() {
-		return "Hello World!" + SecurityContextHolder.getContext().getAuthentication();
+		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		return "Hello World!" + id;
 	}
-
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	@GetMapping("/profile")
-	public ResponseEntity<?> getUserProfile(){
-		SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//User u = userManager.getUserById(id);
-		return null;
-	}
-	
-	@GetMapping("/profile/short")
-	public ResponseEntity<?> getUserProfileShort(){
-		
-		return null;
-	}
-	
-	@PutMapping(
-			path = "/profile",
-			consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<?> updateUserProfile(@RequestBody User user){
-		//check if user contains all required info
-		return null;
-	}
-	
-	@PostMapping( 
-			path = "/contacts",
-			consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<?> addUserContact(@RequestBody User user){
-		// check if user id is valid
-		return null;
-	}
-	
-	@GetMapping("/contacts")
-	public ResponseEntity<?> getUserContacts(){
-		return ResponseEntity.ok(userManager.getContacts());
-	}
-	
-	@DeleteMapping("/contacts/{id}")
-	public ResponseEntity<?> deleteUserContact(@PathVariable("id") String id){
-		//check if contact exists
-		//delete contact
-		return null;
-	}
-	
-	
-	
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	@GetMapping("/tasks")
-	public ResponseEntity<?> getAllTasks() {
-		return ResponseEntity.ok(new TaskList(taskManager.getAllTasks(), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
-	}
-	
-	@GetMapping("/tasks/{id}")
-	public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
-		if(taskManager.taskExists(UUID.fromString(id)))
-			return ResponseEntity.ok(taskManager.getTaskById(UUID.fromString(id)));
-		return null;
-	}
-	
-	@PostMapping(
-            path = "/tasks",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> createTask(@RequestBody Task task) {
-		if(task.getSwimlane() != null && task.getTitle() != null)
-			taskManager.createNewTask(task);
-		return null;
-	}
-	
-	@PutMapping(
-            path = "/tasks/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> updateTask(@PathVariable("id") String id, @RequestBody Task task) {
-		if(task.getId() != null && task.getSwimlane() != null && task.getTitle() != null)
-			taskManager.updateTask(task);
-		return null;
-	}
-	
-	@DeleteMapping(
-            path = "/tasks/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
-		
-		return null;
-	}
-	
-	@DeleteMapping(
-            path = "/tasks",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> deleteAllTasks() {
-		
-		return null;
-	}
-	
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	@GetMapping("/notifications")
-	public ResponseEntity<?> getAllNotifications() {
-		return ResponseEntity.ok(notificationManager.getAllNotifications());
-	}
-	
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	@PostMapping(
-            path = "/pomodoro/subjects",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> addSubject(@RequestBody Subject subject) {
-		//check if valid
-		return null;
-	}
-	
-	@PutMapping(
-            path = "/pomodoro/subjects/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> updateSubjectName(@PathVariable("id") String id, @RequestBody Subject subject) {
-		//check if valid
-		return null;
-	}
-	
-	@PutMapping(
-            path = "/pomodoro/subjects/{id}/time",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> updateSubjectTime(@PathVariable("id") String id, @RequestBody Subject subject) {
-		//check if valid
-		return null;
-	}
-	
-	@GetMapping("/pomodoro/subjects")
-	public ResponseEntity<?> getAllSubjects(){
-		return null;
-	}
-	
-	@GetMapping("/pomodoro/subjects/{id}")
-	public ResponseEntity<?> getSubject(@PathVariable("id") String id){
-		return null;
-	}
-	
-	@DeleteMapping(
-            path = "/pomodoro/subjects/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> deleteSubject(@PathVariable("id") String id) {
-		
-		return null;
-	}
-	
-	
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	
-	@PostMapping(
-            path = "/alexa",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public AlexaRO alexaEndPoint(@RequestBody AlexaRO alexaRO) {
-		
-		return alexaService.processRequest(alexaRO);
-	}
-	
-	@PostMapping(
-            path = "/alexa/connect/token",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public AlexaConnectResponse accountLinkingAlexaToken(final @RequestParam Map<String, String> parameters) {
-		return null;
-	}
-	
-	@PostMapping(
-            path = "/alexa/connect/auth",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public AlexaConnectResponse accountLinkingAlexaAuth() {
-		return null;
-	}
-	
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	@PostMapping(
-            path = "/registrate",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> registrateNewUser(@RequestBody User user) {
-		if(user.getEmail() != null && user.getPassword() != null)
-			userManager.registerNewUser(user);
-		return null;
-	}
-	
-	@PostMapping(
-            path = "/activate/{token}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-    )
-	public ResponseEntity<?> registrateNewUser() {
-		//userService.
-		return null;
-	}
-	
-	/*
-	 *******************************************************************************************************
-	 */
-	
-	@GetMapping("/dhbw-schedule/courses")
-    public DHBWCourses getAllCourses() {
-		return new DHBWCourses(dhbwScheduleService.loadAllCourses());
-    }
-	
-	@GetMapping("/dhbw-schedule/{course}")
-    public DHBWSchedule getAllLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
-		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
-        return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);
-    }
-	
-	@GetMapping("/dhbw-schedule/{course}/upcomingdays")
-    public DHBWSchedule getUpcomingDaysLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "days", defaultValue = "3") int days) {
-		
-		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
-		Predicate<DHBWLecture> streamsPredicate = 
-				lecture -> lecture.getEnd().isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)) 
-					&& lecture.getStart().isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusDays(days));
-		 
-	    lectures = lectures.stream()
-	      .filter(streamsPredicate)
-	      .collect(Collectors.toList());
-		
-	    return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);
-    }
-	
-	
+//
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	@GetMapping("/profile")
+//	public ResponseEntity<?> getUserProfile(){
+//		SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		//User u = userManager.getUserById(id);
+//		return null;
+//	}
+//	
+//	@GetMapping("/profile/short")
+//	public ResponseEntity<?> getUserProfileShort(){
+//		
+//		return null;
+//	}
+//	
+//	@PutMapping(
+//			path = "/profile",
+//			consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE})
+//	public ResponseEntity<?> updateUserProfile(@RequestBody User user){
+//		//check if user contains all required info
+//		return null;
+//	}
+//	
+//	@PostMapping( 
+//			path = "/contacts",
+//			consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE})
+//	public ResponseEntity<?> addUserContact(@RequestBody User user){
+//		// check if user id is valid
+//		return null;
+//	}
+//	
+//	@GetMapping("/contacts")
+//	public ResponseEntity<?> getUserContacts(){
+//		UUID id = null;
+//		return ResponseEntity.ok(userManager.getContactsOf(id));
+//	}
+//	
+//	@DeleteMapping("/contacts/{id}")
+//	public ResponseEntity<?> deleteUserContact(@PathVariable("id") String id){
+//		//check if contact exists
+//		//delete contact
+//		return null;
+//	}
+//	
+//	
+//	
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	@GetMapping("/tasks")
+//	public ResponseEntity<?> getAllTasks() {
+//		UUID id = null;
+//		return ResponseEntity.ok(new TaskList(taskManager.getAllTasksOf(id), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
+//	}
+//	
+//	@GetMapping("/tasks/{id}")
+//	public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
+//		if(taskManager.taskExists(UUID.fromString(id)))
+//			return ResponseEntity.ok(taskManager.getTaskById(UUID.fromString(id)));
+//		return null;
+//	}
+//	
+//	@PostMapping(
+//            path = "/tasks",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> createTask(@RequestBody Task task) {
+//		UUID id = null;
+//		if(task.getSwimlane() != null && task.getTitle() != null)
+//			
+//			taskManager.createNewTask(task, id);
+//		return null;
+//	}
+//	
+//	@PutMapping(
+//            path = "/tasks/{id}",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> updateTask(@PathVariable("id") String id, @RequestBody Task task) {
+//		if(task.getId() != null && task.getSwimlane() != null && task.getTitle() != null)
+//			taskManager.updateTask(task);
+//		return null;
+//	}
+//	
+//	@DeleteMapping(
+//            path = "/tasks/{id}",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
+//		
+//		return null;
+//	}
+//	
+//	@DeleteMapping(
+//            path = "/tasks",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> deleteAllTasks() {
+//		
+//		return null;
+//	}
+//	
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	@GetMapping("/notifications")
+//	public ResponseEntity<?> getAllNotifications() {
+//		UUID id = null;
+//		return ResponseEntity.ok(notificationManager.getAllNotificationsOf(id));
+//	}
+//	
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	@PostMapping(
+//            path = "/pomodoro/subjects",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> addSubject(@RequestBody Subject subject) {
+//		//check if valid
+//		return null;
+//	}
+//	
+//	@PutMapping(
+//            path = "/pomodoro/subjects/{id}",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> updateSubjectName(@PathVariable("id") String id, @RequestBody Subject subject) {
+//		//check if valid
+//		return null;
+//	}
+//	
+//	@PutMapping(
+//            path = "/pomodoro/subjects/{id}/time",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> updateSubjectTime(@PathVariable("id") String id, @RequestBody Subject subject) {
+//		//check if valid
+//		return null;
+//	}
+//	
+//	@GetMapping("/pomodoro/subjects")
+//	public ResponseEntity<?> getAllSubjects(){
+//		return null;
+//	}
+//	
+//	@GetMapping("/pomodoro/subjects/{id}")
+//	public ResponseEntity<?> getSubject(@PathVariable("id") String id){
+//		return null;
+//	}
+//	
+//	@DeleteMapping(
+//            path = "/pomodoro/subjects/{id}",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> deleteSubject(@PathVariable("id") String id) {
+//		
+//		return null;
+//	}
+//	
+//	
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	
+//	@PostMapping(
+//            path = "/alexa",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public AlexaRO alexaEndPoint(@RequestBody AlexaRO alexaRO) {
+//		
+//		return alexaService.processRequest(alexaRO);
+//	}
+//	
+//	@PostMapping(
+//            path = "/alexa/connect/token",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public AlexaConnectResponse accountLinkingAlexaToken(final @RequestParam Map<String, String> parameters) {
+//		return null;
+//	}
+//	
+//	@PostMapping(
+//            path = "/alexa/connect/auth",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public AlexaConnectResponse accountLinkingAlexaAuth() {
+//		return null;
+//	}
+//	
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	@PostMapping(
+//            path = "/registrate",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> registrateNewUser(@RequestBody User user) {
+//		if(user.getEmail() != null && user.getPassword() != null)
+//			userManager.registerNewUser(user);
+//		return null;
+//	}
+//	
+//	@PostMapping(
+//            path = "/activate/{token}",
+//            consumes = {MediaType.APPLICATION_JSON_VALUE},
+//            produces = {MediaType.APPLICATION_JSON_VALUE}
+//    )
+//	public ResponseEntity<?> registrateNewUser() {
+//		//userService.
+//		return null;
+//	}
+//	
+//	/*
+//	 *******************************************************************************************************
+//	 */
+//	
+//	@GetMapping("/dhbw-schedule/courses")
+//    public DHBWCourses getAllCourses() {
+//		return new DHBWCourses(dhbwScheduleService.loadAllCourses());
+//    }
+//	
+//	@GetMapping("/dhbw-schedule/{course}")
+//    public DHBWSchedule getAllLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "name", defaultValue = "Student") String name) {
+//		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
+//        return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);
+//    }
+//	
+//	@GetMapping("/dhbw-schedule/{course}/upcomingdays")
+//    public DHBWSchedule getUpcomingDaysLecturesByCourse(@PathVariable("course") String course, @RequestParam(value = "days", defaultValue = "3") int days) {
+//		
+//		Collection<DHBWLecture> lectures = dhbwScheduleService.loadAllLecturesOfCourse(course);
+//		Predicate<DHBWLecture> streamsPredicate = 
+//				lecture -> lecture.getEnd().isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)) 
+//					&& lecture.getStart().isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusDays(days));
+//		 
+//	    lectures = lectures.stream()
+//	      .filter(streamsPredicate)
+//	      .collect(Collectors.toList());
+//		
+//	    return new DHBWSchedule(course, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), lectures);
+//    }
+//	
+//	
 	
 
 }
