@@ -25,12 +25,9 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("Suche nach: "+username);
-		try {
 		if(!isEmailUsed(username)) 
 			throw new UsernameNotFoundException(username);
 		return dataManager.loadUserByUsername(username);
-		}catch(Exception e) {e.printStackTrace(); return null;}
 		
 	}
 	
@@ -76,10 +73,6 @@ public class UserService implements UserDetailsService {
 	
 	public Collection<User> getAllUsers() {
 		return dataManager.getAllUsers();
-	}
-	
-	public boolean isTokenInvalid(String token) {
-		return dataManager.isTokenInvalid(token);
 	}
 	
 	

@@ -10,7 +10,6 @@ export class RegisterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
   //Password Register validation
     var myInput = (<HTMLInputElement>document.getElementById("Password-Register"));
     var letter = (<HTMLInputElement>document.getElementById("letter"));
@@ -70,5 +69,20 @@ export class RegisterComponent implements OnInit {
       }
     }
     }
+
+    showPassword2L() {
+      var x = (<HTMLInputElement>document.getElementById("Password-Register"));
+      if (x.type === "password") {
+        x.type = "text";
+        } else {
+          x.type = "password";
+          }
+    var y = (<HTMLInputElement>document.getElementById("Password-Confirmation"));
+      if (y.type === "password") {
+        y.type = "text";
+        } else {
+          y.type = "password";
+          }
+  }
 
 }

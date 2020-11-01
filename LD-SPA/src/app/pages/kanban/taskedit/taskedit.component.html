@@ -1,0 +1,155 @@
+<!-- Modal -->
+<div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-labelledby="editTask" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTask">Aufgabe bearbeiten</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="card col-md-12 col-lg-9">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="card shadow m-sm-1"> 
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <h4>&nbsp;
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-font" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+                                                    <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3zm1.443 3H5.057L5 8h.5c.18-1.096.356-1.192 1.694-1.235l.293-.01v5.09c0 .47-.1.582-.898.655v.5H9.41v-.5c-.803-.073-.903-.184-.903-.654V6.755l.298.01c1.338.043 1.514.14 1.694 1.235h.5l-.057-2z"/>
+                                                </svg>
+                                                Titel
+                                            </h4>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-sm">Bearbeiten</button>
+                                        </div>
+                                        <div class="col-auto text-sm-right">
+                                            <h5>
+                                                <span class="text-muted"><small>erstellt 05 Nov 2020</small></span>
+                                                <span class="badge badge-info">#Aufgabennummer</span>
+                                            </h5>
+                                        </div>
+                                    </div>	
+                                    <div class="form-group container-fluid">
+                                        <textarea class="form-control" id="exampleFormControlTitel" rows="3" placeholder="Titel eingeben..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="card shadow m-sm-1"> 
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <h4>&nbsp;
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-justify-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                                </svg>
+                                                Beschreibung
+                                            </h4>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-sm">Bearbeiten</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group container-fluid">
+                                        <textarea class="form-control" id="exampleFormControlDescription" rows="3" placeholder="Aufgabenbeschreibung eingeben..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="card shadow m-sm-1"> 
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <h4>&nbsp;
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-right-dots" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                                                <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                            </svg>
+                                            Kommentar eingeben
+                                            </h4>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-sm">Bearbeiten</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group shadow-textarea container-fluid">
+                                        <textarea class="form-control z-depth-1" id="exampleFormControlEXAMPLE" rows="3" placeholder="Kommentar eingeben..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card col-md-12 col-lg-3">
+                        <div class="card m-1 shadow">
+                            <div class="form-group">
+                                <div class="card-body">
+                                    <h5>
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+                                            <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+                                        </svg>
+                                        Swimlane
+                                    </h5>
+                <!--
+                                    <div class="col-sm-12">
+                                        <select class="form-control">
+                                            <option selected="">Aktuelle Swimlane</option>
+                                            <option>TO DO</option>
+                                            <option>IN ARBEIT</option>
+                                            <option>FERTIG</option>
+                                        </select>
+                                    </div> 
+                -->
+                                    <div class="m-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">To Do</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">In Arbeit</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio3">Fertig</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card m-1 shadow">
+                            <div class="card-body">
+                                <h5>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                    </svg>
+                                    Mitarbeiter
+                                </h5>
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="m-1 col-auto">
+                                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="m-1">
+                                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-primary">Mitarbeiter hinzufügen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-primary">Änderungen speichern</button>
+            </div>
+        </div>
+    </div>
+</div>

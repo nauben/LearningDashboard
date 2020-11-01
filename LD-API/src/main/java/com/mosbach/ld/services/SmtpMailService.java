@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.mosbach.ld.config.SmtpMailConfig;
-import com.mosbach.ld.model.mail.EMail;
+import com.mosbach.ld.model.EMail;
 
 @Service
 public class SmtpMailService {
