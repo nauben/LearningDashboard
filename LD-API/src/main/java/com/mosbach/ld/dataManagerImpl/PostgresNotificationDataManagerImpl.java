@@ -27,7 +27,7 @@ public class PostgresNotificationDataManagerImpl implements NotificationDataMana
 		final String sql = 
 				"INSERT INTO public.\"Messages\"\r\n"
 				+ "(id, \"user-id\", \"timestamp\", message, link)\r\n"
-				+ "VALUES(uuid_generate_v4(), '"+user+"', CURRENT_DATE, '"+notification.getMessage()+"', '"+notification.getLink()+"');";
+				+ "VALUES(uuid_generate_v4(), '"+user+"', date_trunc('second', CURRENT_TIMESTAMP), '"+notification.getMessage()+"', '"+notification.getLink()+"');";
 		try {
 			jdbcTemplate.update(sql);
 		}catch(Exception e) {

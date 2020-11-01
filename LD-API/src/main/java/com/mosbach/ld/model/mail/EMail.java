@@ -1,4 +1,4 @@
-package com.mosbach.ld.model;
+package com.mosbach.ld.model.mail;
 
 import java.util.Collection;
 

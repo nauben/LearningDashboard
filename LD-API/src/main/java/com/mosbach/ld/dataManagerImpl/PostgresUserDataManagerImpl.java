@@ -32,17 +32,19 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 				"INSERT INTO public.\"User\""
 				+ "(id, email, \"password\", firstname, lastname, institution, \"location\", \"picture-url\", \"last-Login\", created, activated, \"blocked\")"
 				+ "VALUES(uuid_generate_v4(), '"+user.getEmail()+"', '"+user.getPassword()+"', '"+user.getFirstname()+"',"
-				+ " '"+user.getLastname()+"', '"+user.getInstitution()+"',"
-				+ " '"+user.getLocation()+"', '', CURRENT_DATE, CURRENT_DATE, true, false); "
+				+ " '"+user.getLastname()+"', '',"
+				+ " '', '', date_trunc('second', CURRENT_TIMESTAMP), date_trunc('second', CURRENT_TIMESTAMP), true, false); "
 				+ "INSERT INTO public.\"Settings\" "
 				+ "(\"user-id\", visibility, \"email-notification\") "
 				+ "VALUES((select id from public.\"User\" where email='"+user.getEmail()+"'), 0, false); "
 				+ "INSERT INTO public.\"Schedule-Settings\" "
 				+ "(\"user-id\", course) "
 				+ "VALUES((select id from public.\"User\" where email='"+user.getEmail()+"'), ''); ";
+		System.out.println(sql);
 		try {
 			jdbcTemplate.update(sql);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -92,8 +94,8 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 			changes++;
 		}
 		sb.append(" WHERE id='"+user.getId()+"';");
+		int sChanges = 0;
 		if(user.getVisibility() != null || user.isSendNotifications() != null) {
-			int sChanges = 0;
 			sb.append(" UPDATE public.\"Settings\" SET ");
 			if(user.getVisibility() != null) {
 				sb.append("visibility="+user.getVisibility()+"");
@@ -106,7 +108,9 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 			}
 			sb.append(" WHERE \"user-id\"='"+user.getId()+"';");
 		}
-		return sb.toString();
+		if(changes > 0 || sChanges > 0)
+			return sb.toString();
+		else return "NULL;";
 	}
 
 	@Override
@@ -174,9 +178,9 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 					resultSet.getString("location"),
 					0,
 					null,
-					false,
 					null,
-					false,
+					null,
+					null,
 					null,
 					null
 				);
@@ -230,7 +234,7 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 		final String sql = "SELECT * FROM public.\"User\" WHERE email = ?;";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		return jdbcTemplate.queryForObject(sql, new Object[] {username}, (resultSet, i) -> {
-			return new User(
+			User u =  new User(
 					new ArrayList<>(),
 					UUID.fromString(resultSet.getString("id")),
 					LocalDateTime.parse(resultSet.getString("created"), formatter),
@@ -244,13 +248,15 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 					"",
 					resultSet.getString("location"),
 					0,
-					resultSet.getBoolean("sendNotifications"),
 					false,
+					true,
 					!resultSet.getBoolean("blocked"),
-					false,
+					true,
 					resultSet.getBoolean("activated"),
 					null
 				);
+			System.out.println(u);
+			return u;
 		});
 
 	}
@@ -292,13 +298,53 @@ public class PostgresUserDataManagerImpl implements UserDataManager {
 	@Override
 	public boolean updateUserLogin(UUID user) {
 		final String sql = 
-				"update \"User\" set (\"last-Login\") as (current_time) where id = '"+user+"';";
+				"update \"User\" set (\"last-Login\") as (date_trunc('second', CURRENT_TIMESTAMP)) where id = '"+user+"';";
 		try {
 			jdbcTemplate.update(sql);
 		}catch(Exception e) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean deleteContactFrom(UUID id, UUID contact) {
+		final String sql = 
+				"DELETE FROM public.\"Contacts\" "
+				+ "WHERE (\"user-id\"='"+id+"' AND \"contact-id\"='"+contact+"') OR (\"user-id\"='"+contact+"' AND \"contact-id\"='"+id+"');";
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean markTokenAsInvalid(String token) {
+		final String sql = 
+				"INSERT INTO public.\"Tokens\" "
+				+ "(\"token\", \"timestamp\") "
+				+ "VALUES('"+token+"', date_trunc('second', CURRENT_TIMESTAMP));";
+		try {
+			jdbcTemplate.update(sql);
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isTokenInvalid(String token) {
+		final String sql = "SELECT \"token\", \"timestamp\" FROM public.\"Tokens\" where \"token\"= ?;";
+		try {
+			boolean isInvalid =  jdbcTemplate.queryForObject(sql, new Object[] {token}, (resultSet, i) -> {
+				return true;
+			});
+			return isInvalid;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 
 }

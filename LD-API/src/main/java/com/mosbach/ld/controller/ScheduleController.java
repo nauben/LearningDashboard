@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +45,13 @@ public class ScheduleController {
 		return new DHBWCourses(dhbwScheduleService.loadAllCourses());
     }
 	
-	@PostMapping( 
+	@GetMapping("/dhbw-schedule/courses/selected")
+    public String getCourse() {
+		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		return dataManager.getCourseOf(id);
+    }
+	
+	@PutMapping( 
 			path = "/dhbw-schedule/courses/{course}")
     public void setCourse(@PathVariable("course") String course) {
 		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
