@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { StartRoutingModule } from './start-routing.module';
 import { StartComponent } from './start.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { KanbanModule } from '../kanban/kanban.module';
 
 @NgModule({
   imports: [
     CommonModule,
     StartRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    KanbanModule,
   ],
   declarations: [StartComponent]
 })

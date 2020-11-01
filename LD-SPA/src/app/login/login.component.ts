@@ -12,12 +12,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   showPassword1L() {
-    console.log("JS loaded!");
       var x = (<HTMLInputElement>document.getElementById("Password-Login"));
       if (x.type === "password") {
         x.type = "text";
         } else {
           x.type = "password";
           }
-  } 
+  }
 }

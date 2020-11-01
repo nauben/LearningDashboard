@@ -1,13 +1,12 @@
 /*eslint-env es6*/
 /*function showPassword1L() {
-	console.log("JS loaded!");
 		var x = document.getElementById("Password-Login");
 		if (x.type === "password") {
 			x.type = "text";
 			} else {
 				x.type = "password";
 				}
-} */
+} 
 
 function showPassword2L() {
 		var x = document.getElementById("Password-Register");
@@ -22,7 +21,7 @@ function showPassword2L() {
 			} else {
 				y.type = "password";
 				}
-}
+} 
 
 function showPassword2EP() {
 	var x = document.getElementById("Password-current");
@@ -37,7 +36,7 @@ var y = document.getElementById("Password-New");
 		} else {
 			y.type = "password";
 			}
-}
+} */
 
 /*//####################
 //Password Register validation

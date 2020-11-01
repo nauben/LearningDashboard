@@ -17,6 +17,7 @@ const routes: Routes = [
       { path: 'lernen', loadChildren: () => import('../pages/learn/learn.module').then(m=>m.LearnModule) },
       { path: 'kanban', loadChildren: () => import('../pages/kanban/kanban.module').then(m=>m.KanbanModule) },
       { path: 'vorlesungen', loadChildren: () => import('../pages/schedule/schedule.module').then(m=>m.ScheduleModule) },
+      { path: 'profil', loadChildren: () => import('../pages/profile/profile.module').then(m=>m.ProfileModule) },
     ]
   },
   {
