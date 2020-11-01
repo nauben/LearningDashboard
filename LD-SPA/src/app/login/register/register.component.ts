@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AccountService} from '../../_services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -6,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+    loading = false;
+    submitted = false;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+        private router: Router,
+        private accountService: AccountService,
+  ) { }
 
   ngOnInit(): void {
   //Password Register validation
@@ -84,5 +93,19 @@ export class RegisterComponent implements OnInit {
           y.type = "password";
           }
   }
+
+  onSubmit() {
+    this.submitted = true;
+    this.loading = true;
+    this.accountService.register((<HTMLInputElement>document.getElementById('Email-Login')).value,(<HTMLInputElement>document.getElementById('Password-Register')).value)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.router.navigate(['../login'], { relativeTo: this.route });
+            },
+            error => {
+                this.loading = false;
+            });
+}
 
 }

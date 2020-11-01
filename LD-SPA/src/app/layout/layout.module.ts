@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HdrFtrSidebarLayoutComponent,
     SidebarComponent,
     HeaderComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
