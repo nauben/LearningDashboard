@@ -1,7 +1,5 @@
 package com.mosbach.ld.services;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.mosbach.ld.model.alexa.AlexaRO;
@@ -13,20 +11,18 @@ import com.mosbach.ld.model.task.TaskList;
 @Service
 public class AlexaService {
 
-	//TODO as account linking not yet possible, hardcoded user
-	private final UUID USER_ID = UUID.randomUUID();
-
-	public AlexaService() {
-		
-	}
+	private final String CLIENT_ID = "secret";
+	private final String CLIENT_SECRET = "secret";
+	private final String REDIRECT_URL = "";
+	private final String STATE = "test";
 	
-	/*
+	
 	private final String CONNECT_URL = "https://www.amazon.com/ap/oa?client_id="+CLIENT_ID+"&scope=alexa::skills:"
 			+ "account_linking&response_type=code&redirect_uri="+REDIRECT_URL+"&state="+STATE;
-	*/
+	
 	
 	public void connectToAlexa() {
-		throw new UnsupportedOperationException("No OAuth/Account Linking possible yet!");
+		
 	}
 	
 	public AlexaRO processRequest(AlexaRO alexaRO) {
@@ -50,7 +46,8 @@ public class AlexaService {
 		}else if(alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
                 (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ScheduleReadIntent"))) {
 			return processScheduleReadIntent(alexaRO);
-		} 
+		}
+		//TODO 
 		return null;
 	}
 	
