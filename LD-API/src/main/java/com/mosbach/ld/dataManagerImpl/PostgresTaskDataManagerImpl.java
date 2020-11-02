@@ -118,15 +118,20 @@ public class PostgresTaskDataManagerImpl implements TaskDataManager {
 	@Override
 	public Task getTaskById(UUID id) {
 		final String sql = "SELECT * "
-				+ "FROM public.\"Task\" where id='"+id+"';";
+				+ "FROM public.\"Task\" where id=?;";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		return jdbcTemplate.queryForObject(sql, new Object[] {id}, (resultSet, i) -> {
+			LocalDateTime dueDate = null;
+			if(resultSet.getString("due-date") == null)
+				dueDate = null;
+			else
+				dueDate = LocalDateTime.parse(resultSet.getString("due-date"), formatter);
 			return new Task(
 					UUID.fromString(resultSet.getString("id")),
 					resultSet.getInt("swimlane"),
 					resultSet.getString("title"),
 					resultSet.getString("description"),
-					LocalDateTime.parse(resultSet.getString("due-date"), formatter),
+					dueDate,
 					null,
 					LocalDateTime.parse(resultSet.getString("created"), formatter),
 					null,
@@ -146,6 +151,7 @@ public class PostgresTaskDataManagerImpl implements TaskDataManager {
 				"SELECT u.id, u.email, u.\"password\", u.firstname, u.lastname, u.institution, u.\"location\", u.\"picture-url\", u.\"last-Login\", u.created, u.activated, u.\"blocked\" "
 				+ "FROM public.\"User\" u, public.\"TaskUser\" tu where tu.\"user-id\" = u.id and tu.\"task-id\" = '"+id+"';";
 		return jdbcTemplate.query(sql, (resultSet, i) -> {
+			
 			return new User(
 					null,
 					UUID.fromString(resultSet.getString("id")),
