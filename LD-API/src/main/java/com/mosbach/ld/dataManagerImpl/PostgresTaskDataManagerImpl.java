@@ -77,7 +77,7 @@ public class PostgresTaskDataManagerImpl implements TaskDataManager {
 		}
 		if(task.getLabel() != null) {
 			if(changes > 0) sb.append(", ");
-			sb.append("\"label\" = "+task.getTitle()+"");
+			sb.append("\"label\" = "+task.getLabel()+"");
 			changes++;
 		}
 		if(task.getDueDate() != null) {
