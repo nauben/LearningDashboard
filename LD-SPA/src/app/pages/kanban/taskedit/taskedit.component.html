@@ -29,8 +29,8 @@
                                         </div>
                                         <div class="col-auto text-sm-right">
                                             <h5>
-                                                <span class="text-muted"><small>erstellt 05 Nov 2020</small></span>
-                                                <span class="badge badge-info">#Aufgabennummer</span>
+                                                <span class="text-muted"><small *ngIf="task">erstellt {{task.created[2]}}.{{task.created[1]}}.{{task.created[0]}}</small></span>
+                                                <span class="badge badge-info"></span>
                                             </h5>
                                         </div>
                                     </div>	
@@ -101,16 +101,16 @@
                 -->
                                     <div class="m-2">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                            <label class="custom-control-label" for="customRadio1">To Do</label>
+                                            <input type="radio" id="customRadioTodo" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioTodo">To Do</label>
                                         </div>
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                            <label class="custom-control-label" for="customRadio2">In Arbeit</label>
+                                            <input type="radio" id="customRadioWip" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioWip">In Arbeit</label>
                                         </div>
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                            <label class="custom-control-label" for="customRadio3">Fertig</label>
+                                            <input type="radio" id="customRadioDone" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioDone">Fertig</label>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                <button type="button" class="btn btn-primary">Änderungen speichern</button>
+                <button (click)="saveChanges()" type="button" class="btn btn-primary">Änderungen speichern</button>
             </div>
         </div>
     </div>

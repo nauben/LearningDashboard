@@ -21,15 +21,18 @@ export class KanbanService {
     }
 
     getTaskById(id:string){
-        return this.http.get<Task>(`${environment.apiUrl}/tasks/`+id, null).pipe(map(task => {
-            return task;
-        }));;
+        return this.http.get<Task>(`${environment.apiUrl}/tasks/`+id);
     }
 
     updateTask(task:Task){
-        return this.http.put(`${environment.apiUrl}/tasks`, task).pipe(map(task => {
-            return task;
-        }));;
+        this.http.put(`${environment.apiUrl}/tasks`, task).subscribe({
+            next: data => {
+                console.log(data);
+            },
+            error: error => {
+                console.error('There was an error!', error);
+            }
+        })
     }
 
     getDeleteTask(id:string){

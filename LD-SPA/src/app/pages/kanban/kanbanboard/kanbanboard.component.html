@@ -1,4 +1,4 @@
-<app-taskedit></app-taskedit>
+<app-taskedit (saveUpdate)="refreshBoard()"></app-taskedit>
 <li class="list-group-item">
     <div class="card" (window:resize)="sizeKan()">
         <!-- only visible on screens smaller than lg -->
@@ -21,12 +21,10 @@
                     <div  class="items" >
                       <div  class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                       <div *ngFor="let task of toDo">
-                      <div  class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                      <div (click)="onClick($event)" class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
                           <div class="card-body p-2" data-toggle="modal" data-target="#editTask">
                               <div class="card-title">
-                                  <span class="font-italic text-info" style="font-size: 10px">
-                                  {{task.id}}&nbsp;&nbsp;&nbsp;
-                                  </span>
+                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>
                                   <div class="btn-group dropright">
                                     <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -65,12 +63,10 @@
                     <div class="items">
                       <div  class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                       <div *ngFor="let task of wip">
-                      <div   class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                      <div (click)="onClick($event)"  class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
                           <div class="card-body p-2" data-toggle="modal" data-target="#editTask">
                               <div class="card-title">
-                                  <span class="font-italic text-info" style="font-size: 10px">
-                                  {{task.id}}&nbsp;&nbsp;&nbsp;
-                                  </span>
+                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>
                                   <div class="btn-group dropright">
                                     <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -107,12 +103,10 @@
                     <div class="items">
                       <div  class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                       <div *ngFor="let task of done">
-                      <div   class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                      <div  (click)="onClick($event)" class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
                           <div class="card-body p-2" data-toggle="modal" data-target="#editTask">
                               <div class="card-title">
-                                  <span class="font-italic text-info" style="font-size: 10px">
-                                  {{task.id}}&nbsp;&nbsp;&nbsp;
-                                  </span>
+                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>
                                   <div class="btn-group dropright">
                                     <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

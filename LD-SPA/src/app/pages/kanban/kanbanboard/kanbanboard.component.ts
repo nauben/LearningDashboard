@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Task, TaskList} from '../../../_models';
 import {KanbanService} from '../../../_services/kanban.service';
 import { first } from 'rxjs/operators';
+import { TaskeditComponent } from '../taskedit/taskedit.component';
 
 @Component({
   selector: 'app-kanbanboard',
@@ -15,40 +16,47 @@ export class KanbanboardComponent implements OnInit {
   toDo:Task[]
   wip:Task[]
   done:Task[]
+  @ViewChild(TaskeditComponent) editModal:TaskeditComponent;
 
   constructor(
     private kanbanService: KanbanService
   ) {}
 
   ngOnInit(): void {
+    
+    this.refreshBoard();
+  }
+
+
+
+  refreshBoard(){
     this.kanbanService.getAllTasks().pipe(first())
     .subscribe(
         data => {
-          console.log()
+          console.log("")
           this.taskList = data;
           this.tasks = this.taskList.tasks;
           this.toDo = this.tasks.filter(task => { return task.swimlane === 0});
           this.wip = this.tasks.filter(task => { return task.swimlane === 1});
           this.done = this.tasks.filter(task => { return task.swimlane === 2});
+          if(!this.tasks) return
+          this.tasks.forEach(task => {
+            console.log($('.items'))
+            $(".items").append(this.getKanbanTaskElement(task.id, task.title, new Date(task.dueDate[0], task.dueDate[1], task.dueDate[2], task.dueDate[3], task.dueDate[4])));
+          });
         },
         error => {
             console.log(error);
-        });;
-        this.refreshBoard();
-  }
-
-  refreshBoard(){
+        });
     
 
-    this.tasks.forEach(task => {
-      console.log($('.items'))
-      $(".items").append(this.getKanbanTaskElement(task.id, task.title, new Date(task.dueDate[0], task.dueDate[1], task.dueDate[2], task.dueDate[3], task.dueDate[4])));
-    });
-
   }
 
-  setModal(item) {
-    console.log(item)
+  onClick(event){
+    var target = event.target || event.srcElement || event.currentTarget;
+    console.log($(target).find(".idTask")[0].innerHTML);
+    this.editModal.setTask($(target).find(".idTask")[0].innerHTML);
+
   }
 
 
