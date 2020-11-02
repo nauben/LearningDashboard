@@ -7,6 +7,7 @@ import { LayoutModule } from './layout/layout.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor} from './_helpers/jwt.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,6 +20,7 @@ import { JwtInterceptor} from './_helpers/jwt.interceptor';
     BrowserModule,
     LayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
   ],

@@ -317,4 +317,70 @@ $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
-        }); */
+		}); */
+		
+		let d = new Date();
+        let startTime;
+		let stopTime;
+		
+        //flag for Button reset
+        let flag = false;
+		
+        //Reload div
+        function reset() {
+
+            $('#loadDot').load("load.html");
+            $('#numb1').load("load2.html");
+            flag = true;
+            console.log("stop");
+
+          //  alert("Time learned: " + (stopTime - startTime));
+        }
+
+        //function to start animation
+        function startAnimation() {
+
+			
+            //start the counter
+            counter();
+
+            //start animation for left side
+            const barLeft = document.getElementById('barLeft');
+            barLeft.style.animation = 'left 20s linear both';
+
+            //start animation for right side
+            const barRight = document.getElementById('barRight');
+            barRight.style.animation = 'right 20s linear both';
+            barRight.style.animationDelay = '20s';
+
+            //start animation for dot
+            const dot1 = document.getElementById('dot1');
+            dot1.style.animation = 'dot 40s linear both';
+
+        }
+
+        //function for number counter
+        function counter() {
+            startTime = d.getTime();
+
+
+            const numb = document.querySelector(".numb");
+            let counter = 0;
+            setInterval(()=>{
+                if(counter == 100 || flag == true){
+                    clearInterval();
+                    counter = 0;
+                   // stopTime = d.getTime();
+                   // reset();
+                }else{
+                    counter+=1;
+                    numb.textContent = counter + "%";
+                }
+            }, 400);
+
+            //
+            flag = false;
+			//console.log(stopTime - startTime);
+			
+        
+	}
