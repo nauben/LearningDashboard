@@ -126,7 +126,7 @@ public class PostgresTaskDataManagerImpl implements TaskDataManager {
 					resultSet.getInt("swimlane"),
 					resultSet.getString("title"),
 					resultSet.getString("description"),
-					LocalDateTime.parse(resultSet.getString("due-atde"), formatter),
+					LocalDateTime.parse(resultSet.getString("due-date"), formatter),
 					null,
 					LocalDateTime.parse(resultSet.getString("created"), formatter),
 					null,
