@@ -31,7 +31,7 @@ public class RequestRO
         super();
     }
 
-    public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp)
+    public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp, String slots)
     {
         super();
         this.type = type;
@@ -39,6 +39,7 @@ public class RequestRO
         this.intent = intent;
         this.locale = locale;
         this.timestamp = timestamp;
+        this.slots = slots;
     }
  
     @JsonProperty("type")
@@ -100,5 +101,13 @@ public class RequestRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
+	public String getSlots() {
+		return slots;
+	}
+
+	public void setSlots(String slots) {
+		this.slots = slots;
+	}
 
 }

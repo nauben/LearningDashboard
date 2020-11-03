@@ -27,17 +27,12 @@ public class AlexaService {
 	
 	public AlexaRO processRequest(AlexaRO alexaRO) {
 		System.out.println(alexaRO.getAdditionalProperties());
+		System.out.println(alexaRO.getRequest().getSlots());
 		if(alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest")) {
 			return processLaunchRequest(alexaRO);
 		}else if(alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("TaskToDoReadIntent"))) {
-			return processTaskToDoReadIntend(alexaRO);
-		}else if(alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("TaskWIPReadIntent"))) {
-			return processTaskWIPReadIntent(alexaRO);
-		}else if(alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("TaskFinishedReadIntent"))) {
-			return processTaskFinishedReadIntent(alexaRO);
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("TaskReadIntent"))) {
+			return processReadIntend(alexaRO);
 		}else if(alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
                 (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("ReadSummaryIntent"))) {
 			return processReadSummaryIntent(alexaRO);
@@ -54,34 +49,14 @@ public class AlexaService {
 	private AlexaRO processLaunchRequest(AlexaRO request) {
 		String outText = "";
 		try {
-			outText += "Willkommen beim Learning Dashboard.";
+			outText += "Willkommen beim Learning Dashboard. Wie kann ich dir weiterhelfen?";
 		}catch(Exception e) {
 			outText = "";
 		}
 		return prepareResponse(request, outText, false);
 	}
 	
-	private AlexaRO processTaskToDoReadIntend(AlexaRO request) {
-		String outText = "";
-		try {
-			outText += "Willkommen beim Learning Dashboard.";
-		}catch(Exception e) {
-			outText = "Leider ist beim Lesen deiner Aufgaben ein Fehler aufgetreten. Probiere es einfach später erneut.";
-		}
-		return prepareResponse(request, outText, true);
-	}
-	
-	private AlexaRO processTaskWIPReadIntent(AlexaRO request) {
-		String outText = "";
-		try {
-			outText += "Willkommen beim Learning Dashboard.";
-		}catch(Exception e) {
-			outText = "Leider ist beim Lesen deiner Aufgaben ein Fehler aufgetreten. Probiere es einfach später erneut.";
-		}
-		return prepareResponse(request, outText, true);
-	}
-	
-	private AlexaRO processTaskFinishedReadIntent(AlexaRO request) {
+	private AlexaRO processReadIntend(AlexaRO request) {
 		String outText = "";
 		try {
 			outText += "Willkommen beim Learning Dashboard.";
