@@ -27,6 +27,7 @@ public class AlexaService {
 	
 	public AlexaRO processRequest(AlexaRO alexaRO) {
 		System.out.println(alexaRO.getAdditionalProperties());
+		if(alexaRO.getRequest().getIntent() != null)
 		System.out.println(alexaRO.getRequest().getIntent().getSlots().getScheduleDate().getValue());
 		if(alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest")) {
 			return processLaunchRequest(alexaRO);
