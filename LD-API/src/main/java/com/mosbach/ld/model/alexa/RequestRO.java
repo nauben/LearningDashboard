@@ -31,7 +31,7 @@ public class RequestRO
         super();
     }
 
-    public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp, String slots)
+    public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp, Map<String, Object> slots)
     {
         super();
         this.type = type;
