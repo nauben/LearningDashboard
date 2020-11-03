@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mosbach.ld.dataManager.DHBWScheduleDataManager;
+import com.mosbach.ld.model.common.DefaultActionResponse;
 import com.mosbach.ld.model.dhbwSchedule.DHBWCourses;
 import com.mosbach.ld.model.dhbwSchedule.DHBWLecture;
 import com.mosbach.ld.model.dhbwSchedule.DHBWSchedule;
@@ -46,16 +48,20 @@ public class ScheduleController {
     }
 	
 	@GetMapping("/dhbw-schedule/courses/selected")
-    public String getCourse() {
+    public ResponseEntity<?> getCourse() {
 		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
-		return dataManager.getCourseOf(id);
+		return ResponseEntity.ok(new DHBWSchedule(dataManager.getCourseOf(id), null, null));
     }
 	
 	@PutMapping( 
 			path = "/dhbw-schedule/courses/{course}")
-    public void setCourse(@PathVariable("course") String course) {
+    public ResponseEntity<?> setCourse(@PathVariable("course") String course) {
 		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		boolean success = false;
 		dataManager.setCourseOf(id, course);
+		if(success)
+			return ResponseEntity.ok(new DefaultActionResponse(true, null));
+		return ResponseEntity.ok(new DefaultActionResponse(false, "Error while saving data..."));
     }
 	
 	@GetMapping("/dhbw-schedule")
