@@ -14,8 +14,8 @@ public class IntentRO
     @JsonProperty("name")
     private String name;
     
-    // @JsonProperty("slots")
-    // private SlotsRO slots;
+    @JsonProperty("slots")
+    private SlotsRO slots;
     // So müsste es weitergehen, wenn der Intent Slots hat
     //
     
@@ -27,10 +27,11 @@ public class IntentRO
         super();
     }
 
-    public IntentRO(String name)
+    public IntentRO(String name, SlotsRO slots)
     {
         super();
         this.name = name;
+        this.slots = slots;
     }
     
     @JsonProperty("name")
@@ -43,7 +44,17 @@ public class IntentRO
         this.name = name;
     }
 
-    @JsonAnyGetter
+    @JsonProperty("slots")
+    public SlotsRO getSlots() {
+		return slots;
+	}
+
+    @JsonProperty("slots")
+	public void setSlots(SlotsRO slots) {
+		this.slots = slots;
+	}
+
+	@JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }

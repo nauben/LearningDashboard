@@ -21,8 +21,6 @@ public class RequestRO
     private String locale;
     @JsonProperty("timestamp")
     private String timestamp;
-    @JsonProperty("slots")
-    private Map<String, Object> slots;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -31,7 +29,7 @@ public class RequestRO
         super();
     }
 
-    public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp, Map<String, Object> slots)
+    public RequestRO(String type, String requestId, IntentRO intent, String locale, String timestamp)
     {
         super();
         this.type = type;
@@ -39,7 +37,6 @@ public class RequestRO
         this.intent = intent;
         this.locale = locale;
         this.timestamp = timestamp;
-        this.slots = slots;
     }
  
     @JsonProperty("type")
@@ -101,13 +98,5 @@ public class RequestRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-    @JsonProperty("slots")
-	public Map<String, Object> getSlots() {
-		return slots;
-	}
-	@JsonProperty("slots")
-	public void setSlots(Map<String, Object> slots) {
-		this.slots = slots;
-	}
 
 }
