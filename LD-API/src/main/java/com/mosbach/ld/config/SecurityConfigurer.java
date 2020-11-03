@@ -107,8 +107,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 						"/api/v0.1a/login",
 						"/api/v0.1a/register",
 						"/api/v0.1a/test",
-						"/api/v0.1a/alexa/endpoint",
-						"/api/v0.1a/tasks"
+						"/api/v0.1a/alexa/endpoint"
 						).permitAll()
 				.anyRequest().authenticated()
 			.and()
