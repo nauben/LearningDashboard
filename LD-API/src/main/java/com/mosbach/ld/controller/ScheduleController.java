@@ -58,7 +58,7 @@ public class ScheduleController {
     public ResponseEntity<?> setCourse(@PathVariable("course") String course) {
 		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
 		boolean success = false;
-		dataManager.setCourseOf(id, course);
+		success = dataManager.setCourseOf(id, course);
 		if(success)
 			return ResponseEntity.ok(new DefaultActionResponse(true, null));
 		return ResponseEntity.ok(new DefaultActionResponse(false, "Error while saving data..."));
