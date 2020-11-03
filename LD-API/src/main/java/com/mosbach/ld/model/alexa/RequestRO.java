@@ -22,7 +22,7 @@ public class RequestRO
     @JsonProperty("timestamp")
     private String timestamp;
     @JsonProperty("slots")
-    private String slots;
+    private Map<String, Object> slots;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -101,12 +101,12 @@ public class RequestRO
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
-	public String getSlots() {
+    @JsonProperty("slots")
+	public Map<String, Object> getSlots() {
 		return slots;
 	}
-
-	public void setSlots(String slots) {
+	@JsonProperty("slots")
+	public void setSlots(Map<String, Object> slots) {
 		this.slots = slots;
 	}
 
