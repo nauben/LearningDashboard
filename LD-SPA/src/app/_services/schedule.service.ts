@@ -5,10 +5,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { User } from '../_models';
+import { Schedule, CourseList } from '../_models';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService {
+export class ScheduleService {
 
     constructor(
         private router: Router,
@@ -18,20 +18,34 @@ export class AccountService {
     }
 
     getSchedule(){
-
+        return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule`);
     }
 
-    getScheduleForNextDays(days:number){
-
+    getScheduleForNextDays(days?:number){
+        if(days)
+            return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule/upcomingdays`+days);
+        else
+            return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule/upcomingdays`);
     }
 
     getAllCourses(){
-        return this.http.get<string[]>(`${environment.apiUrl}/dhbw-schedule/courses`, null);
+        return this.http.get<CourseList>(`${environment.apiUrl}/dhbw-schedule/courses`);
+    }
+
+    getSavedCourse(){
+        return this.http.get<string>(`${environment.apiUrl}/dhbw-schedule/courses/selected`);
     }
 
     setCourse(course:string){
         console.log(course);
-        return this.http.post(`${environment.apiUrl}/dhbw-schedule/courses/${course}`, null);
+        this.http.put(`${environment.apiUrl}/dhbw-schedule/courses/`+course, null).subscribe({
+            next: data => {
+                console.log(data);
+            },
+            error: error => {
+                console.error('There was an error!', error);
+            }
+        })
     }
 
 }
