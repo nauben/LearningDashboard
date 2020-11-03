@@ -14,22 +14,19 @@ import com.mosbach.ld.model.task.TaskList;
 public class AlexaService {
 
 	//TODO as account linking not yet possible, hardcoded user
-	private final UUID USER_ID = UUID.randomUUID();
+	private final UUID USER_ID = UUID.fromString("62c3caa2-44c0-47b5-a9ad-e6dc14774312");
 
 	public AlexaService() {
 		
 	}
 	
-	/*
-	private final String CONNECT_URL = "https://www.amazon.com/ap/oa?client_id="+CLIENT_ID+"&scope=alexa::skills:"
-			+ "account_linking&response_type=code&redirect_uri="+REDIRECT_URL+"&state="+STATE;
-	*/
 	
 	public void connectToAlexa() {
 		throw new UnsupportedOperationException("No OAuth/Account Linking possible yet!");
 	}
 	
 	public AlexaRO processRequest(AlexaRO alexaRO) {
+		System.out.println(alexaRO.getAdditionalProperties());
 		if(alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest")) {
 			return processLaunchRequest(alexaRO);
 		}else if(alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&

@@ -21,6 +21,8 @@ public class RequestRO
     private String locale;
     @JsonProperty("timestamp")
     private String timestamp;
+    @JsonProperty("slots")
+    private String slots;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
