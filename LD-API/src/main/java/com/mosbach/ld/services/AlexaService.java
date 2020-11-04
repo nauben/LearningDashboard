@@ -78,7 +78,7 @@ public class AlexaService {
 		try {
 			outText += "Willkommen beim Learning Dashboard.";
 		}catch(Exception e) {
-			outText = "Leider ist beim Lesen deiner Aufgaben ein Fehler aufgetreten. Probiere es einfach später erneut.";
+			outText = "Leider ist beim Lesen deiner Aufgaben ein Fehler aufgetreten. Probiere es einfach sp\u00e4ter erneut.";
 		}
 		return prepareResponse(request, outText, true);
 	}
@@ -88,7 +88,7 @@ public class AlexaService {
 		try {
 			outText += "Keine Ahnung, was du unter einer Zusammenfassung alles haben willst. Probier es doch mal mit welche vorlesungen habe ich morgen? oder welche aufgaben sind in arbeit?";
 		}catch(Exception e) {
-			outText = "Leider konnte auf deine Daten nicht zugegriffen werden. Probiere es einfach später erneut.";
+			outText = "Leider konnte auf deine Daten nicht zugegriffen werden. Probiere es einfach sp\u00e4ter erneut.";
 		}
 		return prepareResponse(request, outText, true);
 	}
@@ -96,9 +96,9 @@ public class AlexaService {
 	private AlexaRO processCreateToDoTaskIntent(AlexaRO request) {
 		String outText = "";
 		try {
-			outText += "Willkommen beim Learning Dashboard.";
+			outText += "Leider kann ich noch keine Aufgaben für dich anlegen, freue dich aber schonmal darauf, dass es bald m\u00f6glich sein wird";
 		}catch(Exception e) {
-			outText = "Leider konnte keine neue Aufgabe angelegt werden. Probiere es einfach später erneut.";
+			outText = "Leider konnte keine neue Aufgabe angelegt werden. Probiere es einfach sp\u00e4ter erneut.";
 		}
 		return prepareResponse(request, outText, true);
 	}
@@ -109,10 +109,16 @@ public class AlexaService {
 		try {
 			outText.append("Du hast am ");
 			LocalDateTime date = LocalDateTime.parse(request.getRequest().getIntent().getSlots().getScheduleDate().getValue(), formatter);
-			outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+date.getYear()+" folgende Vorlesungen: ");
+			
 			String course = this.scheduleDataManager.getCourseOf(USER_ID);
 			Collection<DHBWLecture> lectures = scheduleManager.loadAllLecturesOfCourse(course);
 			lectures = lectures.stream().filter((lecture)-> lecture.getStart().truncatedTo(ChronoUnit.DAYS).equals(date)).collect(Collectors.toList());
+			if(lectures.size() == 0) {
+				outText = new StringBuilder();
+				outText.append("Du hast am ");
+				outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+date.getYear()+" keine Vorlesungen! ");
+			}else 
+				outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+date.getYear()+" folgende Vorlesungen: ");
 			Iterator<DHBWLecture> iterator = lectures.iterator();
 			while(iterator.hasNext()) {
 				DHBWLecture lecture = iterator.next();
@@ -128,7 +134,7 @@ public class AlexaService {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-			outText.append("Leider konnte nicht auf den Vorlesungsplan zugegriffen werden. Probiere es einfach später erneut.");
+			outText.append("Leider konnte nicht auf den Vorlesungsplan zugegriffen werden. Probiere es einfach sp\u00e4ter erneut.");
 		}
 		return prepareResponse(request, outText.toString(), true);
 	}
