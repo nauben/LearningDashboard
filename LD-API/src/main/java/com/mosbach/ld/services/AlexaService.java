@@ -103,12 +103,13 @@ public class AlexaService {
 				Task t = iterator.next();
 				outText.append(" "+t.getTitle()+" "+t.getDescription());
 				if(t.getDueDate() != null) {
-					outText.append(" fällig am "+t.getDueDate().getDayOfMonth()+"."+t.getDueDate().getMonthValue()+"."+t.getDueDate().getYear());
+					outText.append(" f\u00e4llig am "+t.getDueDate().getDayOfMonth()+"."+t.getDueDate().getMonthValue()+"."+t.getDueDate().getYear());
 				}
 				if(iterator.hasNext())
 					outText.append(" und ");
 			}
 		}catch(Exception e) {
+			e.printStackTrace();
 			outText = new StringBuilder();
 			outText.append("Leider konnte auf deine Daten nicht zugegriffen werden. Probiere es einfach sp\u00e4ter erneut.");
 		}
