@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService} from '../../_services/account.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+	private accountService: AccountService
+  ) { }
 
   ngOnInit(): void {
     //Password Register validation
@@ -84,6 +87,11 @@ export class ProfileComponent implements OnInit {
       } else {
         y.type = "password";
         }
+  }
+
+  onLogout(){
+    console.log('Bye');
+    this.accountService.logout();
   }
 
 }
