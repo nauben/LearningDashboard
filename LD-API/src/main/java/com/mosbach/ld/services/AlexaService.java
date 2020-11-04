@@ -11,10 +11,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.mosbach.ld.dataManager.DHBWScheduleDataManager;
+import com.mosbach.ld.dataManager.TaskDataManager;
 import com.mosbach.ld.dataManager.UserDataManager;
 import com.mosbach.ld.dataManagerImpl.DHBWScheduleDataManagerImpl;
 import com.mosbach.ld.model.alexa.AlexaRO;
@@ -31,11 +34,14 @@ public class AlexaService {
 	//TODO as account linking not yet possible, hardcoded user
 	private final UUID USER_ID = UUID.fromString("62c3caa2-44c0-47b5-a9ad-e6dc14774312");
 	private DHBWScheduleService scheduleManager;
-	private DHBWScheduleDataManagerImpl scheduleDataManager;
+	private DHBWScheduleDataManager scheduleDataManager;
+	private TaskDataManager taskManager;
 	
 	@Autowired
-	public AlexaService(DHBWScheduleService scheduleManager,
-			DHBWScheduleDataManagerImpl scheduleDataManager) {
+	public AlexaService(
+			DHBWScheduleService scheduleManager,
+			@Qualifier("s-postgres") DHBWScheduleDataManager scheduleDataManager,
+			@Qualifier("t-postgres") TaskDataManager taskManager) {
 		this.scheduleManager = scheduleManager;
 		this.scheduleDataManager = scheduleDataManager;
 	}
@@ -74,28 +80,52 @@ public class AlexaService {
 		return prepareResponse(request, outText, false);
 	}
 	
-	private AlexaRO processReadIntend(AlexaRO request) {
+	private AlexaRO processReadSummaryIntent(AlexaRO request) {
 		String outText = "";
 		try {
-			outText += "Willkommen beim Learning Dashboard.";
+			outText += "Keine Ahnung, was du unter einer Zusammenfassung alles haben willst. Probier es doch mal mit welche vorlesungen habe ich morgen? oder welche aufgaben sind in arbeit?";
 		}catch(Exception e) {
 			outText = "Leider ist beim Lesen deiner Aufgaben ein Fehler aufgetreten. Probiere es einfach sp\u00e4ter erneut.";
 		}
 		return prepareResponse(request, outText, true);
 	}
 	
-	private AlexaRO processReadSummaryIntent(AlexaRO request) {
-		String outText = "";
+	private AlexaRO processReadIntend(AlexaRO request) {
+		StringBuilder outText = new StringBuilder();
 		try {
-			outText += "Keine Ahnung, was du unter einer Zusammenfassung alles haben willst. Probier es doch mal mit welche vorlesungen habe ich morgen? oder welche aufgaben sind in arbeit?";
+			String text = request.getRequest().getIntent().getSlots().getSwimlane().getValue();
+			int swimlane = getSwimlaneFromText(text);
+			Collection<Task> tasks = taskManager.getAllTasksOf(USER_ID);
+			tasks = tasks.stream().filter((task)-> task.getSwimlane() == swimlane).collect(Collectors.toList());
+			outText.append("Du hast folgende Aufgaben in "+text+": ");
+			Iterator<Task> iterator = tasks.iterator();
+			while(iterator.hasNext()) {
+				Task t = iterator.next();
+				outText.append(" "+t.getTitle()+" "+t.getDescription());
+				if(t.getDueDate() != null) {
+					outText.append(" fällig am "+t.getDueDate().getDayOfMonth()+"."+t.getDueDate().getMonthValue()+"."+t.getDueDate().getYear());
+				}
+				if(iterator.hasNext())
+					outText.append(" und ");
+			}
 		}catch(Exception e) {
-			outText = "Leider konnte auf deine Daten nicht zugegriffen werden. Probiere es einfach sp\u00e4ter erneut.";
+			outText = new StringBuilder();
+			outText.append("Leider konnte auf deine Daten nicht zugegriffen werden. Probiere es einfach sp\u00e4ter erneut.");
 		}
-		return prepareResponse(request, outText, true);
+		return prepareResponse(request, outText.toString(), true);
+	}
+	private int getSwimlaneFromText(String text) {
+		switch(text.toLowerCase()) {
+		case "to do": return 0;
+		case "in arbeit": return 1;
+		case "fertig": return 2;
+		default: return -1;
+		}
 	}
 	
 	private AlexaRO processCreateToDoTaskIntent(AlexaRO request) {
 		String outText = "";
+		
 		try {
 			outText += "Leider kann ich noch keine Aufgaben f\u00fcr dich anlegen, freue dich aber schonmal darauf, dass es bald m\u00f6glich sein wird";
 		}catch(Exception e) {
@@ -103,6 +133,7 @@ public class AlexaService {
 		}
 		return prepareResponse(request, outText, true);
 	}
+	
 	
 	private AlexaRO processScheduleReadIntent(AlexaRO request) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -117,9 +148,9 @@ public class AlexaService {
 			if(lectures.size() == 0) {
 				outText = new StringBuilder();
 				outText.append("Du hast am ");
-				outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+date.getYear()+" keine Vorlesungen! ");
+				outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+"."+date.getYear()+" keine Vorlesungen! ");
 			}else 
-				outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+date.getYear()+" folgende Vorlesungen: ");
+				outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+"."+date.getYear()+" folgende Vorlesungen: ");
 			Iterator<DHBWLecture> iterator = lectures.iterator();
 			while(iterator.hasNext()) {
 				DHBWLecture lecture = iterator.next();
