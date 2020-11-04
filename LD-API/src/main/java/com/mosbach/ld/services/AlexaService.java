@@ -105,9 +105,9 @@ public class AlexaService {
 	
 	private AlexaRO processScheduleReadIntent(AlexaRO request) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		
+		StringBuilder outText = new StringBuilder();
 		try {
-			StringBuilder outText = new StringBuilder("Du hast am ");
+			outText.append("Du hast am ");
 			LocalDateTime date = LocalDateTime.parse(request.getRequest().getIntent().getSlots().getScheduleDate().getValue(), formatter);
 			outText.append(date.getDayOfMonth()+"."+date.getMonthValue()+date.getYear()+" folgende Vorlesungen: ");
 			String course = this.scheduleDataManager.getCourseOf(USER_ID);
