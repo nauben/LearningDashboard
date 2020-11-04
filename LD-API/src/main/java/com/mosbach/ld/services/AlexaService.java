@@ -1,5 +1,6 @@
 package com.mosbach.ld.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -96,7 +97,7 @@ public class AlexaService {
 	private AlexaRO processCreateToDoTaskIntent(AlexaRO request) {
 		String outText = "";
 		try {
-			outText += "Leider kann ich noch keine Aufgaben für dich anlegen, freue dich aber schonmal darauf, dass es bald m\u00f6glich sein wird";
+			outText += "Leider kann ich noch keine Aufgaben f\u00fcr dich anlegen, freue dich aber schonmal darauf, dass es bald m\u00f6glich sein wird";
 		}catch(Exception e) {
 			outText = "Leider konnte keine neue Aufgabe angelegt werden. Probiere es einfach sp\u00e4ter erneut.";
 		}
@@ -108,11 +109,11 @@ public class AlexaService {
 		StringBuilder outText = new StringBuilder();
 		try {
 			outText.append("Du hast am ");
-			LocalDateTime date = LocalDateTime.parse(request.getRequest().getIntent().getSlots().getScheduleDate().getValue(), formatter);
+			LocalDate date = LocalDate.parse(request.getRequest().getIntent().getSlots().getScheduleDate().getValue(), formatter);
 			
 			String course = this.scheduleDataManager.getCourseOf(USER_ID);
 			Collection<DHBWLecture> lectures = scheduleManager.loadAllLecturesOfCourse(course);
-			lectures = lectures.stream().filter((lecture)-> lecture.getStart().truncatedTo(ChronoUnit.DAYS).equals(date)).collect(Collectors.toList());
+			lectures = lectures.stream().filter((lecture)-> lecture.getStart().toLocalDate().equals(date)).collect(Collectors.toList());
 			if(lectures.size() == 0) {
 				outText = new StringBuilder();
 				outText.append("Du hast am ");
@@ -134,6 +135,7 @@ public class AlexaService {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			outText = new StringBuilder();
 			outText.append("Leider konnte nicht auf den Vorlesungsplan zugegriffen werden. Probiere es einfach sp\u00e4ter erneut.");
 		}
 		return prepareResponse(request, outText.toString(), true);
