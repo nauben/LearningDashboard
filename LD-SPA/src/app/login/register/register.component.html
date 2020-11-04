@@ -1,7 +1,7 @@
 <div class="col-sm-8 mx-auto">
     <h1 class="text-white display-4">Registrieren</h1>
     <br>
-    <form>
+    <form onSubmit="return false;">
       <div class="form-group">
         <input autofocus required type="email" class="form-control" id="Email-Login" placeholder="E-Mail-Adresse">
       </div>
@@ -17,7 +17,7 @@
       </div>
       <div class="text-white">
         <div class="text-right">
-              <button type="submit" class="btn btn-info btn-lg" (click)="onSubmit()">Registrieren</button>
+              <button  class="btn btn-info btn-lg" (click)="onSubmit()">Registrieren</button>
             <br><br>
               <a [routerLink] = "['/login']" class="text-white"><h5>Zurück zur Anmeldung</h5>
               </a>
