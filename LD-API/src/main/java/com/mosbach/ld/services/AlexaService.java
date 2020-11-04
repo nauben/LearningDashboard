@@ -44,6 +44,7 @@ public class AlexaService {
 			@Qualifier("t-postgres") TaskDataManager taskManager) {
 		this.scheduleManager = scheduleManager;
 		this.scheduleDataManager = scheduleDataManager;
+		this.taskManager = taskManager;
 	}
 	
 	
