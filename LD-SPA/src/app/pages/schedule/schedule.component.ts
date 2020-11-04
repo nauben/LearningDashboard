@@ -23,6 +23,7 @@ export class ScheduleComponent implements OnInit {
   ngOnInit(): void {
     this.loadCourses()
     this.loadSelectedCourse();
+    this.loadSchedule();
   }
 
   private updateFilterOptions(){
@@ -70,6 +71,7 @@ export class ScheduleComponent implements OnInit {
       console.log("save course: "+course)
       this.saveSelectedCourse(course);
     }
+    
 
   }
 
@@ -78,7 +80,14 @@ export class ScheduleComponent implements OnInit {
   }
 
   loadSchedule(){
-
+    this.scheduleService.getSchedule().pipe(first())
+    .subscribe(
+        data => {
+           console.log(data)
+        },
+        error => {
+            console.log(error);
+        });;
   }
 
 
