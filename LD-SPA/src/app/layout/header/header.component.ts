@@ -26,12 +26,16 @@ export class HeaderComponent implements OnInit {
       this.greeting = "Guten Morgen";
     else if(d.getHours() < 17)
       this.greeting = "Guten Tag";
-    else this.greeting = "GutenAbend";
+    else this.greeting = "Guten Abend";
     const user = this.accountService.userValue;
     if(user && user.firstname && user.lastname)
       this.name = ", "+user.firstname+""+user.lastname;
   }
 
+  onLogout(){
+    console.log('Bye');
+    this.accountService.logout();
+  }
   
 
 }

@@ -95,9 +95,36 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    var email = (<HTMLInputElement>document.getElementById('Email-Login')).value;
+    var password = (<HTMLInputElement>document.getElementById('Password-Register')).value;
+    var password2 = (<HTMLInputElement>document.getElementById('Password-Confirmation')).value;
+    var emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
+    if(email == "" && password == "" && password2 == ""){
+      alert("Bitte alle Felder ausfüllen");
+      return
+    }
+    if(email == ""){
+      alert("Bitte E-Mail-Adresse eingeben");
+      return
+    }
+    if(!email.match(emailFormat)){
+      alert("Bitte gib eine E-Mail-Adresse ein");
+      return
+    }
+    if(password == "" || password2 == ""){
+      alert("Bitte Passwort zweimal eingeben");
+      return
+    }
+
+    if(password != password2){
+      alert("Die eingegebenen Passwörter stimmen nicht überein");
+      return
+    }
+
     this.submitted = true;
     this.loading = true;
-    this.accountService.register((<HTMLInputElement>document.getElementById('Email-Login')).value,(<HTMLInputElement>document.getElementById('Password-Register')).value)
+    this.accountService.register(email,password)
         .pipe(first())
         .subscribe(
             data => {

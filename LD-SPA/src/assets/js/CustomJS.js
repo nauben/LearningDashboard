@@ -319,11 +319,9 @@ $(document).ready(function () {
             });
 		}); */
 		
-		let d = new Date();
-        let startTime;
-		let stopTime;
 		
-        //flag for Button reset
+		
+    	//flag for Button reset
         let flag = false;
 		
         //Reload div
@@ -332,7 +330,6 @@ $(document).ready(function () {
             $('#loadDot').load("load.html");
             $('#numb1').load("load2.html");
             flag = true;
-            console.log("stop");
 
           //  alert("Time learned: " + (stopTime - startTime));
         }
@@ -340,7 +337,6 @@ $(document).ready(function () {
         //function to start animation
         function startAnimation() {
 
-			
             //start the counter
             counter();
 
@@ -355,21 +351,22 @@ $(document).ready(function () {
 
             //start animation for dot
             const dot1 = document.getElementById('dot1');
-            dot1.style.animation = 'dot 40s linear both';
+			dot1.style.animation = 'dot 40s linear both';
 
         }
 
         //function for number counter
         function counter() {
-            startTime = d.getTime();
-
+            
 
             const numb = document.querySelector(".numb");
             let counter = 0;
-            setInterval(()=>{
+            const interVal = setInterval(()=>{
                 if(counter == 100 || flag == true){
-                    clearInterval();
-                    counter = 0;
+                    clearInterval(interVal);
+					counter = 0;
+					var pomodoroAudioPlayer = document.getElementById("pomodoroAudio");
+					pomodoroAudioPlayer.play();
                    // stopTime = d.getTime();
                    // reset();
                 }else{
@@ -381,6 +378,5 @@ $(document).ready(function () {
             //
             flag = false;
 			//console.log(stopTime - startTime);
-			
         
 	}

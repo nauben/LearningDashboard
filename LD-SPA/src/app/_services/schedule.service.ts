@@ -33,7 +33,7 @@ export class ScheduleService {
     }
 
     getSavedCourse(){
-        return this.http.get<string>(`${environment.apiUrl}/dhbw-schedule/courses/selected`);
+        return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule/courses/selected`);
     }
 
     setCourse(course:string){

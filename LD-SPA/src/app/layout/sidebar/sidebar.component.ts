@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onLogout(){
-    console.log('Hi');
+    console.log('Bye');
     this.accountService.logout();
   }
 

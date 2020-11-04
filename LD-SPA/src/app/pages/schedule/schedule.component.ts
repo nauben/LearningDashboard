@@ -58,6 +58,7 @@ export class ScheduleComponent implements OnInit {
     .subscribe(
         data => {
            console.log(data)
+           this.myControl.setValue(data.course);
         },
         error => {
             console.log(error);
