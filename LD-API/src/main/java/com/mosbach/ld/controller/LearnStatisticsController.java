@@ -59,9 +59,7 @@ public class LearnStatisticsController {
 	}
 	
 	@DeleteMapping(
-            path = "/subjects/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/subjects/{id}"
     )
 	public ResponseEntity<?> deleteSubject(@PathVariable("id") String id) {
 		

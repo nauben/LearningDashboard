@@ -142,9 +142,7 @@ public class TaskController {
 	}
 	
 	@DeleteMapping(
-            path = "/tasks/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/tasks/{id}"
     )
 	public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
 		boolean success = false;
@@ -161,9 +159,7 @@ public class TaskController {
 	}
 	
 	@DeleteMapping(
-            path = "/tasks",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/tasks"
     )
 	public ResponseEntity<?> deleteAllTasks() {
 		UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getDetails();
