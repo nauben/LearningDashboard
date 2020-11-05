@@ -105,23 +105,39 @@ export class ScheduleComponent implements OnInit {
   }
 
   refreshScheduleDisplay(schedule:Schedule){
+    if(schedule == null) return;
     var dateStart:Date = this.myDateStartControl.value;
+    dateStart = new Date(dateStart.getFullYear(), dateStart.getMonth(), dateStart.getDate())
     var dateEnd:Date = this.myDateEndControl.value;
+    dateEnd = new Date(dateEnd.getFullYear(), dateEnd.getMonth(), dateEnd.getDate()+1)
     var result:string = "";
     var dates:Date[] = [];
+    var prevDate:string = "";
     schedule.lectures.forEach((lecture)=>{
-      if(dates.indexOf(new Date(lecture.start[0],lecture.start[1],lecture.start[2])) == -1)
-        dates.push(new Date(lecture.start[0],lecture.start[1],lecture.start[2]));
+      if(new Date(lecture.start[0],lecture.start[1]-1,lecture.start[2]).toISOString() !== prevDate){
+        dates.push(new Date(lecture.start[0],lecture.start[1]-1,lecture.start[2]));
+        prevDate = new Date(lecture.start[0],lecture.start[1]-1,lecture.start[2]).toISOString()
+      }
+        
     });
 
+    console.log( dates.reverse().filter((date)=>{
+      //console.log(date, (dateStart.valueOf() <= date.valueOf()) && (dateEnd.valueOf() >= date.valueOf()), dateStart.valueOf(), date.valueOf(), dateEnd.valueOf())
+      return dateStart.valueOf() <= date.valueOf() && dateEnd.valueOf() >= date.valueOf()
+      //console.log(dateStart.toISOString(), date, dateEnd.toISOString(), date.localeCompare(dateStart.toISOString()) >= 0 &&  date.localeCompare(dateEnd.toISOString()) <= 0)
+      //return date.value
+    }))
     dates.reverse().filter((date)=>{
-      console.log(date, (dateStart.valueOf() <= date.valueOf()) && (dateEnd.valueOf() >= date.valueOf()), dateStart.valueOf(), date.valueOf(), dateEnd.valueOf())
+     // console.log(date, (dateStart.valueOf() <= date.valueOf()) && (dateEnd.valueOf() >= date.valueOf()), dateStart.valueOf(), date.valueOf(), dateEnd.valueOf())
       return dateStart.valueOf() <= date.valueOf() && dateEnd.valueOf() >= date.valueOf()
       //console.log(dateStart.toISOString(), date, dateEnd.toISOString(), date.localeCompare(dateStart.toISOString()) >= 0 &&  date.localeCompare(dateEnd.toISOString()) <= 0)
       //return date.value
     }).forEach((date) =>{
       result += this.getDisplayForSingleDay(schedule.lectures.filter((lecture) =>{
-        return date.valueOf() === new Date(lecture.start[0],lecture.start[1],lecture.start[2]).valueOf();
+        //if(date.valueOf() === new Date(lecture.start[0],lecture.start[1],lecture.start[2]).valueOf())
+        //console.log(date, new Date(lecture.start[0],lecture.start[1],lecture.start[2]))
+        return date.valueOf() === new Date(lecture.start[0],lecture.start[1]-1,lecture.start[2]).valueOf();
+        //return true
       }),
       date
       );
@@ -141,17 +157,18 @@ export class ScheduleComponent implements OnInit {
       singles += this.getDisplayForSingleLecture(lecture);
     });
     return '<li class="list-group-item"><div class="card mb-2"><div class="card-header">'+
-    this.getWeekdayBy(dateVar) +", "+dateVar.getDate()+"."+dateVar.getMonth()+"."+dateVar.getFullYear()+
+    this.getWeekdayBy(dateVar) +", "+dateVar.getDate()+"."+(dateVar.getMonth()+1)+"."+dateVar.getFullYear()+
     '</div><ul class="list-group list-group-flush">'+
      singles+  
     '</ul></div></li>';
   }
   getWeekdayBy(date:Date){
-    var days:string[] = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+    var days:string[] = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
     return days[date.getDay()];
   }
 
   getDisplayForSingleLecture(lecture:Lecture){
+    console.log(lecture)
     var minute1:string;
     var minute2:string;
     if(lecture.start[4] < 10) minute1 = "0"+lecture.start[4];
@@ -160,7 +177,7 @@ export class ScheduleComponent implements OnInit {
     else minute2 = lecture.end[4]+"";
     return '<li class="list-group-item schedule">'+
         lecture.title+'<br>'+
-        lecture.start[3]+":"+minute1+" bis "+lecture.end[3]+":"+minute2+" Uhr"+
+        (lecture.start[3]+1)+":"+minute1+" bis "+(lecture.end[3]+1)+":"+minute2+" Uhr"+
       '</li>';
   }
 
