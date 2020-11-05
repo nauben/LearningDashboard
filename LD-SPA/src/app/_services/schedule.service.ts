@@ -23,7 +23,7 @@ export class ScheduleService {
 
     getScheduleForNextDays(days?:number){
         if(days)
-            return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule/upcomingdays`+days);
+            return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule/upcomingdays/`+days);
         else
             return this.http.get<Schedule>(`${environment.apiUrl}/dhbw-schedule/upcomingdays`);
     }
