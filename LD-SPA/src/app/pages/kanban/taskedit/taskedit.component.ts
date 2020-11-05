@@ -49,11 +49,11 @@ setTask(id:string){
             $("#customRadioTodo").prop('checked', true);
             $("#customRadioWip").prop('checked', false);
             $("#customRadioDone").prop('checked', false);
-          } if (this.task.swimlane === 1){
+          } else if (this.task.swimlane === 1){
             $("#customRadioTodo").prop('checked', false);
             $("#customRadioWip").prop('checked', true);
             $("#customRadioDone").prop('checked', false);
-          }else {
+          }else if (this.task.swimlane === 2) {
             $("#customRadioTodo").prop('checked', false);
             $("#customRadioWip").prop('checked', false);
             $("#customRadioDone").prop('checked', true);

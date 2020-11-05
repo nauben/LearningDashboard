@@ -15,7 +15,7 @@
                             <div class="col-xl-4 my-auto">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Vorlesungen vom:</mat-label>
-                                    <input matInput [matDatepicker]="startdate">
+                                    <input matInput [matDatepicker]="startdate" (dateChange)="addEvent('change', $event)" [formControl]="myDateStartControl">
                                     <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
                                     <mat-datepicker #startdate></mat-datepicker>
                                   </mat-form-field>
@@ -23,7 +23,7 @@
                             <div class="col-xl-3 my-auto">
                                 <mat-form-field appearance="fill" class="width120px">
                                     <mat-label>bis:</mat-label>
-                                    <input matInput [matDatepicker]="enddate">
+                                    <input matInput [matDatepicker]="enddate" (dateChange)="addEvent('change', $event)" [formControl]="myDateEndControl">
                                     <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
                                     <mat-datepicker #enddate></mat-datepicker>
                                   </mat-form-field>
@@ -55,20 +55,10 @@
                 </div>
             </li>
             <!-- einzelne Vorlesungen -->
-            <li class="list-group-item">
-                <div class="card mb-2">
-                    <div class="card-header">
-                        Mittwoch, 21. Oktober 2020
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item schedule">ABWL-Steuern u. Bilanzen<br>
-                            08:15 bis 12:15 Uhr
-                        </li>
-                        <li class="list-group-item schedule">Einführung Web-Appl.<br>
-                            13:00 bis 17:15 Uhr</li>
-                    </ul>
-                </div>
-            </li>
+            <div id="scheduleHolder" class="inboxContainer">
+                
+            </div>
+            
         </ul>
     </div>
 </div>

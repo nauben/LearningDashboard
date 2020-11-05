@@ -15,6 +15,10 @@ export class KanbanService {
         
     }
 
+    createNewTask(title:string, swimlane:number){
+        return this.http.post(`${environment.apiUrl}/tasks`, {title, swimlane})
+    }
+
     getAllTasks(){
         console.log(`${environment.apiUrl}/tasks`)
         return this.http.get<TaskList>(`${environment.apiUrl}/tasks`)
@@ -35,7 +39,7 @@ export class KanbanService {
         })
     }
 
-    getDeleteTask(id:string){
+    deleteTask(id:string){
         return this.http.delete(`${environment.apiUrl}/tasks/`+id);
     }
 

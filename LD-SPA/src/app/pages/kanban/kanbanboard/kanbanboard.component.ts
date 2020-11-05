@@ -27,19 +27,55 @@ export class KanbanboardComponent implements OnInit {
     this.refreshBoard();
   }
 
+  addNewTaskTodo(){
+    var title:string = $("#tasktitle").val()+"";
+    $("#tasktitle").val("")
+    if(title){
+      console.log(title)
+      this.kanbanService.createNewTask(title, 0).subscribe({
+        next: data => {
+            console.log(data);
+            this.refreshBoard();
+        },
+        error: error => {
+            console.error('There was an error!', error);
+        }
+    });
+    }
+    console.log("test")
+  }
 
+  deleteTask(event){
+    var target = event.target || event.srcElement || event.currentTarget;
+    console.log(target)
+    console.log($(target).closest(".card-body").find(".idTask")[0].innerHTML);
+
+    if($(target).closest(".card-body").find(".idTask")[0].innerHTML){
+      this.kanbanService.deleteTask($(target).closest(".card-body").find(".idTask")[0].innerHTML).subscribe({
+        next: data => {
+            console.log(data);
+            this.refreshBoard();
+        },
+        error: error => {
+            console.error('There was an error!', error);
+        }
+    });
+
+    }
+    
+  }
 
   refreshBoard(){
     this.kanbanService.getAllTasks().pipe(first())
     .subscribe(
         data => {
-          console.log("")
+          console.log(data)
           this.taskList = data;
           this.tasks = this.taskList.tasks;
           this.toDo = this.tasks.filter(task => { return task.swimlane === 0});
           this.wip = this.tasks.filter(task => { return task.swimlane === 1});
           this.done = this.tasks.filter(task => { return task.swimlane === 2});
-          if(!this.tasks) return
+          if(!this.tasks || this.tasks.length === 0) return;
           this.tasks.forEach(task => {
             console.log($('.items'))
             $(".items").append(this.getKanbanTaskElement(task.id, task.title, new Date(task.dueDate[0], task.dueDate[1], task.dueDate[2], task.dueDate[3], task.dueDate[4])));
@@ -54,8 +90,12 @@ export class KanbanboardComponent implements OnInit {
 
   onClick(event){
     var target = event.target || event.srcElement || event.currentTarget;
-    console.log($(target).find(".idTask")[0].innerHTML);
-    this.editModal.setTask($(target).find(".idTask")[0].innerHTML);
+    
+    if(target && $(target).closest(".card-body").find(".idTask").length != 0){
+      console.log($(target).closest(".card-body").find(".idTask")[0].innerHTML);
+      this.editModal.setTask($(target).closest(".card-body").find(".idTask")[0].innerHTML);
+    }
+      
 
   }
 

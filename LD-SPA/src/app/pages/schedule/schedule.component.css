@@ -1,3 +1,7 @@
-.width120px{
-    width: 120px;
+.width120px {
+  width: 120px;
+}
+.inboxContainer {
+  height: 60vh;
+  overflow: auto;
 }

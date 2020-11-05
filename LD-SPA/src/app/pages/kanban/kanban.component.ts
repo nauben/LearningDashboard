@@ -12,4 +12,6 @@ export class KanbanComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
 }

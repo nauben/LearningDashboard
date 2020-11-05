@@ -24,9 +24,6 @@
                                                 Titel
                                             </h4>
                                         </div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-outline-primary btn-sm">Bearbeiten</button>
-                                        </div>
                                         <div class="col-auto text-sm-right">
                                             <h5>
                                                 <span class="text-muted"><small *ngIf="task">erstellt {{task.created[2]}}.{{task.created[1]}}.{{task.created[0]}}</small></span>
@@ -48,9 +45,6 @@
                                                 Beschreibung
                                             </h4>
                                         </div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-outline-primary btn-sm">Bearbeiten</button>
-                                        </div>
                                     </div>
                                     <div class="form-group container-fluid">
                                         <textarea class="form-control" id="exampleFormControlDescription" rows="3" placeholder="Aufgabenbeschreibung eingeben..."></textarea>
@@ -66,9 +60,6 @@
                                             </svg>
                                             Kommentar eingeben
                                             </h4>
-                                        </div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-outline-primary btn-sm">Bearbeiten</button>
                                         </div>
                                     </div>
                                     <div class="form-group shadow-textarea container-fluid">
@@ -148,7 +139,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                <button (click)="saveChanges()" type="button" class="btn btn-primary">Änderungen speichern</button>
+                <button (click)="saveChanges()" type="button" class="btn btn-primary" data-dismiss="modal">Änderungen speichern</button>
             </div>
         </div>
     </div>

@@ -19,12 +19,13 @@
                         To Do
                     </div>
                     <div  class="items" >
-                      <div  class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
+                      <div  class="dropzone rounded" ondrop="drop(event)," ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                       <div *ngFor="let task of toDo">
-                      <div (click)="onClick($event)" class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
-                          <div class="card-body p-2" data-toggle="modal" data-target="#editTask">
+                      <div class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                          <div class="card-body p-2" >
                               <div class="card-title">
-                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>
+                                <span data-toggle="modal" data-target="#editTask"></span>
+                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>&nbsp;&nbsp;
                                   <div class="btn-group dropright">
                                     <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -32,10 +33,12 @@
                                       </svg>
                                     </button>
                                     <div class="dropdown-menu">
-                                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editTask">
+                                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editTask" (click)="onClick($event)">
                                         Aufgabe bearbeiten
                                       </button>
-                                      <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                      <button type="button" class="dropdown-item"  (click)="deleteTask($event)">
+                                        <span class="text-danger">Aufgabe löschen</span>
+                                      </button>
                                     </div>
                                   </div>
                                   <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -43,14 +46,16 @@
                                       <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                   </svg>
                               </div>
+                              <div data-toggle="modal" data-target="#editTask" (click)="onClick($event)">
                               {{task.title}}
                               <p *ngIf="task.dueDate" class ="card-text">{{task.dueDate[2]}}.{{task.dueDate[1]}}.{{task.dueDate[0]}}</p>
+                              </div>
                           </div>					
                       </div>
                       <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                     </div>
                       <div class="form-group ml-2 mr-2 shadow">
-                          <input type="text" class="form-control" id="tasktitle" placeholder="+ Aufgabe hinzufügen...">
+                          <input (keyup.enter)="addNewTaskTodo()" type="text" class="form-control" id="tasktitle" placeholder="+ Aufgabe hinzufügen...">
                       </div>
                   </div>
                 </div>
@@ -63,10 +68,11 @@
                     <div class="items">
                       <div  class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                       <div *ngFor="let task of wip">
-                      <div (click)="onClick($event)"  class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
-                          <div class="card-body p-2" data-toggle="modal" data-target="#editTask">
+                      <div  class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                          <div class="card-body p-2">
                               <div class="card-title">
-                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>
+                                <span data-toggle="modal" data-target="#editTask"></span>
+                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>&nbsp;&nbsp;
                                   <div class="btn-group dropright">
                                     <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -74,10 +80,12 @@
                                       </svg>
                                     </button>
                                     <div class="dropdown-menu">
-                                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editTask">
+                                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editTask" (click)="onClick($event)">
                                         Aufgabe bearbeiten
                                       </button>
-                                      <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                      <button type="button" class="dropdown-item"  (click)="deleteTask($event)">
+                                        <span class="text-danger">Aufgabe löschen</span>
+                                      </button>
                                     </div>
                                   </div>
                                   <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -85,8 +93,10 @@
                                       <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                   </svg>
                               </div>
-                              {{task.title}}
-                              <p *ngIf="task.dueDate" class ="card-text">{{task.dueDate[2]}}{{task.dueDate[1]}}{{task.dueDate[0]}}</p>
+                              <div data-toggle="modal" data-target="#editTask" (click)="onClick($event)">
+                                {{task.title}}
+                                <p *ngIf="task.dueDate" class ="card-text">{{task.dueDate[2]}}.{{task.dueDate[1]}}.{{task.dueDate[0]}}</p>
+                                </div>
                           </div>					
                       </div>
                       <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
@@ -103,10 +113,11 @@
                     <div class="items">
                       <div  class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
                       <div *ngFor="let task of done">
-                      <div  (click)="onClick($event)" class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
-                          <div class="card-body p-2" data-toggle="modal" data-target="#editTask">
-                              <div class="card-title">
-                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>
+                      <div   class="card shadow m-2 draggable" id="cd6" draggable="true" ondragstart="drag(event)">
+                          <div class="card-body p-2" >
+                              <div class="card-title" >
+                                <span data-toggle="modal" data-target="#editTask"></span>
+                                  <span class="font-italic text-info idTask" style="font-size: 10px">{{task.id}}</span>&nbsp;&nbsp;
                                   <div class="btn-group dropright">
                                     <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -114,10 +125,12 @@
                                       </svg>
                                     </button>
                                     <div class="dropdown-menu">
-                                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editTask">
+                                      <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editTask" (click)="onClick($event)">
                                         Aufgabe bearbeiten
                                       </button>
-                                      <a class="dropdown-item" href="#"><span class="text-danger">Aufgabe löschen</span></a>
+                                      <button type="button" class="dropdown-item"  (click)="deleteTask($event)">
+                                        <span class="text-danger">Aufgabe löschen</span>
+                                      </button>
                                     </div>
                                   </div>
                                   <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-person-square float-right" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -125,8 +138,10 @@
                                       <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                   </svg>
                               </div>
-                              {{task.title}}
-                              <p *ngIf="task.dueDate" class ="card-text">{{task.dueDate[2]}}{{task.dueDate[1]}}{{task.dueDate[0]}}</p>
+                              <div data-toggle="modal" data-target="#editTask" (click)="onClick($event)">
+                                {{task.title}}
+                                <p *ngIf="task.dueDate" class ="card-text">{{task.dueDate[2]}}.{{task.dueDate[1]}}.{{task.dueDate[0]}}</p>
+                              </div>
                           </div>					
                       </div>
                       <div class="dropzone rounded" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)"> &nbsp; </div>
