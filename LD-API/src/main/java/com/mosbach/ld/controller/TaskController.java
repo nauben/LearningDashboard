@@ -122,9 +122,7 @@ public class TaskController {
 	}
 	
 	@DeleteMapping(
-            path = "/tasks/{id}/users/{userId}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/tasks/{id}/users/{userId}"
     )
 	public ResponseEntity<?> deleteFromTaskMembers(@PathVariable("id") String id, @PathVariable("userId") String userId) {
 		boolean success = false;
